@@ -1,14 +1,11 @@
 import './App.css';
+import Dashboard from './Dashboard';
 import GuessInput from './GuessInput';
 import React from 'react';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-      <GuessInput/>
-      </header>
-    </div>
+    <Dashboard/>
   );
 }
 
