@@ -17,9 +17,10 @@ import GuessInput from './GuessInput';
 import MenuIcon from '@mui/icons-material/Menu';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import SettingsIcon from '@mui/icons-material/Settings';
+import { SettingsDialog } from './dialogs';
 import { mainListItems } from './listItems';
-import { useAtomValue } from 'jotai/utils';
-import { darkMode } from './atoms';
+import { useReactiveVar } from '@apollo/client';
+import { darkMode, settingsDialogOpen } from './reactive-vars';
 
 const drawerWidth = 240;
 
@@ -74,15 +75,22 @@ function DashboardContent() {
     setOpen(!open);
   };
   
-  const isDarkMode = useAtomValue(darkMode);
+  const isDarkMode = useReactiveVar(darkMode);
   console.log(isDarkMode);
   const mdTheme = createTheme({
     palette: {
       mode: isDarkMode ? 'dark' : 'light',
     },
   });
+
+
+  const handleOpenSettingsDialog = () => {
+    settingsDialogOpen(true);
+  }
+
   return (
     <ThemeProvider theme={mdTheme}>
+      <SettingsDialog />
       <Box sx={{ display: 'flex' }}>
         <CssBaseline />
         <AppBar position="absolute" open={open}>
@@ -112,7 +120,7 @@ function DashboardContent() {
             >
               Lordle
             </Typography>
-            <IconButton color="inherit">
+            <IconButton color="inherit" onClick={handleOpenSettingsDialog}>
               <SettingsIcon/>
             </IconButton>
           </Toolbar>
