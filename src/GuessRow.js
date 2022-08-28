@@ -22,8 +22,8 @@ const CHECK_GUESS = gql`
         type
         result
       }
-      expansionResult {
-        expansion
+      setResult {
+        set
         result
       }
     }
@@ -41,37 +41,131 @@ export default function GuessRow({code}) {
         <GuessBox
           position={1}
           correct={data.guess.regionResult.result === 'CORRECT'}
-          text={data.guess.regionResult.regions.join(', ')}
+          text={data.guess.regionResult.regions.map(cleanName).join(', ')}
+          // TODO: Figure out multi-region images
+          image={getMedia(data.guess.regionResult.regions[0])}
         />
       </Grid>
       <Grid item xs={2}>
         <GuessBox
           position={2}
           correct={data.guess.rarityResult.result === 'CORRECT'}
-          text={data.guess.rarityResult.rarity}
+          text={cleanName(data.guess.rarityResult.rarity)}
+          image={getMedia(data.guess.rarityResult.rarity)}
         />
       </Grid>
       <Grid item xs={2}>
         <GuessBox
           position={3}
           correct={data.guess.manaCostResult.result === 'CORRECT'}
-          text={data.guess.manaCostResult.manaCost}
+          text={cleanName(data.guess.manaCostResult.manaCost)}
+          image={getMedia(data.guess.manaCostResult.manaCost)}
         />
       </Grid>
       <Grid item xs={2}>
         <GuessBox
           position={4}
           correct={data.guess.typeResult.result === 'CORRECT'}
-          text={data.guess.typeResult.type}
+          text={cleanName(data.guess.typeResult.type)}
+          image={getMedia(data.guess.typeResult.type)}
         />
       </Grid>
       <Grid item xs={2}>
         <GuessBox
           position={5}
-          correct={data.guess.expansionResult.result === 'CORRECT'}
-          text={data.guess.expansionResult.expansion}
+          correct={data.guess.setResult.result === 'CORRECT'}
+          text={cleanName(data.guess.setResult.set)}
+          image={getMedia(data.guess.setResult.set)}
         />
       </Grid>
     </>
   )
+}
+
+function cleanName(name) {
+  switch(name) {
+    case 'Set1':
+      return 'Foundations'
+    case 'Set2':
+      return 'Rising Tides'
+    case 'Set3':
+      return 'Call of the Mountain'
+    case 'Set4':
+      return 'Empires of the Ascended'
+    case 'Set5':
+      return 'Beyond the Bandlewood'
+    case 'Set6':
+      return 'Worldwalker'
+    case 'Set6cde':
+      return 'Worldwalker'
+    case 'RARE':
+      return 'Rare'
+    case 'EPIC':
+      return 'Epic'
+    case 'COMMON':
+      return 'Common'
+    case 'BandleCity':
+      return 'Bandle City'
+    case 'PiltoverZaun':
+      return 'Piltover & Zaun'
+    default:
+      return name
+  }
+}
+
+function getMedia(name) {
+  switch(name) {
+    case 'Demacia':
+      return 'https://lor-card-images.s3.us-west-1.amazonaws.com/Demacia.webp'
+    case 'Ionia':
+      return 'https://lor-card-images.s3.us-west-1.amazonaws.com/Ionia.webp'
+    case 'Noxus':
+      return 'https://lor-card-images.s3.us-west-1.amazonaws.com/Noxus.webp'
+    case 'Bilgewater':
+      return 'https://lor-card-images.s3.us-west-1.amazonaws.com/Bilgewater.webp'
+    case 'BandleCity':
+      return 'https://lor-card-images.s3.us-west-1.amazonaws.com/BandleCity.webp'
+    case 'Freljord':
+      return 'https://lor-card-images.s3.us-west-1.amazonaws.com/Freljord.webp'
+    case 'PiltoverZaun':
+      return 'https://lor-card-images.s3.us-west-1.amazonaws.com/PiltoverZaun.webp'
+    case 'Runeterra':
+      return 'https://lor-card-images.s3.us-west-1.amazonaws.com/Runeterra.webp'
+    case 'ShadowIsles':
+      return 'https://lor-card-images.s3.us-west-1.amazonaws.com/ShadowIsles.webp'
+    case 'Shurima':
+      return 'https://lor-card-images.s3.us-west-1.amazonaws.com/Shurima.webp'
+    case 'Targon':
+      return 'https://lor-card-images.s3.us-west-1.amazonaws.com/Targon.webp'
+    case 'Champion':
+      return 'https://lor-card-images.s3.us-west-1.amazonaws.com/Champion.webp'
+    case 'EPIC':
+      return 'https://lor-card-images.s3.us-west-1.amazonaws.com/Epic.webp'
+    case 'RARE':
+      return 'https://lor-card-images.s3.us-west-1.amazonaws.com/Rare.webp'
+    case 'COMMON':
+      return 'https://lor-card-images.s3.us-west-1.amazonaws.com/Common.webp'
+    case 'Unit':
+      return 'https://lor-card-images.s3.us-west-1.amazonaws.com/Unit.webp'
+    case 'Landmark':
+      return 'https://lor-card-images.s3.us-west-1.amazonaws.com/Landmark.webp'
+    case 'Spell':
+      return 'https://lor-card-images.s3.us-west-1.amazonaws.com/Spell.webp'
+    case 'Set1':
+      return 'https://lor-card-images.s3.us-west-1.amazonaws.com/Set_1.webp'
+    case 'Set2':
+      return 'https://lor-card-images.s3.us-west-1.amazonaws.com/Set_2.webp'
+    case 'Set3':
+      return 'https://lor-card-images.s3.us-west-1.amazonaws.com/Set_3.webp'
+    case 'Set4':
+      return 'https://lor-card-images.s3.us-west-1.amazonaws.com/Set_4.webp'
+    case 'Set5':
+      return 'https://lor-card-images.s3.us-west-1.amazonaws.com/Set_4.webp'
+    case 'Set6':
+      return 'https://lor-card-images.s3.us-west-1.amazonaws.com/Set_6.webp'
+    case 'Set6cde':
+      return 'https://lor-card-images.s3.us-west-1.amazonaws.com/Set_6.webp'
+    default:
+      return 'https://lor-card-images.s3.us-west-1.amazonaws.com/Mana.webp'
+  }
 }

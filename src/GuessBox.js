@@ -1,7 +1,7 @@
-import { Slide, Paper } from '@mui/material';
+import { Slide, Card, CardMedia, CardContent, Typography } from '@mui/material';
 import React from 'react';
 
-export default function GuessBox({correct, text, position}) {
+export default function GuessBox({correct, text, position, image}) {
   return (
     <Slide
       direction='up'
@@ -9,45 +9,20 @@ export default function GuessBox({correct, text, position}) {
       timeout={1000}
       style={{ transitionDelay: `${position * 500}ms` }}
     >
-      <Paper
-        sx={{
-          backgroundColor: (theme) =>
-            theme.palette.mode === 'light'
-              ? (correct ? theme.palette.info : theme.palette.warning)
-              : (correct ? theme.palette.success.dark : theme.palette.error.dark),
-          textAlign: 'center',
-          height: {
-            xs: 50,
-            sm: 95,
-            md: 128,
-            lg: 200,
-            xl: 220,
-          },
-          lineHeight: {
-            xs: '50px',
-            sm: '95px',
-            md: '128px',
-            lg: '200px',
-            xl: '220px',
-          },
-          width: {
-            xs: 50,
-            sm: 95,
-            md: 128,
-            lg: 200,
-            xl: 220,
-          },
-          height: {
-            xs: 50,
-            sm: 95,
-            md: 128,
-            lg: 200,
-            xl: 220,
-          }
-        }}
-      >
-      {text}
-      </Paper>
+      <Card>
+        <CardContent
+          sx={{bgcolor: ({palette}) => palette.background.paper}}
+        >
+          <Typography variant="subtitle1" noWrap={true}>
+            {text}
+          </Typography>
+        </CardContent>
+        <CardMedia
+          sx={{bgcolor: ({palette}) => correct ? palette.success.main : palette.error.main}}
+          component="img"
+          image={image}
+        />
+      </Card>
     </Slide>
   )
 }

@@ -1,6 +1,6 @@
 import { Autocomplete, Button, createFilterOptions, Stack, TextField } from "@mui/material";
 import { useQuery, gql } from '@apollo/client';
-import React, { useState } from 'react';
+import React from 'react';
 
 const GET_CARDS = gql`
   query GetCards {
