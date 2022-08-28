@@ -165,6 +165,32 @@ function getMedia(name) {
       return 'https://lor-card-images.s3.us-west-1.amazonaws.com/Set_6.webp'
     case 'Set6cde':
       return 'https://lor-card-images.s3.us-west-1.amazonaws.com/Set_6.webp'
+    case 0:
+      return 'https://lor-card-images.s3.us-west-1.amazonaws.com/0.webp'
+    case 1:
+      return 'https://lor-card-images.s3.us-west-1.amazonaws.com/1.webp'
+    case 2:
+      return 'https://lor-card-images.s3.us-west-1.amazonaws.com/2.webp'
+    case 3:
+      return 'https://lor-card-images.s3.us-west-1.amazonaws.com/3.webp'
+    case 4:
+      return 'https://lor-card-images.s3.us-west-1.amazonaws.com/4.webp'
+    case 5:
+      return 'https://lor-card-images.s3.us-west-1.amazonaws.com/5.webp'
+    case 6:
+      return 'https://lor-card-images.s3.us-west-1.amazonaws.com/6.webp'
+    case 7:
+      return 'https://lor-card-images.s3.us-west-1.amazonaws.com/7.webp'
+    case 8:
+      return 'https://lor-card-images.s3.us-west-1.amazonaws.com/8.webp'
+    case 9:
+      return 'https://lor-card-images.s3.us-west-1.amazonaws.com/9.webp'
+    case 10:
+      return 'https://lor-card-images.s3.us-west-1.amazonaws.com/10.webp'
+    case 12:
+      return 'https://lor-card-images.s3.us-west-1.amazonaws.com/12.webp'
+    case 15:
+      return 'https://lor-card-images.s3.us-west-1.amazonaws.com/15.webp'
     default:
       return 'https://lor-card-images.s3.us-west-1.amazonaws.com/Mana.webp'
   }
