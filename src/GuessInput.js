@@ -1,4 +1,4 @@
-import { Autocomplete, TextField } from "@mui/material";
+import { Autocomplete, createFilterOptions, TextField } from "@mui/material";
 import { useQuery, gql } from '@apollo/client';
 import React from 'react';
 
@@ -12,32 +12,17 @@ const GET_CARDS = gql`
 `;
 
 export default function GuessInput() {
-  const { loading, error, data } = useQuery(GET_CARDS);
-
-  let cards = []
-
-  if (loading) {
-    cards = 
-      [
-        { label: 'Loading...', id: '01IO012' },
-      ]
-  } else if (error) {
-    cards = 
-      [
-        { label: 'Error...', id: '01IO012' },
-      ]
-  } else {
-    cards = data.cards.map(card => ({
-      ...card,
-      label: card.name,
-      id: card.cardCode
-    }))
-  }
+  const { data } = useQuery(GET_CARDS);
+  const cards = data?.cards || []
 
   return <Autocomplete
+    autoComplete={true}
+    filterOptions={createFilterOptions({limit: 10})}
     id="guess-input"
     options={cards}
+    onChange={(_e, {cardCode}) => console.log(cardCode)}
     sx={{ width: 300 }}
+    getOptionLabel={(option) => option.name}
     renderInput={(params) => <TextField {...params} label="Guess" />}
   />
 }
