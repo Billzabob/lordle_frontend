@@ -1,18 +1,21 @@
 import GuessInput from './GuessInput';
 import GuessRow from './GuessRow';
-import Stack from '@mui/material/Stack';
-import Container from '@mui/material/Container';
 import React, { useState } from 'react';
+import { Container, Grid } from '@mui/material';
 
 export default function GuessingGame() {
-  const [guess, setGuess] = useState('01IO012')
+  const [guesses, setGuesses] = useState([])
+  
+  const setGuess = (guess) => setGuesses(guesses => [...guesses, guess])
 
   return (
-    <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
-      <Stack spacing={2}>
-        <GuessInput setGuess={setGuess} />
-        <GuessRow code={guess}/>
-      </Stack>
+    <Container sx={{ mt: 4, mb: 4 }}>
+      <Grid container columns={10} spacing={2}>
+        <Grid item xs={12}>
+          <GuessInput setGuess={setGuess} />
+        </Grid>
+        {guesses.map((guess, i) => <GuessRow key={i} code={guess}/>)}
+      </Grid>
     </Container>
-)
+  )
 }
