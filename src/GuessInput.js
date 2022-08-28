@@ -11,17 +11,17 @@ const GET_CARDS = gql`
   }
 `;
 
-export default function GuessInput() {
+export default function GuessInput({ setGuess }) {
   const { data } = useQuery(GET_CARDS);
   const cards = data?.cards || []
   const sorted = cards.slice().sort((c1, c2) => c1.name > c2.name ? 1 : -1)
 
   return <Autocomplete
     autoComplete={true}
-    filterOptions={createFilterOptions({limit: 10})}
+    filterOptions={createFilterOptions({ limit: 10 })}
     id="guess-input"
     options={sorted}
-    onChange={(_e, {cardCode}) => console.log(cardCode)}
+    onChange={(e, c) => { if (c) setGuess(c.cardCode) }}
     sx={{ width: 300 }}
     getOptionLabel={(option) => option.name}
     renderInput={(params) => <TextField {...params} label="Guess" />}
