@@ -160,7 +160,7 @@ function getMedia(name) {
     case 'Set4':
       return 'https://lor-card-images.s3.us-west-1.amazonaws.com/Set_4.webp'
     case 'Set5':
-      return 'https://lor-card-images.s3.us-west-1.amazonaws.com/Set_4.webp'
+      return 'https://lor-card-images.s3.us-west-1.amazonaws.com/Set_5.webp'
     case 'Set6':
       return 'https://lor-card-images.s3.us-west-1.amazonaws.com/Set_6.webp'
     case 'Set6cde':
