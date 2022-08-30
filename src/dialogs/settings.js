@@ -3,7 +3,6 @@ import { useReactiveVar } from '@apollo/client';
 import { settingsDialogOpen, darkMode } from '../reactive-vars';
 import DialogTitle from '@mui/material/DialogTitle';
 import Dialog from '@mui/material/Dialog';
-import Typography from '@mui/material/Typography';
 import Switch from '@mui/material/Switch';
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
