@@ -6,19 +6,19 @@ export default function GuessBox({correct, text, position, image}) {
     <Fade
       direction='up'
       in={true}
-      timeout={1000}
+      timeout={750}
       style={{ transitionDelay: `${position * 500}ms` }}
     >
       <Card>
         <CardContent
-          sx={{bgcolor: ({palette}) => palette.background.paper}}
+          sx={{bgcolor: ({palette}) => palette.background.paper, textAlign: "center"}}
         >
-          <Typography variant="subtitle1" noWrap={true}>
+          <Typography variant="h6" noWrap={true}>
             {text}
           </Typography>
         </CardContent>
         <CardMedia
-          sx={{bgcolor: ({palette}) => correct ? palette.success.main : palette.error.main}}
+          sx={{bgcolor: ({palette}) => correct ? palette.success.main : palette.error.main, padding: "20px"}}
           component="img"
           image={image}
         />

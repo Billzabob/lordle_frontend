@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { styled, createTheme, ThemeProvider } from '@mui/material/styles';
+import { styled, createTheme, ThemeProvider, responsiveFontSizes } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import Drawer from '@mui/material/Drawer';
 import CssBaseline from '@mui/material/CssBaseline';
@@ -11,7 +11,7 @@ import Divider from '@mui/material/Divider';
 import IconButton from '@mui/material/IconButton';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
-import GuessingGame from './GuessingGame';
+import GuessingGame from './guessing-game/GuessingGame';
 import MenuIcon from '@mui/icons-material/Menu';
 import SettingsIcon from '@mui/icons-material/Settings';
 import { SettingsDialog } from './dialogs';
@@ -68,11 +68,12 @@ const DrawerHeader = styled('div')(({ theme }) => ({
 
 function DashboardContent() {
   const isDarkMode = useReactiveVar(darkMode);
-  const mdTheme = createTheme({
+  let mdTheme = createTheme({
     palette: {
       mode: isDarkMode ? 'dark' : 'light',
     },
   });
+  mdTheme = responsiveFontSizes(mdTheme);
   const [open, setOpen] = React.useState(false);
 
   const handleDrawerOpen = () => {
@@ -103,13 +104,13 @@ function DashboardContent() {
             >
               <MenuIcon />
             </IconButton>
-            <Typography               
+            <Typography          
               component="h1"
-              variant="h6"
+              variant="h5"
               color="inherit"
               noWrap
               sx={{ flexGrow: 1 }}>
-              Lordle
+              LoRdle
             </Typography>
             <IconButton color="inherit" onClick={handleOpenSettingsDialog}>
               <SettingsIcon/>
