@@ -66,6 +66,12 @@ const DrawerHeader = styled('div')(({ theme }) => ({
   justifyContent: 'flex-end',
 }));
 
+const MainGameTitle = () => {
+  return (
+    <Typography variant="h5" sx={{textAlign: "center", mt: 3}}>Guess today's Legend of Runeterra card</Typography>
+  )
+}
+
 function DashboardContent() {
   const isDarkMode = useReactiveVar(darkMode);
   let mdTheme = createTheme({
@@ -142,6 +148,7 @@ function DashboardContent() {
         </Drawer>
         <Main open={open}>
           <DrawerHeader />
+          <MainGameTitle />
           <GuessingGame/>
         </Main>
       </Box>

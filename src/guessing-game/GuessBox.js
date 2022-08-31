@@ -9,16 +9,14 @@ export default function GuessBox({correct, text, position, image}) {
       timeout={750}
       style={{ transitionDelay: `${position * 500}ms` }}
     >
-      <Card>
+      <Card variant="outlined">
         <CardContent
           sx={{bgcolor: ({palette}) => palette.background.paper, textAlign: "center"}}
         >
-          <Typography variant="h6" noWrap={true}>
-            {text}
-          </Typography>
+          <Typography variant="h8" noWrap sx={{display: "block"}}>{text}</Typography>
         </CardContent>
         <CardMedia
-          sx={{bgcolor: ({palette}) => correct ? palette.success.main : palette.error.main, padding: "20px"}}
+          sx={{bgcolor: ({palette}) => correct ? palette.success.main : palette.error.main, p: 3}}
           component="img"
           image={image}
         />

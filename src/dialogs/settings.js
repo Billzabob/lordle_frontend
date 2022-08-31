@@ -9,20 +9,23 @@ import ListItem from '@mui/material/ListItem';
 import ListItemText from '@mui/material/ListItemText';
 
 const ToggleOption = ({title, on, toggle}) => {
+
+  const handleToggle = (toggleStatus) => {
+    localStorage.setItem("darkMode", toggleStatus);
+    toggle(toggleStatus);
+  }
+
   return (    
     <ListItem>
       <ListItemText primary={title} />
       <Switch
         edge="end"
-        onChange={() => toggle(!on)}
+        onChange={() => handleToggle(!on)}
         checked={on}
       />
     </ListItem>
   )
 }
-
-
-
 
 export const SettingsDialog = () => {
   const open = useReactiveVar(settingsDialogOpen);
