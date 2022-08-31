@@ -1,13 +1,18 @@
 import GuessInput from './GuessInput';
 import GuessRow from './GuessRow';
-import GuesssHeader from './GuessingHeader';
+import GuessHeader from './GuessingHeader';
 import React, { useState } from 'react';
 import { Container, Grid } from '@mui/material';
 
 export default function GuessingGame() {
-  const [guesses, setGuesses] = useState([])
+  const [previousGuesses, setPreviousGuesses] = useState([])
+  const [currentGuess, setCurrentGuess] = useState(null)
   
-  const setGuess = (guess) => setGuesses(guesses => [...guesses, guess])
+  const setGuess = (guess) => {
+    if(currentGuess) 
+      setPreviousGuesses([...previousGuesses, currentGuess])
+    setCurrentGuess(guess)
+  }
 
   return (
     <Container maxWidth="md" sx={{ mt: 4, mb: 4 }}>
@@ -15,8 +20,9 @@ export default function GuessingGame() {
         <Grid item display="flex" justifyContent="center" xs={12}>
           <GuessInput setGuess={setGuess} />
         </Grid>
-        {guesses.length > 0 && <GuesssHeader/>}
-        {guesses.map((guess, i) => <GuessRow key={i} code={guess}/>)}
+        {currentGuess && <GuessHeader/>}
+        {currentGuess && <GuessRow code={currentGuess} isAnimated />}
+        {previousGuesses.reverse().map((guess, i) => <GuessRow key={i} code={guess} />)}
       </Grid>
     </Container>
   )

@@ -30,7 +30,7 @@ const CHECK_GUESS = gql`
   }
 `;
 
-export default function GuessRow({code}) {
+export default function GuessRow({code, isAnimated = false}) {
   const { loading, data } = useQuery(CHECK_GUESS, { variables: { code } });
 
   if (loading) return null
@@ -44,6 +44,7 @@ export default function GuessRow({code}) {
           text={data.guess.regionResult.regions.map(cleanName).join(', ')}
           // TODO: Figure out multi-region images
           image={getMedia(data.guess.regionResult.regions[0])}
+          isAnimated={isAnimated}
         />
       </Grid>
       <Grid item xs={2}>
@@ -52,6 +53,7 @@ export default function GuessRow({code}) {
           correct={data.guess.rarityResult.result === 'CORRECT'}
           text={cleanName(data.guess.rarityResult.rarity)}
           image={getMedia(data.guess.rarityResult.rarity)}
+          isAnimated={isAnimated}
         />
       </Grid>
       <Grid item xs={2}>
@@ -60,6 +62,7 @@ export default function GuessRow({code}) {
           correct={data.guess.manaCostResult.result === 'CORRECT'}
           text={cleanName(data.guess.manaCostResult.manaCost)}
           image={getMedia(data.guess.manaCostResult.manaCost)}
+          isAnimated={isAnimated}
         />
       </Grid>
       <Grid item xs={2}>
@@ -68,6 +71,7 @@ export default function GuessRow({code}) {
           correct={data.guess.typeResult.result === 'CORRECT'}
           text={cleanName(data.guess.typeResult.type)}
           image={getMedia(data.guess.typeResult.type)}
+          isAnimated={isAnimated}
         />
       </Grid>
       <Grid item xs={2}>
@@ -76,6 +80,7 @@ export default function GuessRow({code}) {
           correct={data.guess.setResult.result === 'CORRECT'}
           text={cleanName(data.guess.setResult.set)}
           image={getMedia(data.guess.setResult.set)}
+          isAnimated={isAnimated}
         />
       </Grid>
     </>
