@@ -1,15 +1,16 @@
 import GuessInput from './GuessInput';
 import GuessRow from './GuessRow';
 import GuessHeader from './GuessingHeader';
-import React, { useState } from 'react';
+import React from 'react';
 import { Container, Grid } from '@mui/material';
+import { useLocalStorage } from '../util';
 
 export default function GuessingGame() {
-  const [previousGuesses, setPreviousGuesses] = useState([])
-  const [currentGuess, setCurrentGuess] = useState(null)
-  
+  const [previousGuesses, setPreviousGuesses] = useLocalStorage('oldGuesses', [])
+  const [currentGuess, setCurrentGuess] = useLocalStorage('lastGuess', null)
+
   const setGuess = (guess) => {
-    if(currentGuess) 
+    if (currentGuess)
       setPreviousGuesses([...previousGuesses, currentGuess])
     setCurrentGuess(guess)
   }
@@ -20,7 +21,7 @@ export default function GuessingGame() {
         <Grid item display="flex" justifyContent="center" xs={12}>
           <GuessInput setGuess={setGuess} />
         </Grid>
-        {currentGuess && <GuessHeader/>}
+        {currentGuess && <GuessHeader />}
         {currentGuess && <GuessRow code={currentGuess} isAnimated />}
         {previousGuesses.reverse().map((guess, i) => <GuessRow key={i} code={guess} />)}
       </Grid>
