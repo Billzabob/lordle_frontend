@@ -1,12 +1,12 @@
 import React from 'react';
 import GuessBox from './GuessBox';
-import { Grid } from '@mui/material';
+import { Grid, Tooltip } from '@mui/material';
 import { useQuery, gql } from '@apollo/client';
-import { getFieldDef } from 'graphql/execution/execute';
 
 const CHECK_GUESS = gql`
   query CheckGuess($code: String!) {
     guess(code: $code) {
+      image
       regionResult {
         regions
         result
@@ -31,13 +31,26 @@ const CHECK_GUESS = gql`
   }
 `;
 
-export default function GuessRow({code, isAnimated = false}) {
+export default function GuessRow({ code, isAnimated = false }) {
   const { loading, data } = useQuery(CHECK_GUESS, { variables: { code } });
 
   if (loading) return null
 
   return (
     <>
+      <Grid item xs={2}>
+        <Tooltip
+          componentsProps={{ tooltip: { sx: { bgcolor: 'transparent' } } }}
+          placement='right'
+          followCursor={true}
+          title={
+            <>
+              <img src={data.guess.image} alt='card' style={{ height: '520px', width: '340px' }} />
+            </>
+          }>
+          <img src={data.guess.image} alt='card' style={{ display: 'block', maxWidth: '100%', height: 'auto' }} />
+        </Tooltip>
+      </Grid>
       <Grid item xs={2}>
         <GuessBox
           position={1}
@@ -89,7 +102,7 @@ export default function GuessRow({code, isAnimated = false}) {
 }
 
 function cleanName(name) {
-  switch(name) {
+  switch (name) {
     case 'Set1':
       return 'Foundations'
     case 'Set2':

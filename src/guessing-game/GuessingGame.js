@@ -16,7 +16,7 @@ export default function GuessingGame() {
 
   return (
     <Container maxWidth="md" sx={{ mt: 4, mb: 4 }}>
-      <Grid container columns={10} spacing={2}>
+      <Grid container columns={12} spacing={2}>
         <Grid item display="flex" justifyContent="center" xs={12}>
           <GuessInput setGuess={setGuess} />
         </Grid>
