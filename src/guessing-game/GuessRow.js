@@ -43,6 +43,7 @@ export default function GuessRow({ code, isAnimated = false }) {
           componentsProps={{ tooltip: { sx: { bgcolor: 'transparent' } } }}
           placement='right'
           followCursor={true}
+          enterTouchDelay={0}
           title={
             <>
               <img src={data.guess.image} alt='card' style={{ height: '520px', width: '340px' }} />
