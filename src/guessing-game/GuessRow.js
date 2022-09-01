@@ -44,6 +44,7 @@ export default function GuessRow({ code, isAnimated = false }) {
           placement='right'
           followCursor={true}
           enterTouchDelay={0}
+          leaveTouchDelay={0}
           title={
             <>
               <img src={data.guess.image} alt='card' style={{ height: '520px', width: '340px' }} />
