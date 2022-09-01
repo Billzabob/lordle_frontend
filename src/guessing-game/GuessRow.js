@@ -77,7 +77,7 @@ export default function GuessRow({ code, isAnimated = false }) {
           position={3}
           correct={data.guess.manaCostResult.result === 'CORRECT'}
           text={cleanName(data.guess.manaCostResult.manaCost)}
-          image={getMedia(data.guess.manaCostResult.manaCost)}
+          image={getMedia(data.guess.manaCostResult.result === 'CORRECT' ? data.guess.manaCostResult.manaCost : data.guess.manaCostResult.result)}
           isAnimated={isAnimated}
         />
       </Grid>
