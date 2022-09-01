@@ -2,6 +2,7 @@ import React from 'react';
 import GuessBox from './GuessBox';
 import { Grid } from '@mui/material';
 import { useQuery, gql } from '@apollo/client';
+import { getFieldDef } from 'graphql/execution/execute';
 
 const CHECK_GUESS = gql`
   query CheckGuess($code: String!) {
@@ -102,7 +103,7 @@ function cleanName(name) {
     case 'Set6':
       return 'Worldwalker'
     case 'Set6cde':
-      return 'Worldwalker'
+      return 'The Darkin Saga'
     case 'RARE':
       return 'Rare'
     case 'EPIC':
@@ -119,84 +120,5 @@ function cleanName(name) {
 }
 
 function getMedia(name) {
-  switch(name) {
-    case 'Demacia':
-      return 'https://lor-card-images.s3.us-west-1.amazonaws.com/Demacia.webp'
-    case 'Ionia':
-      return 'https://lor-card-images.s3.us-west-1.amazonaws.com/Ionia.webp'
-    case 'Noxus':
-      return 'https://lor-card-images.s3.us-west-1.amazonaws.com/Noxus.webp'
-    case 'Bilgewater':
-      return 'https://lor-card-images.s3.us-west-1.amazonaws.com/Bilgewater.webp'
-    case 'BandleCity':
-      return 'https://lor-card-images.s3.us-west-1.amazonaws.com/BandleCity.webp'
-    case 'Freljord':
-      return 'https://lor-card-images.s3.us-west-1.amazonaws.com/Freljord.webp'
-    case 'PiltoverZaun':
-      return 'https://lor-card-images.s3.us-west-1.amazonaws.com/PiltoverZaun.webp'
-    case 'Runeterra':
-      return 'https://lor-card-images.s3.us-west-1.amazonaws.com/Runeterra.webp'
-    case 'ShadowIsles':
-      return 'https://lor-card-images.s3.us-west-1.amazonaws.com/ShadowIsles.webp'
-    case 'Shurima':
-      return 'https://lor-card-images.s3.us-west-1.amazonaws.com/Shurima.webp'
-    case 'Targon':
-      return 'https://lor-card-images.s3.us-west-1.amazonaws.com/Targon.webp'
-    case 'Champion':
-      return 'https://lor-card-images.s3.us-west-1.amazonaws.com/Champion.webp'
-    case 'EPIC':
-      return 'https://lor-card-images.s3.us-west-1.amazonaws.com/Epic.webp'
-    case 'RARE':
-      return 'https://lor-card-images.s3.us-west-1.amazonaws.com/Rare.webp'
-    case 'COMMON':
-      return 'https://lor-card-images.s3.us-west-1.amazonaws.com/Common.webp'
-    case 'Unit':
-      return 'https://lor-card-images.s3.us-west-1.amazonaws.com/Unit.webp'
-    case 'Landmark':
-      return 'https://lor-card-images.s3.us-west-1.amazonaws.com/Landmark.webp'
-    case 'Spell':
-      return 'https://lor-card-images.s3.us-west-1.amazonaws.com/Spell.webp'
-    case 'Set1':
-      return 'https://lor-card-images.s3.us-west-1.amazonaws.com/Set_1.webp'
-    case 'Set2':
-      return 'https://lor-card-images.s3.us-west-1.amazonaws.com/Set_2.webp'
-    case 'Set3':
-      return 'https://lor-card-images.s3.us-west-1.amazonaws.com/Set_3.webp'
-    case 'Set4':
-      return 'https://lor-card-images.s3.us-west-1.amazonaws.com/Set_4.webp'
-    case 'Set5':
-      return 'https://lor-card-images.s3.us-west-1.amazonaws.com/Set_5.webp'
-    case 'Set6':
-      return 'https://lor-card-images.s3.us-west-1.amazonaws.com/Set_6.webp'
-    case 'Set6cde':
-      return 'https://lor-card-images.s3.us-west-1.amazonaws.com/Set_6.webp'
-    case 0:
-      return 'https://lor-card-images.s3.us-west-1.amazonaws.com/0.webp'
-    case 1:
-      return 'https://lor-card-images.s3.us-west-1.amazonaws.com/1.webp'
-    case 2:
-      return 'https://lor-card-images.s3.us-west-1.amazonaws.com/2.webp'
-    case 3:
-      return 'https://lor-card-images.s3.us-west-1.amazonaws.com/3.webp'
-    case 4:
-      return 'https://lor-card-images.s3.us-west-1.amazonaws.com/4.webp'
-    case 5:
-      return 'https://lor-card-images.s3.us-west-1.amazonaws.com/5.webp'
-    case 6:
-      return 'https://lor-card-images.s3.us-west-1.amazonaws.com/6.webp'
-    case 7:
-      return 'https://lor-card-images.s3.us-west-1.amazonaws.com/7.webp'
-    case 8:
-      return 'https://lor-card-images.s3.us-west-1.amazonaws.com/8.webp'
-    case 9:
-      return 'https://lor-card-images.s3.us-west-1.amazonaws.com/9.webp'
-    case 10:
-      return 'https://lor-card-images.s3.us-west-1.amazonaws.com/10.webp'
-    case 12:
-      return 'https://lor-card-images.s3.us-west-1.amazonaws.com/12.webp'
-    case 15:
-      return 'https://lor-card-images.s3.us-west-1.amazonaws.com/15.webp'
-    default:
-      return 'https://lor-card-images.s3.us-west-1.amazonaws.com/Mana.webp'
-  }
+  return 'https://lor-card-images.s3.us-west-1.amazonaws.com/' + name + ".webp"
 }
