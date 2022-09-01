@@ -137,6 +137,7 @@ function cleanName(name) {
     case 'PiltoverZaun':
       return 'Piltover & Zaun'
     default:
+      if (typeof name == 'number') return name + ' Mana'
       return name
   }
 }
