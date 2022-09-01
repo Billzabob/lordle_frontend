@@ -1,7 +1,7 @@
 import React from 'react';
 import { Grid, Typography } from '@mui/material';
 
-const headerNames = ['Card', 'Region', 'Rarity', 'Cost', 'Type', 'Expansion'];
+const headerNames = ['Card', 'Region', 'Rarity', 'Cost', 'Type', 'Set'];
 
 export default function GuesssHeader() {
   return (
