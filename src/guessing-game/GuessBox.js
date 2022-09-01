@@ -1,6 +1,18 @@
 import { Fade, Card, CardMedia, CardContent, Typography } from '@mui/material';
 import React from 'react';
 
+const Image = React.memo(
+  function Image({image, correct}) {
+    return (
+      <CardMedia
+      sx={{bgcolor: ({palette}) => correct ? palette.success.main : palette.error.main, p: 3}}
+      component="img"
+      image={image}
+    />
+    )
+  }
+)
+
 export default function GuessBox ({correct, text, position, image, isAnimated}) {
   return (
     <>
@@ -19,11 +31,7 @@ export default function GuessBox ({correct, text, position, image, isAnimated}) 
               >
                 <Typography variant="h8" noWrap sx={{display: "block"}}>{text}</Typography>
               </CardContent>
-              <CardMedia
-                sx={{bgcolor: ({palette}) => correct ? palette.success.main : palette.error.main, p: 3}}
-                component="img"
-                image={image}
-              />
+              <Image image={image} correct={correct} />
             </Card>
           </Fade>
         :
@@ -33,11 +41,7 @@ export default function GuessBox ({correct, text, position, image, isAnimated}) 
           >
             <Typography variant="h8" noWrap sx={{display: "block"}}>{text}</Typography>
           </CardContent>
-          <CardMedia
-            sx={{bgcolor: ({palette}) => correct ? palette.success.main : palette.error.main, p: 3}}
-            component="img"
-            image={image}
-          />
+          <Image image={image} correct={correct}/>
         </Card>
       }
 
