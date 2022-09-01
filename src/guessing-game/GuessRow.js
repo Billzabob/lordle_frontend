@@ -1,6 +1,6 @@
 import React from 'react';
 import GuessBox from './GuessBox';
-import { Grid, Tooltip } from '@mui/material';
+import { Fade, Grid, Tooltip } from '@mui/material';
 import { useQuery, gql } from '@apollo/client';
 
 const CHECK_GUESS = gql`
@@ -31,7 +31,7 @@ const CHECK_GUESS = gql`
   }
 `;
 
-export default function GuessRow({ code, isAnimated = false }) {
+export default React.memo(function GuessRow({ code, isAnimated = false }) {
   const { loading, data } = useQuery(CHECK_GUESS, { variables: { code } });
 
   if (loading) return null
@@ -50,12 +50,19 @@ export default function GuessRow({ code, isAnimated = false }) {
               <img src={data.guess.image} alt='card' style={{ height: '520px', width: '340px' }} />
             </>
           }>
-          <img src={data.guess.image} alt='card' style={{ display: 'block', maxWidth: '100%', height: 'auto' }} />
+          <Fade
+            direction='up'
+            in={true}
+            timeout={750}
+            style={isAnimated ? { transitionDelay: "500ms" } : {}}
+          >
+            <img src={data.guess.image} alt='card' style={{ display: 'block', maxWidth: '100%', height: 'auto' }} />
+          </Fade>
         </Tooltip>
       </Grid>
       <Grid item xs={2}>
         <GuessBox
-          position={1}
+          position={2}
           correct={data.guess.regionResult.result === 'CORRECT'}
           text={data.guess.regionResult.regions.map(cleanName).join(', ')}
           // TODO: Figure out multi-region images
@@ -65,7 +72,7 @@ export default function GuessRow({ code, isAnimated = false }) {
       </Grid>
       <Grid item xs={2}>
         <GuessBox
-          position={2}
+          position={3}
           correct={data.guess.rarityResult.result === 'CORRECT'}
           text={cleanName(data.guess.rarityResult.rarity)}
           image={getMedia(data.guess.rarityResult.rarity)}
@@ -74,7 +81,7 @@ export default function GuessRow({ code, isAnimated = false }) {
       </Grid>
       <Grid item xs={2}>
         <GuessBox
-          position={3}
+          position={4}
           correct={data.guess.manaCostResult.result === 'CORRECT'}
           text={cleanName(data.guess.manaCostResult.manaCost)}
           image={getMedia(data.guess.manaCostResult.result === 'CORRECT' ? data.guess.manaCostResult.manaCost : data.guess.manaCostResult.result)}
@@ -83,7 +90,7 @@ export default function GuessRow({ code, isAnimated = false }) {
       </Grid>
       <Grid item xs={2}>
         <GuessBox
-          position={4}
+          position={5}
           correct={data.guess.typeResult.result === 'CORRECT'}
           text={cleanName(data.guess.typeResult.type)}
           image={getMedia(data.guess.typeResult.type)}
@@ -92,7 +99,7 @@ export default function GuessRow({ code, isAnimated = false }) {
       </Grid>
       <Grid item xs={2}>
         <GuessBox
-          position={5}
+          position={6}
           correct={data.guess.setResult.result === 'CORRECT'}
           text={cleanName(data.guess.setResult.set)}
           image={getMedia(data.guess.setResult.set)}
@@ -101,7 +108,7 @@ export default function GuessRow({ code, isAnimated = false }) {
       </Grid>
     </>
   )
-}
+})
 
 function cleanName(name) {
   switch (name) {
