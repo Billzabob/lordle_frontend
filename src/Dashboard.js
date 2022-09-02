@@ -18,6 +18,7 @@ import { SettingsDialog } from './dialogs';
 import { mainListItems } from './listItems';
 import { useReactiveVar } from '@apollo/client';
 import { darkMode, settingsDialogOpen } from './reactive-vars';
+import Countdown from './Countdown';
 
 const drawerWidth = 240;
 
@@ -149,6 +150,7 @@ function DashboardContent() {
         <Main open={open}>
           <DrawerHeader />
           <MainGameTitle />
+          <Countdown/>
           <GuessingGame/>
         </Main>
       </Box>

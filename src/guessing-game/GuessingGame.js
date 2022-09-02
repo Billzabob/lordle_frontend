@@ -1,7 +1,7 @@
 import GuessInput from './GuessInput';
 import GuessRow from './GuessRow';
 import GuessHeader from './GuessHeader';
-import React, { useState } from 'react';
+import React from 'react';
 import { Container, Grid } from '@mui/material';
 import { useLocalStorage } from '../util';
 
