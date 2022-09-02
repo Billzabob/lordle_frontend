@@ -1,12 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Typography } from '@mui/material';
-import { useQuery, gql } from '@apollo/client';
-
-const COUNTDOWN_QUERY = gql`
-  query Countdown {
-    nextCardTimeSeconds
-  }
-`
+import { useQuery } from '@apollo/client';
+import { COUNTDOWN_QUERY } from '../gql/queries';
 
 export default function Countdown() {
   const { data } = useQuery(COUNTDOWN_QUERY)

@@ -15,7 +15,7 @@ import MenuIcon from '@mui/icons-material/Menu';
 import SettingsIcon from '@mui/icons-material/Settings';
 import BarChartIcon from '@mui/icons-material/BarChart';
 import { SettingsDialog, StatsChartDialog } from '../dialogs';
-import { mainListItems } from '../listItems';
+import { mainListItems } from './list-items';
 import { darkMode, settingsDialogOpen, statsDialogOpen } from '../reactive-vars';
 import AppBar from './app-bar';
 import DrawerHeader from './drawer-header';
@@ -23,7 +23,7 @@ import Main from './main';
 import MainGameFooter from './main-game-footer';
 import MainGameTitle from './main-game-title';
 import GuessingGame from '../guessing-game/GuessingGame';
-import Countdown from '../Countdown';
+import Countdown from './countdown';
 
 const drawerWidth = 240;
 
