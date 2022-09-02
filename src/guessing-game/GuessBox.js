@@ -15,7 +15,7 @@ const Image = React.memo(
 
 export default function GuessBox ({correct, text, position, image, isAnimated}) {
   return (
-    <>
+    <React.Fragment>
       {
         isAnimated 
         ?
@@ -45,6 +45,6 @@ export default function GuessBox ({correct, text, position, image, isAnimated}) 
         </Card>
       }
 
-    </>
+    </React.Fragment>
   )
 }

@@ -20,11 +20,11 @@ export default function GuessingGame() {
         </Grid>
         {
           guesses.length > 0 &&
-          <>
+          <React.Fragment>
             <GuessHeader/>
             <GuessRow code={guesses[0]} isAnimated />
             {guesses.slice(1).map((guess, i) => <GuessRow key={i} code={guess} />)}
-          </>
+          </React.Fragment>
         }
       </Grid>
     </Container>

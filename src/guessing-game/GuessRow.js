@@ -10,7 +10,7 @@ export default React.memo(function GuessRow({ code, isAnimated = false }) {
   if (loading) return null
 
   return (
-    <>
+    <React.Fragment>
       <Grid item xs={2}>
         <Tooltip
           componentsProps={{ tooltip: { sx: { bgcolor: 'transparent' } } }}
@@ -19,9 +19,9 @@ export default React.memo(function GuessRow({ code, isAnimated = false }) {
           enterTouchDelay={0}
           leaveTouchDelay={100000}
           title={
-            <>
+            <React.Fragment>
               <img src={data.guess.image} alt='card' style={{ height: '520px', width: '340px' }} />
-            </>
+            </React.Fragment>
           }>
           <Fade
             direction='up'
@@ -79,7 +79,7 @@ export default React.memo(function GuessRow({ code, isAnimated = false }) {
           isAnimated={isAnimated}
         />
       </Grid>
-    </>
+    </React.Fragment>
   )
 })
 
