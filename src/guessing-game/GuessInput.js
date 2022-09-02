@@ -1,15 +1,7 @@
-import { Autocomplete, Button, createFilterOptions, Stack, TextField } from "@mui/material";
-import { useQuery, gql } from '@apollo/client';
 import React from 'react';
-
-const GET_CARDS = gql`
-  query GetCards {
-    cards {
-      cardCode
-      name
-    }
-  }
-`;
+import { Autocomplete, Button, createFilterOptions, Stack, TextField } from "@mui/material";
+import { useQuery } from '@apollo/client';
+import { GET_CARDS } from '../gql/queries';
 
 export default function GuessInput({ setGuess }) {
   const { data } = useQuery(GET_CARDS);

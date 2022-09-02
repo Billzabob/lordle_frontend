@@ -1,35 +1,8 @@
 import React from 'react';
 import GuessBox from './GuessBox';
 import { Fade, Grid, Tooltip } from '@mui/material';
-import { useQuery, gql } from '@apollo/client';
-
-const CHECK_GUESS = gql`
-  query CheckGuess($code: String!) {
-    guess(code: $code) {
-      image
-      regionResult {
-        regions
-        result
-      }
-      rarityResult {
-        rarity
-        result
-      }
-      manaCostResult {
-        manaCost
-        result
-      }
-      typeResult {
-        type
-        result
-      }
-      setResult {
-        set
-        result
-      }
-    }
-  }
-`;
+import { useQuery } from '@apollo/client';
+import { CHECK_GUESS } from '../gql/queries';
 
 export default React.memo(function GuessRow({ code, isAnimated = false }) {
   const { loading, data } = useQuery(CHECK_GUESS, { variables: { code } });
