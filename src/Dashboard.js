@@ -69,7 +69,7 @@ const DrawerHeader = styled('div')(({ theme }) => ({
 
 const MainGameTitle = () => {
   return (
-    <Typography variant="h5" sx={{textAlign: "center", mt: 3}}>Guess today's Legend of Runeterra card</Typography>
+    <Typography variant="h5" sx={{textAlign: "center", mt: 3}}>Guess today's Legends of Runeterra card</Typography>
   )
 }
 

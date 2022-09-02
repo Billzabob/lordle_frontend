@@ -24,7 +24,7 @@ export default function Countdown() {
 
   return (
     <Typography variant="h6" sx={{textAlign: "center", mt: 3}}>
-      Time until next card: {timeString}
+      Next LoRdle: {timeString}
     </Typography>
   )
 }
