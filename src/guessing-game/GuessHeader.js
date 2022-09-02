@@ -3,7 +3,7 @@ import { Grid, Typography } from '@mui/material';
 
 const headerNames = ['Card', 'Region', 'Rarity', 'Cost', 'Type', 'Set'];
 
-export default function GuesssHeader() {
+export default function GuessHeader() {
   return (
     <>
       {headerNames.map((headerName, i) => 

@@ -20,6 +20,7 @@ import { mainListItems } from './listItems';
 import { useReactiveVar } from '@apollo/client';
 import { darkMode, settingsDialogOpen, statsDialogOpen, appTheme } from './reactive-vars';
 import Countdown from './Countdown';
+import { useQuery, gql } from '@apollo/client';
 
 const drawerWidth = 240;
 
@@ -72,6 +73,20 @@ const MainGameTitle = () => {
   return (
     <Typography variant="h5" sx={{textAlign: "center", mt: 3}}>Guess today's Legends of Runeterra card</Typography>
   )
+}
+
+const MainGameFooter = () => {
+  const GET_CARD = gql`
+    query GetCardFromYesterday($daysBack: Int!) {
+      card(daysBack: $daysBack) {
+        name
+      }
+    }
+  `
+
+  const { data, loading } = useQuery(GET_CARD, { variables: { 'daysBack': 1 } })
+
+  return <Typography variant="h6" sx={{textAlign: "center", mt: 3}}>Yesterday's answer was: {loading ? "" : data.card.name}</Typography>
 }
 
 function DashboardContent() {
@@ -153,6 +168,7 @@ function DashboardContent() {
           <MainGameTitle />
           <Countdown/>
           <GuessingGame/>
+          <MainGameFooter/>
         </Main>
       </Box>
     </ThemeProvider>
