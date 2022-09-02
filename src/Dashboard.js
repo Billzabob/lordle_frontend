@@ -14,10 +14,11 @@ import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 import GuessingGame from './guessing-game/GuessingGame';
 import MenuIcon from '@mui/icons-material/Menu';
 import SettingsIcon from '@mui/icons-material/Settings';
-import { SettingsDialog } from './dialogs';
+import BarChartIcon from '@mui/icons-material/BarChart';
+import { SettingsDialog, StatsChartDialog } from './dialogs';
 import { mainListItems } from './listItems';
 import { useReactiveVar } from '@apollo/client';
-import { darkMode, settingsDialogOpen } from './reactive-vars';
+import { darkMode, settingsDialogOpen, statsDialogOpen, appTheme } from './reactive-vars';
 import Countdown from './Countdown';
 
 const drawerWidth = 240;
@@ -91,13 +92,10 @@ function DashboardContent() {
     setOpen(false);
   };
 
-  const handleOpenSettingsDialog = () => {
-    settingsDialogOpen(true);
-  }
-
   return (
     <ThemeProvider theme={mdTheme}>
       <SettingsDialog />
+      <StatsChartDialog />
       <Box sx={{ display: 'flex' }}>
         <CssBaseline />
         <AppBar position="fixed" open={open}>
@@ -119,7 +117,10 @@ function DashboardContent() {
               sx={{ flexGrow: 1 }}>
               LoRdle
             </Typography>
-            <IconButton color="inherit" onClick={handleOpenSettingsDialog}>
+            <IconButton color="inherit" sx={{mr: 1}} onClick={() => statsDialogOpen(true)}>
+              <BarChartIcon/>
+            </IconButton>
+            <IconButton color="inherit" onClick={() => settingsDialogOpen(true)}>
               <SettingsIcon/>
             </IconButton>
           </Toolbar>

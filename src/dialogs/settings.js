@@ -36,9 +36,9 @@ export const SettingsDialog = () => {
   };
 
   return (
-    <Dialog maxWidth="md" onClose={handleClose} open={open}>
-      <DialogTitle>Settings</DialogTitle>
-      <List sx={{ pt: 0 }}>
+    <Dialog maxWidth="xs" fullWidth onClose={handleClose} open={open}>
+      <DialogTitle textAlign="center">Settings</DialogTitle>
+      <List sx={{ pt: 0, ml: 4, mr: 4}}>
         <ToggleOption title={"Dark Mode"} on={darkModeOn} toggle={darkMode} />
       </List>
     </Dialog>
