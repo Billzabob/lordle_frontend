@@ -1,13 +1,11 @@
 import GuessInput from './GuessInput';
 import GuessRow from './GuessRow';
 import GuessHeader from './GuessHeader';
-import React from 'react';
+import React, { useState } from 'react';
 import { Container, Grid } from '@mui/material';
-import { useLocalStorage } from '../util';
-import WinDialog from './WinDialog';
 
 export default function GuessingGame() {
-  const [guesses, setGuesses] = useLocalStorage('guesses', [])
+  const [guesses, setGuesses] = useState([])
   
   const setGuess = (guess) => {
     setGuesses([guess, ...guesses])
