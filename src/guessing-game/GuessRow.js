@@ -1,16 +1,29 @@
-import React from 'react';
+import React, { useState } from 'react';
 import GuessBox from './GuessBox';
 import { Fade, Grid, Tooltip } from '@mui/material';
 import { useQuery } from '@apollo/client';
 import { CHECK_GUESS } from '../gql/queries';
+import WinDialog from './WinDialog';
 
 export default React.memo(function GuessRow({ code, isAnimated = false }) {
   const { loading, data } = useQuery(CHECK_GUESS, { variables: { code } });
+  const [winDialogShown, setWinDialogShown] = useState(false)
+  const [open, setWinDialog] = useState(false)
+  const [correctCard, setCorrectCard] = useState(null)
 
   if (loading) return null
 
+  if (!winDialogShown && correctAnswer(data.guess)) {
+    setTimeout(() => {
+      setWinDialogShown(true)
+      setCorrectCard(data.guess)
+      setWinDialog(true)
+    }, 3500)
+  }
+
   return (
     <React.Fragment>
+      <WinDialog open={open} onClose={() => setWinDialog(false)} correctCard={correctCard?.image}/>
       <Grid item xs={2}>
         <Tooltip
           componentsProps={{ tooltip: { sx: { bgcolor: 'transparent' } } }}
@@ -117,4 +130,14 @@ function cleanName(name) {
 
 function getMedia(name) {
   return 'https://lor-card-images.s3.us-west-1.amazonaws.com/' + name + ".webp"
+}
+
+function correctAnswer(guess) {
+  return (
+    guess.regionResult.result === 'CORRECT' &&
+    guess.rarityResult.result === 'CORRECT' &&
+    guess.manaCostResult.result === 'CORRECT' &&
+    guess.typeResult.result === 'CORRECT' &&
+    guess.setResult.result === 'CORRECT'
+  )
 }

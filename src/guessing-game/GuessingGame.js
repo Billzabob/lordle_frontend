@@ -4,6 +4,7 @@ import GuessHeader from './GuessHeader';
 import React from 'react';
 import { Container, Grid } from '@mui/material';
 import { useLocalStorage } from '../util';
+import WinDialog from './WinDialog';
 
 export default function GuessingGame() {
   const [guesses, setGuesses] = useLocalStorage('guesses', [])

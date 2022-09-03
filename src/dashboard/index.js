@@ -47,10 +47,10 @@ function DashboardContent() {
 
   return (
     <ThemeProvider theme={mdTheme}>
+      <CssBaseline />
       <SettingsDialog />
       <StatsChartDialog />
       <Box sx={{ display: 'flex' }}>
-        <CssBaseline />
         <AppBar position="fixed" open={open} drawerWidth={drawerWidth}>
           <Toolbar>
             <IconButton

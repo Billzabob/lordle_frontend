@@ -1,5 +1,5 @@
 import React from 'react';
-import { Autocomplete, Button, createFilterOptions, Stack, TextField } from "@mui/material";
+import { Autocomplete, createFilterOptions, Stack, TextField } from "@mui/material";
 import { useQuery } from '@apollo/client';
 import { GET_CARDS } from '../gql/queries';
 
@@ -11,7 +11,7 @@ export default function GuessInput({ setGuess }) {
   return (
     <Stack direction="row" spacing={2}>
       <Autocomplete
-        autoComplete={true}
+        clearOnEscape={true}
         filterOptions={createFilterOptions({ limit: 10 })}
         id="guess-input"
         options={sorted}
@@ -20,7 +20,6 @@ export default function GuessInput({ setGuess }) {
         getOptionLabel={(option) => option.name}
         renderInput={(params) => <TextField {...params} label="Guess" />}
       />
-      <Button variant="contained">GO</Button>
     </Stack>
   )
 }
