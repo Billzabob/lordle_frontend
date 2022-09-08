@@ -1,4 +1,6 @@
 export * from './check-guess'
+export * from './correct-answers'
 export * from './countdown'
 export * from './get-card'
 export * from './get-cards'
+export * from './increment-correct-answers'

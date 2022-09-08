@@ -19,6 +19,7 @@ import { mainListItems } from './list-items';
 import { darkMode, settingsDialogOpen, statsDialogOpen } from '../reactive-vars';
 import AppBar from './app-bar';
 import DrawerHeader from './drawer-header';
+import GuessCounter from './guess-counter';
 import Main from './main';
 import MainGameFooter from './main-game-footer';
 import MainGameTitle from './main-game-title';
@@ -106,6 +107,7 @@ function DashboardContent() {
           <MainGameTitle />
           <Countdown />
           <GuessingGame />
+          <GuessCounter />
           <MainGameFooter />
         </Main>
       </Box>
