@@ -2,12 +2,11 @@ import React, { useState } from 'react';
 import GuessBox from './GuessBox';
 import { Fade, Grid, Tooltip } from '@mui/material';
 import { useQuery, useMutation } from '@apollo/client';
-import { CHECK_GUESS, INCREMENT_CORRECT_COUNT } from '../gql/queries';
+import { CHECK_GUESS } from '../gql/queries';
 import WinDialog from './WinDialog';
 
 export default React.memo(function GuessRow({ code, isAnimated = false }) {
   const { loading, data } = useQuery(CHECK_GUESS, { variables: { code } })
-  const [incrementCorrectAnswers] = useMutation(INCREMENT_CORRECT_COUNT)
   const [winDialogShown, setWinDialogShown] = useState(false)
   const [open, setWinDialog] = useState(false)
   const [correctCard, setCorrectCard] = useState(null)
@@ -16,7 +15,6 @@ export default React.memo(function GuessRow({ code, isAnimated = false }) {
 
   if (!winDialogShown && correctAnswer(data.guess)) {
     setTimeout(() => {
-      incrementCorrectAnswers()
       setWinDialogShown(true)
       setCorrectCard(data.guess)
       setWinDialog(true)
