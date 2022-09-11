@@ -1,8 +1,8 @@
 import { gql } from '@apollo/client';
 
-export const GET_CARD = gql`
-query GetCardFromYesterday($daysBack: Int!) {
-  card(daysBack: $daysBack) {
+export const GET_CARDS_FOR_DAY = gql`
+query GetCardsFromYesterday($daysBack: Int!) {
+  cardsForDay(daysBack: $daysBack) {
     name
   }
 }

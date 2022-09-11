@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import GuessBox from './GuessBox';
 import { Fade, Grid, Tooltip } from '@mui/material';
-import { useQuery, useMutation } from '@apollo/client';
+import { useQuery } from '@apollo/client';
 import { CHECK_GUESS } from '../gql/queries';
 import WinDialog from './WinDialog';
 
