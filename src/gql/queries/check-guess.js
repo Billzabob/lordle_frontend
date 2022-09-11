@@ -4,6 +4,10 @@ export const CHECK_GUESS = gql`
 query CheckGuess($code: String!) {
   guess(code: $code) {
     image
+    correct
+    otherCards {
+				image
+			}
     regionResult {
       regions
       result

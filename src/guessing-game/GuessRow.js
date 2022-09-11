@@ -7,23 +7,23 @@ import WinDialog from './WinDialog';
 
 export default React.memo(function GuessRow({ code, isAnimated = false }) {
   const { loading, data } = useQuery(CHECK_GUESS, { variables: { code } })
-  const [winDialogShown, setWinDialogShown] = useState(false)
-  const [open, setWinDialog] = useState(false)
-  const [correctCard, setCorrectCard] = useState(null)
+  const [winDialogState, setWinDialogState] = useState('incorrect')
 
   if (loading) return null
 
-  if (!winDialogShown && correctAnswer(data.guess)) {
-    setTimeout(() => {
-      setWinDialogShown(true)
-      setCorrectCard(data.guess)
-      setWinDialog(true)
-    }, 3500)
+  if (winDialogState === 'incorrect' && data.guess.correct) {
+    console.log('CORRECT!')
+    setTimeout(() => setWinDialogState('open'), 3500)
   }
 
   return (
     <React.Fragment>
-      <WinDialog open={open} onClose={() => setWinDialog(false)} correctCard={correctCard?.image}/>
+      <WinDialog
+        open={winDialogState === 'open'}
+        onClose={() => setWinDialogState('closed')}
+        correctCard={data.guess.image}
+        otherCards={data.guess?.otherCards?.map(c => c.image)}
+      />
       <Grid item xs={2}>
         <Tooltip
           componentsProps={{ tooltip: { sx: { bgcolor: 'transparent' } } }}
@@ -130,14 +130,4 @@ function cleanName(name) {
 
 function getMedia(name) {
   return 'https://lor-card-images.s3.us-west-1.amazonaws.com/' + name + ".webp"
-}
-
-function correctAnswer(guess) {
-  return (
-    guess.regionResult.result === 'CORRECT' &&
-    guess.rarityResult.result === 'CORRECT' &&
-    guess.manaCostResult.result === 'CORRECT' &&
-    guess.typeResult.result === 'CORRECT' &&
-    guess.setResult.result === 'CORRECT'
-  )
 }
