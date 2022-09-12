@@ -13,8 +13,8 @@ export default function WinDialog({ open, onClose, correctCard, otherCards = [] 
         </DialogTitle>
         <DialogContent dividers={false}>
           <Stack alignItems='center'>
-            <CardTooltip image={correctCard}>
-              <img src={correctCard} alt='todo' style={{ height: '312px', width: '204px' }} />
+            <CardTooltip image={correctCard.image} name={correctCard.name}>
+              <img src={correctCard.image} alt={correctCard.name} style={{ height: '312px', width: '204px' }} />
             </CardTooltip>
             {
               otherCards.length > 0 &&
@@ -24,9 +24,9 @@ export default function WinDialog({ open, onClose, correctCard, otherCards = [] 
                 </Typography>
                 <ImageList cols={Math.min(3, otherCards.length)} sx={{ m: 1 }}>
                   {otherCards.map((item) => (
-                    <CardTooltip key={item} image={item}>
+                    <CardTooltip key={item.name} image={item.image} name={item.name}>
                       <ImageListItem>
-                        <img src={item} alt='todo' />
+                        <img src={item.image} alt={item.name} />
                       </ImageListItem>
                     </CardTooltip>
                   ))}

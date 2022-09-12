@@ -21,17 +21,17 @@ export default React.memo(function GuessRow({ code, isAnimated = false }) {
       <WinDialog
         open={winDialogState === 'open'}
         onClose={() => setWinDialogState('closed')}
-        correctCard={data.guess.image}
-        otherCards={data.guess?.otherCards?.map(c => c.image)}
+        correctCard={data.guess}
+        otherCards={data.guess?.otherCards}
       />
       <Grid item xs={2}>
-        <CardTooltip image={data.guess.image}>
+        <CardTooltip image={data.guess.image} name={data.guess.name}>
           <Fade
             in={true}
             timeout={750}
             style={isAnimated ? { transitionDelay: '500ms' } : {}}
           >
-            <img src={data.guess.image} alt='card' style={{ width: '128px', height: '193px' }} />
+            <img src={data.guess.image} alt={data.guess.name} style={{ width: '128px', height: '193px' }} />
           </Fade>
         </CardTooltip>
       </Grid>
