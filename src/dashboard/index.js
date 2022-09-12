@@ -52,7 +52,7 @@ function DashboardContent() {
       <SettingsDialog />
       <StatsChartDialog />
       <Box sx={{ display: 'flex' }}>
-        <AppBar position='fixed' open={open} drawerWidth={drawerWidth}>
+        <AppBar position='fixed' open={open}>
           <Toolbar>
             <IconButton
               color='inherit'
