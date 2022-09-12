@@ -9,7 +9,7 @@ export default function GuessInput({ setGuess }) {
   const sorted = cards.slice().sort((c1, c2) => c1.name > c2.name ? 1 : -1)
 
   return (
-    <Stack direction='row' spacing={2} justifyContent='center'>
+    <Stack direction='row' spacing={2} justifyContent='center' sx={{mt: 4}}>
       <Autocomplete
         clearOnEscape={true}
         filterOptions={createFilterOptions({ limit: 10 })}

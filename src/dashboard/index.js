@@ -102,7 +102,7 @@ function DashboardContent() {
             {mainListItems}
           </List>
         </Drawer>
-        <Main open={open} drawerWidth={drawerWidth}>
+        <Main open={open} drawerWidth={drawerWidth} sx={{overflow: 'auto'}}>
           <DrawerHeader />
           <MainGameTitle />
           <Countdown />
