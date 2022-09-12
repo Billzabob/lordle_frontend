@@ -1,4 +1,4 @@
-import { gql } from '@apollo/client';
+import { gql } from '@apollo/client'
 
 export const CHECK_GUESS = gql`
 query CheckGuess($code: String!) {
@@ -30,4 +30,4 @@ query CheckGuess($code: String!) {
     }
   }
 }
-`;
+`

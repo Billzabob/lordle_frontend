@@ -1,7 +1,7 @@
-import { Fade, Card, CardMedia, CardContent, Typography } from '@mui/material';
-import { useReactiveVar } from '@apollo/client';
-import { darkMode } from '../reactive-vars';
-import React from 'react';
+import { Fade, Card, CardMedia, CardContent, Typography } from '@mui/material'
+import { useReactiveVar } from '@apollo/client'
+import { darkMode } from '../reactive-vars'
+import React from 'react'
 
 const getColor = (palette, correct, isDark) => {
   if(isDark && correct) return palette.success.dark
@@ -16,7 +16,7 @@ const Image = React.memo(
     return (
       <CardMedia
       sx={{bgcolor: ({palette}) => getColor(palette, correct, isDark), p: 3}}
-      component="img"
+      component='img'
       image={image}
     />
     )
@@ -25,7 +25,7 @@ const Image = React.memo(
 
 export default function GuessBox ({correct, text, position, image, isAnimated}) {
   return (
-    <React.Fragment>
+    <>
       {
         isAnimated 
         ?
@@ -35,26 +35,26 @@ export default function GuessBox ({correct, text, position, image, isAnimated}) 
           timeout={750}
           style={{ transitionDelay: `${position * 500}ms` }}
           >
-            <Card variant="outlined">
+            <Card variant='outlined'>
               <CardContent
-                sx={{bgcolor: ({palette}) => palette.background.paper, textAlign: "center"}}
+                sx={{bgcolor: ({palette}) => palette.background.paper, textAlign: 'center'}}
               >
-                <Typography variant="h8" noWrap sx={{display: "block"}}>{text}</Typography>
+                <Typography variant='h8' noWrap sx={{display: 'block'}}>{text}</Typography>
               </CardContent>
               <Image image={image} correct={correct}/>
             </Card>
           </Fade>
         :
-        <Card variant="outlined">
+        <Card variant='outlined'>
           <CardContent
-            sx={{bgcolor: ({palette}) => palette.background.paper, textAlign: "center"}}
+            sx={{bgcolor: ({palette}) => palette.background.paper, textAlign: 'center'}}
           >
-            <Typography variant="h8" noWrap sx={{display: "block"}}>{text}</Typography>
+            <Typography variant='h8' noWrap sx={{display: 'block'}}>{text}</Typography>
           </CardContent>
           <Image image={image} correct={correct}/>
         </Card>
       }
 
-    </React.Fragment>
+    </>
   )
 }

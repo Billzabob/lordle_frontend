@@ -1,10 +1,10 @@
-import React, { useState } from 'react';
-import GuessBox from './GuessBox';
-import { Fade, Grid } from '@mui/material';
-import { useQuery } from '@apollo/client';
-import { CHECK_GUESS } from '../gql/queries';
-import WinDialog from './WinDialog';
-import CardTooltip from '../card-tooltip';
+import React, { useState } from 'react'
+import GuessBox from './GuessBox'
+import { Fade, Grid } from '@mui/material'
+import { useQuery } from '@apollo/client'
+import { CHECK_GUESS } from '../gql/queries'
+import WinDialog from './WinDialog'
+import CardTooltip from '../CardTooltip'
 
 export default React.memo(function GuessRow({ code, isAnimated = false }) {
   const { loading, data } = useQuery(CHECK_GUESS, { variables: { code } })
@@ -17,7 +17,7 @@ export default React.memo(function GuessRow({ code, isAnimated = false }) {
   }
 
   return (
-    <React.Fragment>
+    <>
       <WinDialog
         open={winDialogState === 'open'}
         onClose={() => setWinDialogState('closed')}
@@ -29,7 +29,7 @@ export default React.memo(function GuessRow({ code, isAnimated = false }) {
           <Fade
             in={true}
             timeout={750}
-            style={isAnimated ? { transitionDelay: "500ms" } : {}}
+            style={isAnimated ? { transitionDelay: '500ms' } : {}}
           >
             <img src={data.guess.image} alt='card' style={{ display: 'block', maxWidth: '100%', height: 'auto' }} />
           </Fade>
@@ -81,7 +81,7 @@ export default React.memo(function GuessRow({ code, isAnimated = false }) {
           isAnimated={isAnimated}
         />
       </Grid>
-    </React.Fragment>
+    </>
   )
 })
 
@@ -118,5 +118,5 @@ function cleanName(name) {
 }
 
 function getMedia(name) {
-  return 'https://lor-card-images.s3.us-west-1.amazonaws.com/' + name + ".webp"
+  return 'https://lor-card-images.s3.us-west-1.amazonaws.com/' + name + '.webp'
 }

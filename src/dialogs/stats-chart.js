@@ -1,18 +1,18 @@
-import * as React from 'react';
-import { useReactiveVar } from '@apollo/client';
-import { LineChart, Line, XAxis, YAxis, Label, ResponsiveContainer } from 'recharts';
-import { statsDialogOpen } from '../reactive-vars';
-import DialogTitle from '@mui/material/DialogTitle';
-import Dialog from '@mui/material/Dialog';
-import { DialogContent, useTheme } from '@mui/material';
+import * as React from 'react'
+import { useReactiveVar } from '@apollo/client'
+import { LineChart, Line, XAxis, YAxis, Label, ResponsiveContainer } from 'recharts'
+import { statsDialogOpen } from '../reactive-vars'
+import DialogTitle from '@mui/material/DialogTitle'
+import Dialog from '@mui/material/Dialog'
+import { DialogContent, useTheme } from '@mui/material'
 
 export const StatsChartDialog = () => {
-  const theme = useTheme();
-  const open = useReactiveVar(statsDialogOpen);
+  const theme = useTheme()
+  const open = useReactiveVar(statsDialogOpen)
 
   // Generate Sales Data
   function createData(time, amount) {
-    return { time, amount };
+    return { time, amount }
   }
 
   const data = [
@@ -25,15 +25,15 @@ export const StatsChartDialog = () => {
     createData('18:00', 2400),
     createData('21:00', 2400),
     createData('24:00', undefined),
-  ];
+  ]
 
   const handleClose = () => {
-    statsDialogOpen(false);
-  };
+    statsDialogOpen(false)
+  }
 
   return (
-    <Dialog maxWidth="md" fullWidth onClose={handleClose} open={open} PaperProps={{ sx: { height: "50%" } }}>
-      <DialogTitle textAlign="center">Stats</DialogTitle>
+    <Dialog maxWidth='md' fullWidth onClose={handleClose} open={open} PaperProps={{ sx: { height: '50%' } }}>
+      <DialogTitle textAlign='center'>Stats</DialogTitle>
       <DialogContent>
         <ResponsiveContainer>
           <LineChart
@@ -46,7 +46,7 @@ export const StatsChartDialog = () => {
             }}
           >
             <XAxis
-              dataKey="time"
+              dataKey='time'
               stroke={theme?.palette?.text?.secondary}
               style={theme?.typography?.body2}
             />
@@ -56,7 +56,7 @@ export const StatsChartDialog = () => {
             >
               <Label
                 angle={270}
-                position="left"
+                position='left'
                 style={{
                   textAnchor: 'middle',
                   fill: theme?.palette?.text?.primary,
@@ -68,8 +68,8 @@ export const StatsChartDialog = () => {
             </YAxis>
             <Line
               isAnimationActive={false}
-              type="monotone"
-              dataKey="amount"
+              type='monotone'
+              dataKey='amount'
               stroke={theme?.palette?.primary?.main}
               dot={false}
             />
@@ -77,5 +77,5 @@ export const StatsChartDialog = () => {
         </ResponsiveContainer>
       </DialogContent>
     </Dialog>
-  );
+  )
 }

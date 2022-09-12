@@ -1,4 +1,4 @@
-import { styled } from '@mui/material/styles';
+import { styled } from '@mui/material/styles'
 
 const DrawerHeader = styled('div')(({ theme }) => ({
   display: 'flex',
@@ -7,6 +7,6 @@ const DrawerHeader = styled('div')(({ theme }) => ({
   // necessary for content to be below app bar
   ...theme.mixins.toolbar,
   justifyContent: 'flex-end',
-}));
+}))
 
-export default DrawerHeader;
+export default DrawerHeader

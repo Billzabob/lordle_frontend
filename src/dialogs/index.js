@@ -1,2 +1,2 @@
-export * from './settings';
-export * from './stats-chart';
+export * from './settings'
+export * from './stats-chart'

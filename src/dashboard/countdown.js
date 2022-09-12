@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from 'react';
-import { Typography } from '@mui/material';
-import { useQuery } from '@apollo/client';
-import { COUNTDOWN_QUERY } from '../gql/queries';
+import React, { useEffect, useState } from 'react'
+import { Typography } from '@mui/material'
+import { useQuery } from '@apollo/client'
+import { COUNTDOWN_QUERY } from '../gql/queries'
 
 export default function Countdown() {
   const { data } = useQuery(COUNTDOWN_QUERY)
@@ -18,7 +18,7 @@ export default function Countdown() {
   const timeString = timeLeft ? (new Date(timeLeft * 1000)).toISOString().substring(11, 19) : ''
 
   return (
-    <Typography variant="h6" sx={{textAlign: "center", mt: 3}}>
+    <Typography variant='h6' sx={{textAlign: 'center', mt: 3}}>
       Next LoRdle: {timeString}
     </Typography>
   )

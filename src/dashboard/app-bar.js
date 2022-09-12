@@ -1,5 +1,5 @@
-import MuiAppBar from '@mui/material/AppBar';
-import { styled } from '@mui/material/styles';
+import MuiAppBar from '@mui/material/AppBar'
+import { styled } from '@mui/material/styles'
 
 const AppBar = styled(MuiAppBar, {
   shouldForwardProp: (prop) => prop !== 'open',
@@ -16,6 +16,6 @@ const AppBar = styled(MuiAppBar, {
       duration: theme.transitions.duration.enteringScreen,
     }),
   }),
-}));
+}))
 
-export default AppBar;
+export default AppBar

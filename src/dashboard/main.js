@@ -1,4 +1,4 @@
-import { styled } from '@mui/material/styles';
+import { styled } from '@mui/material/styles'
 
 const Main = styled('main', { shouldForwardProps: (prop) => prop !== 'open' })(
   ({ theme, open, drawerWidth }) => ({
@@ -17,6 +17,6 @@ const Main = styled('main', { shouldForwardProps: (prop) => prop !== 'open' })(
       marginLeft: 0,
     }),
   }),
-);
+)
 
-export default Main;
+export default Main
