@@ -1,15 +1,12 @@
 import { Dialog, DialogContent, DialogTitle, ImageList, ImageListItem, Stack, Typography } from '@mui/material'
-import { useWindowSize } from '@react-hook/window-size'
 import React from 'react'
 import Confetti from 'react-confetti'
 import CardTooltip from '../CardTooltip'
 
 export default function WinDialog({ open, onClose, correctCard, otherCards = [] }) {
-  const [width, height] = useWindowSize()
-
   return (
     <>
-      {open && <Confetti width={width} height={height} />}
+      {open && <Confetti />}
       <Dialog open={open} onClose={onClose}>
         <DialogTitle textAlign='center' variant='h3'>
           Victory!
