@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Autocomplete, Stack, TextField } from '@mui/material'
+import { Autocomplete, createFilterOptions, Stack, TextField } from '@mui/material'
 import { useQuery } from '@apollo/client'
 import { GET_CARDS } from '../gql/queries'
 
@@ -15,7 +15,7 @@ export default function GuessInput({ setGuess, guesses }) {
         blurOnSelect='touch'
         clearOnBlur={true}
         clearOnEscape={true}
-        filterOptions={options => options.filter(c => !guesses.includes(c.cardCode)).slice(0, 10)}
+        filterOptions={filterOptions(guesses)}
         id='guess-input'
         options={sorted}
         onChange={(e, c) => {
@@ -29,4 +29,12 @@ export default function GuessInput({ setGuess, guesses }) {
       />
     </Stack>
   )
+}
+
+function filterOptions(guesses) {
+  return (cards, state) => {
+    const filter = createFilterOptions({ limit: 10 })
+    const removePreviousGuesses = cards.filter(c => !guesses.includes(c.cardCode))
+    return filter(removePreviousGuesses, state)
+  }
 }
