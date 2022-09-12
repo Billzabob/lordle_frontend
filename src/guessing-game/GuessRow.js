@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
 import GuessBox from './GuessBox';
-import { Fade, Grid, Tooltip } from '@mui/material';
+import { Fade, Grid } from '@mui/material';
 import { useQuery } from '@apollo/client';
 import { CHECK_GUESS } from '../gql/queries';
 import WinDialog from './WinDialog';
+import CardTooltip from '../card-tooltip';
 
 export default React.memo(function GuessRow({ code, isAnimated = false }) {
   const { loading, data } = useQuery(CHECK_GUESS, { variables: { code } })
@@ -12,7 +13,6 @@ export default React.memo(function GuessRow({ code, isAnimated = false }) {
   if (loading) return null
 
   if (winDialogState === 'incorrect' && data.guess.correct) {
-    console.log('CORRECT!')
     setTimeout(() => setWinDialogState('open'), 3500)
   }
 
@@ -25,26 +25,15 @@ export default React.memo(function GuessRow({ code, isAnimated = false }) {
         otherCards={data.guess?.otherCards?.map(c => c.image)}
       />
       <Grid item xs={2}>
-        <Tooltip
-          componentsProps={{ tooltip: { sx: { bgcolor: 'transparent' } } }}
-          placement='right'
-          followCursor={true}
-          enterTouchDelay={0}
-          leaveTouchDelay={100000}
-          title={
-            <React.Fragment>
-              <img src={data.guess.image} alt='card' style={{ height: '520px', width: '340px' }} />
-            </React.Fragment>
-          }>
+        <CardTooltip image={data.guess.image}>
           <Fade
-            direction='up'
             in={true}
             timeout={750}
             style={isAnimated ? { transitionDelay: "500ms" } : {}}
           >
             <img src={data.guess.image} alt='card' style={{ display: 'block', maxWidth: '100%', height: 'auto' }} />
           </Fade>
-        </Tooltip>
+        </CardTooltip>
       </Grid>
       <Grid item xs={2}>
         <GuessBox
