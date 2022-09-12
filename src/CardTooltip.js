@@ -10,7 +10,7 @@ export default function CardTooltip({ image, children }) {
       enterTouchDelay={0}
       leaveTouchDelay={100000}
       title={
-        <img src={image} alt='card' style={{ height: '520px', width: '340px' }} />
+        <img src={image} alt='card' style={{ height: '416px', width: '272px' }} />
       }>
       {children}
     </Tooltip>
