@@ -13,7 +13,7 @@ export default function GuessingGame() {
 
   return (
     <>
-      <GuessInput setGuess={setGuess} />
+      <GuessInput setGuess={setGuess} guesses={guesses} />
       <Container maxWidth='md' sx={{ overflow: 'auto' }}>
         {
           guesses.length > 0 &&
