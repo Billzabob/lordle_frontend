@@ -11,6 +11,8 @@ export default function GuessInput({ setGuess }) {
   return (
     <Stack direction='row' spacing={2} justifyContent='center' sx={{mt: 4}}>
       <Autocomplete
+        blurOnSelect='touch'
+        clearOnBlur={true}
         clearOnEscape={true}
         filterOptions={createFilterOptions({ limit: 10 })}
         id='guess-input'
