@@ -31,7 +31,7 @@ export default React.memo(function GuessRow({ code, isAnimated = false }) {
             timeout={750}
             style={isAnimated ? { transitionDelay: '500ms' } : {}}
           >
-            <img src={data.guess.image} alt='card' style={{ display: 'block', maxWidth: '100%', height: 'auto' }} />
+            <img src={data.guess.image} alt='card' style={{ width: '128px', height: '193px' }} />
           </Fade>
         </CardTooltip>
       </Grid>
