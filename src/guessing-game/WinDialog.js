@@ -3,7 +3,7 @@ import React from 'react'
 import Confetti from 'react-confetti'
 import CardTooltip from '../CardTooltip'
 
-export default function WinDialog({ open, onClose, correctCard, otherCards = [] }) {
+export default function WinDialog({ open, onClose, correctCard, otherCards }) {
   return (
     <>
       {open && <Confetti />}
@@ -17,7 +17,7 @@ export default function WinDialog({ open, onClose, correctCard, otherCards = [] 
               <img src={correctCard.image} alt={correctCard.name} style={{ height: '312px', width: '204px' }} />
             </CardTooltip>
             {
-              otherCards.length > 0 &&
+              (otherCards || []).length > 0 &&
               <>
                 <Typography variant='h4' sx={{ textAlign: 'center', mt: 3 }}>
                   Other Possible Answers
