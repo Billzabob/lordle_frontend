@@ -26,6 +26,7 @@ import MenuIcon from '@mui/icons-material/Menu'
 import SettingsIcon from '@mui/icons-material/Settings'
 import Toolbar from '@mui/material/Toolbar'
 
+
 const drawerWidth = 240
 
 function DashboardContent() {
@@ -33,6 +34,12 @@ function DashboardContent() {
   let mdTheme = createTheme({
     palette: {
       mode: isDarkMode ? 'dark' : 'light',
+      primary: {
+        main: '#2E2321',
+      },
+      secondary: {
+        main: '#C2A052',
+      },
     },
   })
   mdTheme = responsiveFontSizes(mdTheme)
