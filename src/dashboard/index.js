@@ -20,7 +20,7 @@ export default function Dashboard() {
     palette: {
       mode: isDarkMode ? 'dark' : 'light',
       primary: {
-        main: '#2E2321',
+        main: '#413331',
       },
       secondary: {
         main: '#C2A052',
