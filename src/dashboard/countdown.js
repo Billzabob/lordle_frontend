@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react'
-import { Typography } from '@mui/material'
+import { Box, Skeleton, Typography } from '@mui/material'
 import { useQuery } from '@apollo/client'
 import { COUNTDOWN_QUERY } from '../gql/queries'
 
 export default function Countdown() {
-  const { data } = useQuery(COUNTDOWN_QUERY)
+  const { data, loading } = useQuery(COUNTDOWN_QUERY)
   const [timeLeft, setTimeLeft] = useState(null)
 
   if (!timeLeft && data) setTimeLeft(data.nextCardTimeSeconds)
@@ -18,8 +18,10 @@ export default function Countdown() {
   const timeString = timeLeft ? (new Date(timeLeft * 1000)).toISOString().substring(11, 19) : ''
 
   return (
-    <Typography variant='h6' sx={{textAlign: 'center', mt: 3}}>
-      Next LoRdle: {timeString}
-    </Typography>
+    <Box display='flex' justifyContent='center'>
+      <Typography variant='h6' sx={{ mt: 3}}>
+        {loading ? <Skeleton width={400}/> : 'Next LoRdle: ' + timeString}
+      </Typography>
+    </Box>
   )
 }

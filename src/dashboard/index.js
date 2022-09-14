@@ -38,13 +38,9 @@ function DashboardContent() {
   mdTheme = responsiveFontSizes(mdTheme)
   const [open, setOpen] = React.useState(false)
 
-  const handleDrawerOpen = () => {
-    setOpen(true)
-  }
+  const handleDrawerOpen = () => setOpen(true)
 
-  const handleDrawerClose = () => {
-    setOpen(false)
-  }
+  const handleDrawerClose = () => setOpen(false)
 
   return (
     <ThemeProvider theme={mdTheme}>
