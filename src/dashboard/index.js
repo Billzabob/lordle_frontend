@@ -35,7 +35,7 @@ export default function Dashboard() {
       <SettingsDialog />
       {/* <StatsChartDialog /> */}
       <MyDrawer/>
-      <Box sx={{ display: 'flex' }}>
+      <Box sx={{ display: 'flex', mb: 4 }}>
         <MyAppBar/>
         <Container sx={{mt: 9}}>
           <MainGameTitle />
