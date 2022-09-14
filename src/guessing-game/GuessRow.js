@@ -27,7 +27,7 @@ export default React.memo(function GuessRow({ code, isAnimated = false }) {
       <Grid item xs={2}>
         <CardTooltip image={data.guess.image} name={data.guess.name}>
           <Fade
-            in={true}
+            in
             timeout={750}
             style={isAnimated ? { transitionDelay: '500ms' } : {}}
           >

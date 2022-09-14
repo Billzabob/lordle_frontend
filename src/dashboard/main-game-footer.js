@@ -9,7 +9,7 @@ export default function MainGameFooter() {
 
   return (
     <Box display='flex' justifyContent='center'>
-      <Typography variant='h6' sx={{ mt: 3 }}>
+      <Typography variant='h6' sx={{ mt: 3, textAlign: 'center' }}>
         {loading ? <Skeleton width={400}/> : content(data)}
       </Typography>
     </Box>

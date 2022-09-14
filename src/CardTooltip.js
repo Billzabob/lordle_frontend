@@ -6,7 +6,7 @@ export default function CardTooltip({ image, name, children }) {
     <Tooltip
       componentsProps={{ tooltip: { sx: { bgcolor: 'transparent' } } }}
       placement='right'
-      followCursor={true}
+      followCursor
       enterTouchDelay={0}
       leaveTouchDelay={100000}
       title={

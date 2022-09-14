@@ -13,8 +13,8 @@ export default function GuessInput({ setGuess, guesses }) {
     <Stack direction='row' spacing={2} justifyContent='center' sx={{ mt: 4 }}>
       <Autocomplete
         blurOnSelect='touch'
-        clearOnBlur={true}
-        clearOnEscape={true}
+        clearOnBlur
+        clearOnEscape
         filterOptions={filterOptions(guesses)}
         id='guess-input'
         options={sorted}

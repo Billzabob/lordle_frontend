@@ -31,7 +31,7 @@ export default function GuessBox ({correct, text, position, image, isAnimated}) 
         ?
           <Fade
           direction='up'
-          in={true}
+          in
           timeout={750}
           style={{ transitionDelay: `${position * 500}ms` }}
           >

@@ -20,7 +20,7 @@ const ToggleOption = ({on, toggle}) => {
   return (    
     <ListItem>
       <ListItemText primary={on ? 'Dark Mode' : 'Light Mode'} />
-       <IconButton sx={{ ml: 1 }} onClick={() => handleToggle(!on)} color="inherit">
+       <IconButton sx={{ ml: 1 }} onClick={() => handleToggle(!on)} color='inherit'>
         {on ? <Brightness7Icon /> : <Brightness4Icon />}
       </IconButton>
     </ListItem>
