@@ -1,6 +1,5 @@
 import * as React from 'react'
 import { Box, List, ListItem, ListItemButton, ListItemIcon, ListItemText, SwipeableDrawer } from '@mui/material'
-import SettingsIcon from '@mui/icons-material/Settings'
 import { makeVar, useReactiveVar } from '@apollo/client'
 import pages from './pages'
 
@@ -11,19 +10,19 @@ export default function MyDrawer() {
 
   const list = (
     <Box
-      sx={{ width: 250 }}
+      sx={{ width: 180 }}
       role='presentation'
       onClick={() => drawerOpen(false)}
       onKeyDown={() => drawerOpen(false)}
     >
       <List>
-        {pages.map(text => (
-          <ListItem key={text} disablePadding>
+        {pages.map(({name, icon}) => (
+          <ListItem key={name} disablePadding>
             <ListItemButton>
               <ListItemIcon>
-                <SettingsIcon />
+                {icon}
               </ListItemIcon>
-              <ListItemText primary={text} />
+              <ListItemText primary={name} />
             </ListItemButton>
           </ListItem>
         ))}

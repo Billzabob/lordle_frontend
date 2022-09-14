@@ -28,13 +28,13 @@ const largeLayout = (
     <Logo sx={{ display: { xs: 'none', md: 'flex' }, ml: 3 }} />
 
     <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' }, ml: 3 }}>
-      {pages.map((page) => (
+      {pages.map(({ name }) => (
         <Button
-          key={page}
+          key={name}
           sx={{ mx: 1, color: 'white', display: 'block' }}
         >
           <Typography variant='h6'>
-            {page}
+            {name}
           </Typography>
         </Button>
       ))}
