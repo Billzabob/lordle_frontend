@@ -37,7 +37,7 @@ export default function Dashboard() {
       <MyDrawer/>
       <Box sx={{ display: 'flex' }}>
         <MyAppBar/>
-        <Container sx={{mt: 12}}>
+        <Container sx={{mt: 9}}>
           <MainGameTitle />
           <Countdown />
           <GuessingGame />
