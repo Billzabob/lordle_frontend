@@ -10,3 +10,11 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+@media (prefers-reduced-motion: reduce) {
+  .logo { fill: green; }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .logo { fill: red; }
+}
