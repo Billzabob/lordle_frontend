@@ -38,10 +38,9 @@ export default React.memo(function GuessRow({ code, isAnimated = false }) {
       <Grid item xs={2}>
         <GuessBox
           position={2}
-          correct={data.guess.regionResult.result === 'CORRECT'}
+          correct={data.guess.regionResult.result === 'PARTIAL' ? 'partial' : data.guess.regionResult.result === 'CORRECT'}
           text={data.guess.regionResult.regions.map(cleanName).join(', ')}
-          // TODO: Figure out multi-region images
-          image={getMedia(data.guess.regionResult.regions[0])}
+          image={getMedia(data.guess.regionResult.regions.slice().sort().join(''))}
           isAnimated={isAnimated}
         />
       </Grid>

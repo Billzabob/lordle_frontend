@@ -4,7 +4,9 @@ import { darkMode } from '../reactive-vars'
 import React from 'react'
 
 const getColor = (palette, correct, isDark) => {
-  if(isDark && correct) return palette.success.dark
+  if(isDark && correct === 'partial') return palette.warning.dark
+  else if(!isDark && correct === 'partial') return palette.warning.light
+  else if(isDark && correct) return palette.success.dark
   else if(!isDark && correct) return palette.success.light
   else if(isDark && !correct) return palette.error.dark
   else if(!isDark && !correct) return palette.error.light
