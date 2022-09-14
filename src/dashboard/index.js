@@ -11,6 +11,7 @@ import MainGameTitle from './main-game-title'
 import MyAppBar from './app-bar'
 import { Box, Container } from '@mui/material'
 import { SettingsDialog } from '../dialogs/settings'
+import MyDrawer from './drawer'
 
 
 export default function Dashboard() {
@@ -33,6 +34,7 @@ export default function Dashboard() {
       <CssBaseline />
       <SettingsDialog />
       {/* <StatsChartDialog /> */}
+      <MyDrawer/>
       <Box sx={{ display: 'flex' }}>
         <MyAppBar/>
         <Container sx={{mt: 12}}>

@@ -1,16 +1,13 @@
 import * as React from 'react'
-import { AppBar, Box, Toolbar, IconButton, Typography, Menu, Button, MenuItem } from '@mui/material'
+import { AppBar, Box, Toolbar, IconButton, Typography, Button } from '@mui/material'
 import MenuIcon from '@mui/icons-material/Menu'
 import Logo from '../Logo'
 import SettingsIcon from '@mui/icons-material/Settings'
 import { settingsDialogOpen } from '../reactive-vars'
-
-const pages = ['Classic', 'Quote', 'Splash']
+import { drawerOpen } from './drawer'
+import pages from './pages'
 
 export default function MyAppBar() {
-  const [anchorElNav, setAnchorElNav] = React.useState(null)
-  const handleCloseNavMenu = () => setAnchorElNav(null)
-
   return (
     <AppBar component='nav'>
       <Box mx={3}>
@@ -20,38 +17,11 @@ export default function MyAppBar() {
           <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
             <IconButton
               size='large'
-              onClick={(event) => setAnchorElNav(event.currentTarget)}
+              onClick={() => drawerOpen(true)}
               color='inherit'
             >
               <MenuIcon/>
             </IconButton>
-            <Menu
-              id='menu-appbar'
-              anchorEl={anchorElNav}
-              anchorOrigin={{
-                vertical: 'bottom',
-                horizontal: 'left',
-              }}
-              keepMounted
-              transformOrigin={{
-                vertical: 'top',
-                horizontal: 'left',
-              }}
-              open={Boolean(anchorElNav)}
-              onClose={handleCloseNavMenu}
-              sx={{
-                display: { xs: 'block', md: 'none' },
-              }}
-            >
-              {pages.map((page) => (
-                <MenuItem
-                  key={page}
-                  onClick={handleCloseNavMenu}
-                >
-                  <Typography textAlign='center'>{page}</Typography>
-                </MenuItem>
-              ))}
-            </Menu>
           </Box>
 
           <Logo sx={{ display: { xs: 'flex', md: 'none', flexGrow: 1 }}}/>
@@ -60,7 +30,7 @@ export default function MyAppBar() {
             {pages.map((page) => (
               <Button
                 key={page}
-                onClick={handleCloseNavMenu}
+                // onClick={handleCloseNavMenu}
                 sx={{ mx: 1, color: 'white', display: 'block' }}
               >
                 <Typography variant='h6'>
