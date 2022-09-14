@@ -17,7 +17,10 @@ const Image = React.memo(
     const isDark = useReactiveVar(darkMode)
     return (
       <CardMedia
-      sx={{bgcolor: ({palette}) => getColor(palette, correct, isDark), p: 3}}
+      sx={{
+        bgcolor: ({palette}) => getColor(palette, correct, isDark),
+        p: correct === 'partial' ? 1 : 3
+      }}
       component='img'
       image={image}
     />
