@@ -20,7 +20,7 @@ export default function Countdown() {
   return (
     <Box display='flex' justifyContent='center'>
       <Typography variant='h6' sx={{ mt: 3}}>
-        {loading ? <Skeleton width={400}/> : 'Next LoRdle: ' + timeString}
+        {loading ? <Skeleton width={400}/> : 'Next challenge in: ' + timeString}
       </Typography>
     </Box>
   )
