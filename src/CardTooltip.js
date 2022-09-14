@@ -7,8 +7,6 @@ export default function CardTooltip({ image, name, children }) {
       componentsProps={{ tooltip: { sx: { bgcolor: 'transparent' } } }}
       placement='right'
       followCursor
-      enterTouchDelay={0}
-      leaveTouchDelay={100000}
       title={
         <img src={image} alt={name} style={{ height: '416px', width: '272px' }} />
       }>
