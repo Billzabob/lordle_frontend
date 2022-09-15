@@ -110,6 +110,8 @@ function cleanName(name) {
       return 'Bandle City'
     case 'PiltoverZaun':
       return 'Piltover & Zaun'
+    case 'ShadowIsles':
+      return 'Shadow Isles'
     default:
       if (typeof name == 'number') return name + ' Mana'
       return name
