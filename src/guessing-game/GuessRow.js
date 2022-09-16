@@ -6,7 +6,7 @@ import { CHECK_GUESS } from '../gql/queries'
 import WinDialog from './WinDialog'
 import CardTooltip from '../CardTooltip'
 
-export default React.memo(function GuessRow({ code, isAnimated = false }) {
+export default React.memo(function GuessRow({ code }) {
   const { loading, data } = useQuery(CHECK_GUESS, { variables: { code } })
   const [winDialogState, setWinDialogState] = useState('incorrect')
 
@@ -29,7 +29,7 @@ export default React.memo(function GuessRow({ code, isAnimated = false }) {
           <Fade
             in
             timeout={750}
-            style={isAnimated ? { transitionDelay: '500ms' } : {}}
+            style={{ transitionDelay: '500ms' }}
           >
             <img src={data.guess.image} alt={data.guess.name} style={{ width: '128px', height: '193px' }} />
           </Fade>
@@ -41,7 +41,6 @@ export default React.memo(function GuessRow({ code, isAnimated = false }) {
           correct={data.guess.regionResult.result === 'PARTIAL' ? 'partial' : data.guess.regionResult.result === 'CORRECT'}
           text={data.guess.regionResult.regions.map(cleanName).join(', ')}
           image={getMedia(data.guess.regionResult.regions.slice().sort().join(''))}
-          isAnimated={isAnimated}
         />
       </Grid>
       <Grid item xs={2}>
@@ -50,7 +49,6 @@ export default React.memo(function GuessRow({ code, isAnimated = false }) {
           correct={data.guess.rarityResult.result === 'CORRECT'}
           text={cleanName(data.guess.rarityResult.rarity)}
           image={getMedia(data.guess.rarityResult.rarity)}
-          isAnimated={isAnimated}
         />
       </Grid>
       <Grid item xs={2}>
@@ -59,7 +57,6 @@ export default React.memo(function GuessRow({ code, isAnimated = false }) {
           correct={data.guess.manaCostResult.result === 'CORRECT'}
           text={cleanName(data.guess.manaCostResult.manaCost)}
           image={getMedia(data.guess.manaCostResult.result === 'CORRECT' ? data.guess.manaCostResult.manaCost : data.guess.manaCostResult.result)}
-          isAnimated={isAnimated}
         />
       </Grid>
       <Grid item xs={2}>
@@ -68,7 +65,6 @@ export default React.memo(function GuessRow({ code, isAnimated = false }) {
           correct={data.guess.typeResult.result === 'CORRECT'}
           text={cleanName(data.guess.typeResult.type)}
           image={getMedia(data.guess.typeResult.type)}
-          isAnimated={isAnimated}
         />
       </Grid>
       <Grid item xs={2}>
@@ -77,7 +73,6 @@ export default React.memo(function GuessRow({ code, isAnimated = false }) {
           correct={data.guess.setResult.result === 'CORRECT'}
           text={cleanName(data.guess.setResult.set)}
           image={getMedia(data.guess.setResult.set)}
-          isAnimated={isAnimated}
         />
       </Grid>
     </>

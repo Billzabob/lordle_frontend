@@ -19,7 +19,7 @@ export default function GuessingGame() {
           guesses.length > 0 &&
           <Grid container columns={12} spacing={2} minWidth={'868px'}>
             <GuessHeader />
-            {guesses.map((guess, i) => <GuessRow isAnimated={i === 0} key={guess} code={guess} />)}
+            {guesses.map(guess => <GuessRow key={guess} code={guess} />)}
           </Grid>
         }
       </Container>
