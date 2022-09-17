@@ -3,10 +3,10 @@ import { useQuery } from '@apollo/client'
 import { CORRECT_ANSWERS } from '../gql/queries'
 import { Box, Skeleton, Typography } from '@mui/material'
 
-export default function GuessCounter() {
+export default React.forwardRef((_, ref) => {
   const { data, loading } = useQuery(CORRECT_ANSWERS)
   return (
-    <Box display='flex' justifyContent='center'>
+    <Box ref={ref} display='flex' justifyContent='center'>
       <Typography variant='h6' sx={{ mt: 3 }}>
         {loading
           ? <Skeleton width={400} />
@@ -14,4 +14,4 @@ export default function GuessCounter() {
       </Typography>
     </Box>
   )
-}
+})

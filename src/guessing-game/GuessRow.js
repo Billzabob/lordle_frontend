@@ -10,14 +10,14 @@ export default React.memo(function GuessRow({ code }) {
   const { loading, data } = useQuery(CHECK_GUESS, { variables: { code } })
   const [winDialogState, setWinDialogState] = useState('incorrect')
 
-  if (loading) return null
+  if (loading) return <div style={{ height: '200px' }}></div>
 
   if (winDialogState === 'incorrect' && data.guess.correct) {
     setTimeout(() => setWinDialogState('open'), 3500)
   }
 
   return (
-    <>
+    <Grid container columns={12} spacing={2} minWidth={'868px'}>
       <WinDialog
         open={winDialogState === 'open'}
         onClose={() => setWinDialogState('closed')}
@@ -75,7 +75,7 @@ export default React.memo(function GuessRow({ code }) {
           image={getMedia(data.guess.setResult.set)}
         />
       </Grid>
-    </>
+    </Grid>
   )
 })
 

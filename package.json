@@ -16,6 +16,7 @@
     "react": "^18.2.0",
     "react-confetti": "^6.1.0",
     "react-dom": "^18.2.0",
+    "react-flip-move": "^3.0.4",
     "react-scripts": "^3.3.0",
     "recharts": "^2.1.13",
     "web-vitals": "^2.1.4"
