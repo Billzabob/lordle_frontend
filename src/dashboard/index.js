@@ -48,9 +48,9 @@ export default function Dashboard() {
           <MainGameTitle />
           <Countdown />
           <GuessInput setGuess={setGuess} guesses={guesses} />
+          <GuessingGame guesses={guesses} />
           <GuessCounter />
           <YesterdaysCard />
-          <GuessingGame guesses={guesses} />
         </Container>
       </Box>
     </ThemeProvider>

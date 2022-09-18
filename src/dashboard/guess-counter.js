@@ -7,7 +7,7 @@ export default React.forwardRef((_, ref) => {
   const { data, loading } = useQuery(CORRECT_ANSWERS)
   return (
     <Box ref={ref} display='flex' justifyContent='center'>
-      <Typography variant='body1' sx={{ mt: 2 }}>
+      <Typography variant='h6' sx={{ mt: 2 }}>
         {loading
           ? <Skeleton width={400} />
           : data.correctAnswers + (data.correctAnswers === 1 ? ' person' : ' people') + ' already found out!'}
