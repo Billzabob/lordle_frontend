@@ -1,4 +1,4 @@
-import * as React from 'react'
+import React from 'react'
 import { useReactiveVar } from '@apollo/client'
 import { settingsDialogOpen, darkMode } from '../reactive-vars'
 import DialogTitle from '@mui/material/DialogTitle'

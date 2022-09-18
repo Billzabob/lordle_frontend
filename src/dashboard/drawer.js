@@ -1,4 +1,4 @@
-import * as React from 'react'
+import React from 'react'
 import { Box, List, ListItem, ListItemButton, ListItemIcon, ListItemText, SwipeableDrawer } from '@mui/material'
 import { makeVar, useReactiveVar } from '@apollo/client'
 import pages from './pages'

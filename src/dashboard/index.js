@@ -1,19 +1,20 @@
+import { Box, Container } from '@mui/material'
 import { createTheme, ThemeProvider, responsiveFontSizes } from '@mui/material/styles'
 import { darkMode } from '../reactive-vars'
-import { useReactiveVar } from '@apollo/client'
-import React, {useState} from 'react'
-import Countdown from './countdown'
+import { makeVar, useReactiveVar } from '@apollo/client'
+import { SettingsDialog } from '../dialogs/settings'
+import { useLocalStorage } from '../util'
 import CssBaseline from '@mui/material/CssBaseline'
+import GuessCounter from './guess-counter'
 import GuessingGame from '../guessing-game/GuessingGame'
+import GuessingGameHeader from '../guessing-game/GuessingGameHeader'
 import MainGameTitle from './main-game-title'
 import MyAppBar from './app-bar'
-import { Box, Container } from '@mui/material'
-import { SettingsDialog } from '../dialogs/settings'
 import MyDrawer from './drawer'
+import React from 'react'
 import YesterdaysCard from './yesterdays-card'
-import GuessCounter from './guess-counter'
-import GuessInput from '../guessing-game/GuessInput'
 
+export const correct = makeVar(false)
 
 export default function Dashboard() {
   const isDarkMode = useReactiveVar(darkMode)
@@ -30,7 +31,7 @@ export default function Dashboard() {
   })
   mdTheme = responsiveFontSizes(mdTheme)
 
-  const [guesses, setGuesses] = useState([])
+  const [guesses, setGuesses] = useLocalStorage('guesses', [])
 
   const setGuess = (guess) => {
     setGuesses([guess, ...guesses])
@@ -41,13 +42,12 @@ export default function Dashboard() {
       <CssBaseline />
       <SettingsDialog />
       {/* <StatsChartDialog /> */}
-      <MyDrawer/>
+      <MyDrawer />
       <Box sx={{ display: 'flex', mb: 4 }}>
-        <MyAppBar/>
-        <Container sx={{mt: 9}}>
+        <MyAppBar />
+        <Container sx={{ mt: 9 }}>
           <MainGameTitle />
-          <Countdown />
-          <GuessInput setGuess={setGuess} guesses={guesses} />
+          <GuessingGameHeader guesses={guesses} setGuess={setGuess} />
           <GuessingGame guesses={guesses} />
           <GuessCounter />
           <YesterdaysCard />

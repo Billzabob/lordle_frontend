@@ -5,15 +5,19 @@ import { useQuery } from '@apollo/client'
 import { CHECK_GUESS } from '../gql/queries'
 import WinDialog from './WinDialog'
 import CardTooltip from '../CardTooltip'
+import { correct } from '../dashboard'
 
-export default React.memo(function GuessRow({ code }) {
+export default React.memo(function GuessRow({ code, isAnimated }) {
   const { loading, data } = useQuery(CHECK_GUESS, { variables: { code } })
   const [winDialogState, setWinDialogState] = useState('incorrect')
 
   if (loading) return <div style={{ height: '200px' }}></div>
 
   if (winDialogState === 'incorrect' && data.guess.correct) {
-    setTimeout(() => setWinDialogState('open'), 2450)
+    setTimeout(() => {
+      correct(true)
+      setWinDialogState('open')
+    }, 2450)
   }
 
   return (
@@ -27,6 +31,7 @@ export default React.memo(function GuessRow({ code }) {
       <Grid item xs={2}>
         <CardTooltip image={data.guess.image} name={data.guess.name}>
           <Fade
+            appear={isAnimated}
             in
             timeout={750}
             style={{ transitionDelay: '350ms' }}
@@ -37,6 +42,7 @@ export default React.memo(function GuessRow({ code }) {
       </Grid>
       <Grid item xs={2}>
         <GuessBox
+          isAnimated={isAnimated}
           position={2}
           correct={data.guess.regionResult.result === 'PARTIAL' ? 'partial' : data.guess.regionResult.result === 'CORRECT'}
           text={data.guess.regionResult.regions.map(cleanName).join(', ')}
@@ -45,6 +51,7 @@ export default React.memo(function GuessRow({ code }) {
       </Grid>
       <Grid item xs={2}>
         <GuessBox
+          isAnimated={isAnimated}
           position={3}
           correct={data.guess.rarityResult.result === 'CORRECT'}
           text={cleanName(data.guess.rarityResult.rarity)}
@@ -53,6 +60,7 @@ export default React.memo(function GuessRow({ code }) {
       </Grid>
       <Grid item xs={2}>
         <GuessBox
+          isAnimated={isAnimated}
           position={4}
           correct={data.guess.manaCostResult.result === 'CORRECT'}
           text={cleanName(data.guess.manaCostResult.manaCost)}
@@ -61,6 +69,7 @@ export default React.memo(function GuessRow({ code }) {
       </Grid>
       <Grid item xs={2}>
         <GuessBox
+          isAnimated={isAnimated}
           position={5}
           correct={data.guess.typeResult.result === 'CORRECT'}
           text={cleanName(data.guess.typeResult.type)}
@@ -69,6 +78,7 @@ export default React.memo(function GuessRow({ code }) {
       </Grid>
       <Grid item xs={2}>
         <GuessBox
+          isAnimated={isAnimated}
           position={6}
           correct={data.guess.setResult.result === 'CORRECT'}
           text={cleanName(data.guess.setResult.set)}

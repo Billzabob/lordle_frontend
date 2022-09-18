@@ -1,4 +1,4 @@
-import * as React from 'react'
+import React from 'react'
 import { useReactiveVar } from '@apollo/client'
 import { LineChart, Line, XAxis, YAxis, Label, ResponsiveContainer } from 'recharts'
 import { statsDialogOpen } from '../reactive-vars'

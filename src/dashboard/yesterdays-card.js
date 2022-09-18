@@ -1,4 +1,4 @@
-import * as React from 'react'
+import React from 'react'
 import { useQuery } from '@apollo/client'
 import Typography from '@mui/material/Typography'
 import { GET_CARDS_FOR_DAY } from '../gql/queries'

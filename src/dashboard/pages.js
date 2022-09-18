@@ -1,4 +1,4 @@
-import * as React from 'react'
+import React from 'react'
 import VideogameAssetIcon from '@mui/icons-material/VideogameAsset'
 import VolumeUpIcon from '@mui/icons-material/VolumeUp'
 import PhotoIcon from '@mui/icons-material/Photo'

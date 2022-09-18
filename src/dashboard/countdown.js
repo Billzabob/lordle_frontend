@@ -21,8 +21,8 @@ export default function Countdown() {
     <Box display='flex' justifyContent='center'>
       {
         timeLeft === 0
-          ? <Button href='/' sx={{ mt: 2.5 }} variant='contained'>Refresh</Button>
-          : <Typography variant='h6' sx={{ mt: 3 }}>
+          ? <Button href='/' sx={{ my: 1.25 }} variant='contained'>Refresh</Button>
+          : <Typography variant='h6' sx={{ my: 1.5 }}>
             {loading ? <Skeleton width={400} /> : 'Next challenge in: ' + timeString}
           </Typography>
       }

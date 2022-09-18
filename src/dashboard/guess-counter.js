@@ -1,4 +1,4 @@
-import * as React from 'react'
+import React from 'react'
 import { useQuery } from '@apollo/client'
 import { CORRECT_ANSWERS } from '../gql/queries'
 import { Box, Skeleton, Typography } from '@mui/material'

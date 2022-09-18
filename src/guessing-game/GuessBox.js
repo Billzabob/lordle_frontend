@@ -21,6 +21,7 @@ const Image = React.memo(
           bgcolor: ({ palette }) => getColor(palette, correct, isDark),
           p: correct === 'partial' ? 1 : 3
         }}
+        style={{width: '127px', height: '127px'}}
         component='img'
         image={image}
       />
@@ -28,9 +29,10 @@ const Image = React.memo(
   }
 )
 
-export default function GuessBox({ correct, text, position, image }) {
+export default function GuessBox({ correct, text, position, image, isAnimated }) {
   return (
     <Fade
+      appear={isAnimated}
       direction='up'
       in
       timeout={750}

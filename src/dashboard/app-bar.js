@@ -1,4 +1,4 @@
-import * as React from 'react'
+import React from 'react'
 import { AppBar, Box, Toolbar, IconButton, Typography, Button } from '@mui/material'
 import MenuIcon from '@mui/icons-material/Menu'
 import Logo from '../Logo'
