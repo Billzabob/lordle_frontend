@@ -9,7 +9,7 @@ export default React.forwardRef((_, ref) => {
 
   return (
     <Box ref={ref} display='flex' justifyContent='center'>
-      <Typography variant='h6' sx={{ mt: 3, textAlign: 'center' }}>
+      <Typography variant='body1' sx={{ my: 2, textAlign: 'center' }}>
         {loading ? <Skeleton width={400} /> : content(data)}
       </Typography>
     </Box>

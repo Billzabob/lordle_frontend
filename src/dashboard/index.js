@@ -1,7 +1,7 @@
 import { createTheme, ThemeProvider, responsiveFontSizes } from '@mui/material/styles'
 import { darkMode } from '../reactive-vars'
 import { useReactiveVar } from '@apollo/client'
-import * as React from 'react'
+import React, {useState} from 'react'
 import Countdown from './countdown'
 import CssBaseline from '@mui/material/CssBaseline'
 import GuessingGame from '../guessing-game/GuessingGame'
@@ -10,6 +10,9 @@ import MyAppBar from './app-bar'
 import { Box, Container } from '@mui/material'
 import { SettingsDialog } from '../dialogs/settings'
 import MyDrawer from './drawer'
+import YesterdaysCard from './yesterdays-card'
+import GuessCounter from './guess-counter'
+import GuessInput from '../guessing-game/GuessInput'
 
 
 export default function Dashboard() {
@@ -27,6 +30,12 @@ export default function Dashboard() {
   })
   mdTheme = responsiveFontSizes(mdTheme)
 
+  const [guesses, setGuesses] = useState([])
+
+  const setGuess = (guess) => {
+    setGuesses([guess, ...guesses])
+  }
+
   return (
     <ThemeProvider theme={mdTheme}>
       <CssBaseline />
@@ -38,7 +47,10 @@ export default function Dashboard() {
         <Container sx={{mt: 9}}>
           <MainGameTitle />
           <Countdown />
-          <GuessingGame />
+          <GuessInput setGuess={setGuess} guesses={guesses} />
+          <GuessCounter />
+          <YesterdaysCard />
+          <GuessingGame guesses={guesses} />
         </Container>
       </Box>
     </ThemeProvider>
