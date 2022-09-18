@@ -13,7 +13,7 @@ export default React.memo(function GuessRow({ code }) {
   if (loading) return <div style={{ height: '200px' }}></div>
 
   if (winDialogState === 'incorrect' && data.guess.correct) {
-    setTimeout(() => setWinDialogState('open'), 3500)
+    setTimeout(() => setWinDialogState('open'), 2450)
   }
 
   return (
@@ -29,7 +29,7 @@ export default React.memo(function GuessRow({ code }) {
           <Fade
             in
             timeout={750}
-            style={{ transitionDelay: '500ms' }}
+            style={{ transitionDelay: '350ms' }}
           >
             <img src={data.guess.image} alt={data.guess.name} style={{ width: '128px', height: '193px' }} />
           </Fade>

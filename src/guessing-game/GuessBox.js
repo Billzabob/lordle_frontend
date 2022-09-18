@@ -34,7 +34,7 @@ export default function GuessBox({ correct, text, position, image }) {
       direction='up'
       in
       timeout={750}
-      style={{ transitionDelay: `${position * 500}ms` }}
+      style={{ transitionDelay: `${position * 350}ms` }}
     >
       <Card variant='outlined'>
         <CardContent
