@@ -1,9 +1,8 @@
-import React from 'react'
 import { Box, List, ListItem, ListItemButton, ListItemIcon, ListItemText, SwipeableDrawer } from '@mui/material'
-import { makeVar, useReactiveVar } from '@apollo/client'
+import { drawerOpen } from '../reactive-vars'
+import { useReactiveVar } from '@apollo/client'
 import pages from './pages'
-
-export const drawerOpen = makeVar(false)
+import React from 'react'
 
 export default function MyDrawer() {
   const open = useReactiveVar(drawerOpen)

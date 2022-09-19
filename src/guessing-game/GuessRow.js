@@ -1,26 +1,27 @@
-import React, { useState } from 'react'
-import GuessBox from './GuessBox'
-import { Fade, Grid } from '@mui/material'
-import { useQuery } from '@apollo/client'
 import { CHECK_GUESS } from '../gql/queries'
-import WinDialog from './WinDialog'
+import { correctAnswer, resultsDialogOpen } from '../reactive-vars'
+import { Fade, Grid } from '@mui/material'
+import { useQuery, useReactiveVar } from '@apollo/client'
 import CardTooltip from '../CardTooltip'
-import { correct } from '../dashboard'
+import GuessBox from './GuessBox'
+import React, { useState } from 'react'
+import WinDialog from './WinDialog'
 
 export default React.memo(function GuessRow({ code, isAnimated }) {
   const { loading, data } = useQuery(CHECK_GUESS, { variables: { code } })
   const [winDialogState, setWinDialogState] = useState('incorrect')
+  const resultsOpen = useReactiveVar(resultsDialogOpen)
 
   if (loading) return <div style={{ height: '200px' }}></div>
 
   if (winDialogState === 'incorrect' && data.guess.correct) {
     if (isAnimated) {
       setTimeout(() => {
-        correct(true)
+        correctAnswer(true)
         setWinDialogState('open')
       }, 2450)
     } else {
-      correct(true)
+      correctAnswer(true)
       setWinDialogState('closed')
     }
   }
@@ -28,8 +29,11 @@ export default React.memo(function GuessRow({ code, isAnimated }) {
   return (
     <Grid container columns={12} spacing={2} minWidth={'868px'}>
       <WinDialog
-        open={winDialogState === 'open'}
-        onClose={() => setWinDialogState('closed')}
+        open={winDialogState === 'open' || (resultsOpen && data.guess.correct)}
+        onClose={() => {
+          setWinDialogState('closed')
+          resultsDialogOpen(false)
+        }}
         correctCard={data.guess}
         otherCards={data.guess?.otherCards}
       />

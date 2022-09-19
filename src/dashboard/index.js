@@ -1,5 +1,5 @@
 import { Box, Container } from '@mui/material'
-import { makeVar, useApolloClient, useQuery } from '@apollo/client'
+import { useApolloClient, useQuery } from '@apollo/client'
 import { GUESSES } from '../gql/queries'
 import { SettingsDialog } from '../dialogs/settings'
 import CacheResetter from './cache-resetter'
@@ -13,8 +13,6 @@ import MyDrawer from './drawer'
 import React from 'react'
 import Themer from './themer'
 import YesterdaysCard from './yesterdays-card'
-
-export const correct = makeVar(false)
 
 export default function Dashboard() {
   const client = useApolloClient()

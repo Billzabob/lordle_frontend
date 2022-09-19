@@ -1,11 +1,10 @@
-import React from 'react'
 import { AppBar, Box, Toolbar, IconButton, Typography, Button } from '@mui/material'
-import MenuIcon from '@mui/icons-material/Menu'
+import { drawerOpen, settingsDialogOpen } from '../reactive-vars'
 import Logo from '../Logo'
-import SettingsIcon from '@mui/icons-material/Settings'
-import { settingsDialogOpen } from '../reactive-vars'
-import { drawerOpen } from './drawer'
+import MenuIcon from '@mui/icons-material/Menu'
 import pages from './pages'
+import React from 'react'
+import SettingsIcon from '@mui/icons-material/Settings'
 
 const smallLayout = (
   <>
