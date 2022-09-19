@@ -3,6 +3,7 @@ import { gql } from '@apollo/client'
 export const CHECK_GUESS = gql`
 query CheckGuess($code: String!) {
   guess(code: $code) {
+    cardCode
     image
     correct
     otherCards {

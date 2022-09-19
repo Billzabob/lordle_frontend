@@ -4,7 +4,7 @@ import { CORRECT_ANSWERS } from '../gql/queries'
 import { Box, Skeleton, Typography } from '@mui/material'
 
 export default React.forwardRef((_, ref) => {
-  const { data, loading } = useQuery(CORRECT_ANSWERS)
+  const { data, loading } = useQuery(CORRECT_ANSWERS, { fetchPolicy: 'network-only' })
   return (
     <Box ref={ref} display='flex' justifyContent='center'>
       <Typography variant='h6' sx={{ mt: 2 }}>

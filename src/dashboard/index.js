@@ -1,9 +1,8 @@
 import { Box, Container } from '@mui/material'
-import { createTheme, ThemeProvider, responsiveFontSizes } from '@mui/material/styles'
-import { darkMode } from '../reactive-vars'
-import { makeVar, useReactiveVar } from '@apollo/client'
+import { gql, makeVar, useApolloClient, useQuery } from '@apollo/client'
+import { GUESSES } from '../gql/queries'
 import { SettingsDialog } from '../dialogs/settings'
-import { useLocalStorage } from '../util'
+import CacheResetter from './cache-resetter'
 import CssBaseline from '@mui/material/CssBaseline'
 import GuessCounter from './guess-counter'
 import GuessingGame from '../guessing-game/GuessingGame'
@@ -12,33 +11,20 @@ import MainGameTitle from './main-game-title'
 import MyAppBar from './app-bar'
 import MyDrawer from './drawer'
 import React from 'react'
+import Themer from './themer'
 import YesterdaysCard from './yesterdays-card'
 
 export const correct = makeVar(false)
 
 export default function Dashboard() {
-  const isDarkMode = useReactiveVar(darkMode)
-  let mdTheme = createTheme({
-    palette: {
-      mode: isDarkMode ? 'dark' : 'light',
-      primary: {
-        main: '#413331',
-      },
-      secondary: {
-        main: '#C2A052',
-      },
-    },
-  })
-  mdTheme = responsiveFontSizes(mdTheme)
-
-  const [guesses, setGuesses] = useLocalStorage('guesses', [])
-
-  const setGuess = (guess) => {
-    setGuesses([guess, ...guesses])
-  }
+  const client = useApolloClient()
+  const { data } = useQuery(GUESSES, { fetchPolicy: 'cache-only' })
+  const guesses = data?.guesses || []
+  const guessCodes = guesses.map(g => g.cardCode)
 
   return (
-    <ThemeProvider theme={mdTheme}>
+    <Themer>
+      <CacheResetter />
       <CssBaseline />
       <SettingsDialog />
       {/* <StatsChartDialog /> */}
@@ -47,12 +33,28 @@ export default function Dashboard() {
         <MyAppBar />
         <Container sx={{ mt: 9 }}>
           <MainGameTitle />
-          <GuessingGameHeader guesses={guesses} setGuess={setGuess} />
-          <GuessingGame guesses={guesses} />
+          <GuessingGameHeader guesses={guessCodes} setGuess={setGuess(client, guesses)} />
+          <GuessingGame guesses={guessCodes} />
           <GuessCounter />
           <YesterdaysCard />
         </Container>
       </Box>
-    </ThemeProvider>
+    </Themer>
   )
+}
+
+function setGuess(client, guesses) {
+  return (guess) => {
+    client.writeQuery({
+      query: GUESSES,
+      data: {
+        guesses: [
+          {
+            __typename: 'Guesses',
+            cardCode: guess
+          }, ...guesses
+        ]
+      },
+    })
+  }
 }
