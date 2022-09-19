@@ -4,7 +4,7 @@ import { CURRENT_DAY } from "../gql/queries"
 
 export default function CacheResetter() {
   const client = useApolloClient()
-  const { data } = useQuery(CURRENT_DAY, { fetchPolicy: 'network-only' })
+  const { data } = useQuery(CURRENT_DAY, { fetchPolicy: 'no-cache' })
 
   useEffect(() => {
     async function checkDay() {

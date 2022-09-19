@@ -1,5 +1,5 @@
 import { Box, Container } from '@mui/material'
-import { gql, makeVar, useApolloClient, useQuery } from '@apollo/client'
+import { makeVar, useApolloClient, useQuery } from '@apollo/client'
 import { GUESSES } from '../gql/queries'
 import { SettingsDialog } from '../dialogs/settings'
 import CacheResetter from './cache-resetter'

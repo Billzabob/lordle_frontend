@@ -1,14 +1,15 @@
 import GuessRow from './GuessRow'
 import GuessHeader from './GuessHeader'
-import React from 'react'
+import React, { useState } from 'react'
 import { Container, Grid } from '@mui/material'
 import FlipMove from 'react-flip-move'
 
 export default function GuessingGame({ guesses }) {
+  const [animatedAlready] = useState(guesses)
 
-  const guessRows = guesses.map((guess, i) =>
+  const guessRows = guesses.map(guess =>
     <div key={guess}>
-      <GuessRow code={guess} isAnimated={i === 0} />
+      <GuessRow code={guess} isAnimated={!animatedAlready.includes(guess)} />
     </div>
   )
 

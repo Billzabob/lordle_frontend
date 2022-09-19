@@ -14,10 +14,15 @@ export default React.memo(function GuessRow({ code, isAnimated }) {
   if (loading) return <div style={{ height: '200px' }}></div>
 
   if (winDialogState === 'incorrect' && data.guess.correct) {
-    setTimeout(() => {
+    if (isAnimated) {
+      setTimeout(() => {
+        correct(true)
+        setWinDialogState('open')
+      }, 2450)
+    } else {
       correct(true)
-      setWinDialogState('open')
-    }, 2450)
+      setWinDialogState('closed')
+    }
   }
 
   return (

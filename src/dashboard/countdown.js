@@ -4,7 +4,7 @@ import { useQuery } from '@apollo/client'
 import { COUNTDOWN_QUERY } from '../gql/queries'
 
 export default function Countdown() {
-  const { data, loading } = useQuery(COUNTDOWN_QUERY)
+  const { data, loading } = useQuery(COUNTDOWN_QUERY, { fetchPolicy: 'no-cache' })
   const [timeLeft, setTimeLeft] = useState(null)
 
   timeLeft === null && data && setTimeLeft(data.nextCardTimeSeconds)
