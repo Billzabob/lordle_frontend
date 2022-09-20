@@ -1,6 +1,7 @@
 import { useApolloClient, useQuery } from "@apollo/client"
 import { useEffect } from "react"
 import { CURRENT_DAY } from "../gql/queries"
+import { correctAnswer } from "../reactive-vars/dialogs"
 
 export default function CacheResetter() {
   const client = useApolloClient()
@@ -9,6 +10,8 @@ export default function CacheResetter() {
   useEffect(() => {
     async function checkDay() {
       const savedDay = window.localStorage.getItem('day') || ''
+
+      correctAnswer(false)
 
       if (data && savedDay !== data.currentDay.toString()) {
         window.localStorage.setItem('day', data.currentDay.toString())
