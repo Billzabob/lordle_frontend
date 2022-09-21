@@ -7,6 +7,7 @@ query CheckGuess($code: String!) {
     image
     correct
     otherCards {
+        cardCode
 				image
         name
 			}

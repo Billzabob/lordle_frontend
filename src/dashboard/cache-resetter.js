@@ -11,9 +11,8 @@ export default function CacheResetter() {
     async function checkDay() {
       const savedDay = window.localStorage.getItem('day') || ''
 
-      correctAnswer(false)
-
       if (data && savedDay !== data.currentDay.toString()) {
+        correctAnswer(false)
         window.localStorage.setItem('day', data.currentDay.toString())
         await client.resetStore()
       }
