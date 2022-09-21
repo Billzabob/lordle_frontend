@@ -6,7 +6,7 @@ export default function WinDialog({ open, onClose, correctCard, otherCards }) {
   const [tooltip, setTooltip] = useState(false)
 
   return (
-    <Dialog open={open} onClose={onClose}>
+    <Dialog open={open} onClose={onClose} maxWidth='xs' fullWidth>
       <DialogTitle textAlign='center' variant='h3'>
         Victory!
       </DialogTitle>

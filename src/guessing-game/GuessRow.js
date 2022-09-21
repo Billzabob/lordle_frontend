@@ -51,6 +51,7 @@ export default React.memo(function GuessRow({ code }) {
           correct={data.guess.regionResult.result === 'PARTIAL' ? 'partial' : data.guess.regionResult.result === 'CORRECT'}
           text={data.guess.regionResult.regions.map(cleanName).join(', ')}
           image={getMedia(data.guess.regionResult.regions.slice().sort().join(''))}
+          padding={data.guess.regionResult.regions.length > 1 ? 1 : null}
         />
       </Grid>
       <Grid item xs={2}>

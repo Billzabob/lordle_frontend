@@ -14,13 +14,13 @@ const getColor = (palette, correct, isDark) => {
 }
 
 const Image = React.memo(
-  function Image({ image, correct }) {
+  function Image({ image, correct, padding }) {
     const isDark = useReactiveVar(darkMode)
     return (
       <CardMedia
         sx={{
           bgcolor: ({ palette }) => getColor(palette, correct, isDark),
-          p: correct === 'partial' ? 1 : 3
+          p: padding || 3
         }}
         style={{width: '127px', height: '127px'}}
         component='img'
@@ -30,7 +30,7 @@ const Image = React.memo(
   }
 )
 
-export default function GuessBox({ correct, text, position, image }) {
+export default function GuessBox({ correct, text, position, image, padding }) {
   return (
     <Fade
       direction='up'
@@ -46,7 +46,7 @@ export default function GuessBox({ correct, text, position, image }) {
             <Typography variant='body2'>{text}</Typography>
           </Box>
         </CardContent>
-        <Image image={image} correct={correct} />
+        <Image image={image} correct={correct} padding={padding} />
       </Card>
     </Fade>
   )
