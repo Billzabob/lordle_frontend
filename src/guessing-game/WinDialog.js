@@ -13,18 +13,18 @@ export default function WinDialog({ open, onClose, correctCard, otherCards }) {
       <DialogContent sx={{p: 0}} dividers={false}>
         <Stack alignItems='center'>
           <CardTooltip image={correctCard.image} name={correctCard.name}>
-            <img src={correctCard.image} alt={correctCard.name} style={{ height: '312px', width: '204px' }} />
+            <img src={correctCard.image} alt={correctCard.name} style={{ margin: '16px', height: '312px', width: '204px' }} />
           </CardTooltip>
           <Tooltip open={tooltip} onClose={() => setTooltip(false)} title='Copied to clipboard!'>
             <Button onClick={() => {
               setTooltip(true)
               navigator.clipboard.writeText(shareText())
-            }} sx={{ width: '100px', mt: 2 }} variant='contained'>Share</Button>
+            }} sx={{ width: '100px', mt: 2, mb: 4 }} variant='contained'>Share</Button>
           </Tooltip>
           {
             (otherCards || []).length > 0 &&
             <>
-              <Typography variant='h4' sx={{ textAlign: 'center', mt: 3 }}>
+              <Typography variant='h4' sx={{ textAlign: 'center', mt: 0 }}>
                 Other Possible Answers
               </Typography>
               <ImageList cols={Math.min(3, otherCards.length)} sx={{ m: 1 }}>
