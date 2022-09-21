@@ -1,5 +1,6 @@
-import { AppBar, Box, Toolbar, IconButton, Typography, Button } from '@mui/material'
+import { AppBar, Box, Toolbar, IconButton, Typography } from '@mui/material'
 import { drawerOpen, settingsDialogOpen } from '../reactive-vars'
+import { StyledButton } from '../dashboard/styled-components'
 import Logo from '../Logo'
 import MenuIcon from '@mui/icons-material/Menu'
 import pages from './pages'
@@ -28,7 +29,7 @@ const largeLayout = (
 
     <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' }}}>
       {pages.map(({ name }) => (
-        <Button
+        <StyledButton
           variant='text'
           key={name}
           color='secondary'
@@ -37,7 +38,7 @@ const largeLayout = (
           <Typography fontSize={14} fontWeight='bold'>
             {name}
           </Typography>
-        </Button>
+        </StyledButton>
       ))}
     </Box>
   </>

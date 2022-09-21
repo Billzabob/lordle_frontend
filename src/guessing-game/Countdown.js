@@ -1,7 +1,8 @@
-import React, { useEffect, useState } from 'react'
-import { Box, Button, Skeleton, Typography } from '@mui/material'
-import { useQuery } from '@apollo/client'
+import { Box, Skeleton, Typography } from '@mui/material'
 import { COUNTDOWN_QUERY } from '../gql/queries'
+import { StyledButton } from '../dashboard/styled-components'
+import { useQuery } from '@apollo/client'
+import React, { useEffect, useState } from 'react'
 
 export default function Countdown() {
   const { data, loading } = useQuery(COUNTDOWN_QUERY, { fetchPolicy: 'no-cache' })
@@ -21,7 +22,7 @@ export default function Countdown() {
     <Box display='flex' justifyContent='center'>
       {
         timeLeft === 0
-          ? <Button href='/' sx={{ my: 1.25 }} variant='contained'>Refresh</Button>
+          ? <StyledButton href='/' sx={{ my: 1.25 }} variant='contained'>Refresh</StyledButton>
           : <Typography variant='h6' sx={{ my: 1.5 }}>
             {loading ? <Skeleton width={400} /> : 'Next challenge in: ' + timeString}
           </Typography>

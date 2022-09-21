@@ -1,6 +1,7 @@
-import { Button, Dialog, DialogContent, DialogTitle, ImageList, ImageListItem, Stack, Tooltip, Typography } from '@mui/material'
-import React, { useState } from 'react'
+import { Dialog, DialogContent, DialogTitle, ImageList, ImageListItem, Stack, Tooltip, Typography } from '@mui/material'
+import { StyledButton } from '../dashboard/styled-components'
 import CardTooltip from '../CardTooltip'
+import React, { useState } from 'react'
 
 export default function WinDialog({ open, onClose, correctCard, otherCards }) {
   const [tooltip, setTooltip] = useState(false)
@@ -16,10 +17,10 @@ export default function WinDialog({ open, onClose, correctCard, otherCards }) {
             <img src={correctCard.image} alt={correctCard.name} style={{ margin: '16px', height: '312px', width: '204px' }} />
           </CardTooltip>
           <Tooltip open={tooltip} onClose={() => setTooltip(false)} title='Copied to clipboard!'>
-            <Button onClick={() => {
+            <StyledButton onClick={() => {
               setTooltip(true)
               navigator.clipboard.writeText(shareText())
-            }} sx={{ width: '100px', mt: 2, mb: 4 }} variant='contained'>Share</Button>
+            }} sx={{ width: '100px', mt: 2, mb: 4 }} variant='contained'>Share</StyledButton>
           </Tooltip>
           {
             (otherCards || []).length > 0 &&

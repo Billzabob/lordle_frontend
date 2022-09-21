@@ -1,5 +1,6 @@
-import { Box, Button, Stack } from '@mui/material'
+import { Box, Stack } from '@mui/material'
 import { correctAnswer, resultsDialogOpen } from '../reactive-vars'
+import { StyledButton } from '../dashboard/styled-components'
 import { useReactiveVar } from '@apollo/client'
 import Countdown from './Countdown'
 import GuessInput from '../guessing-game/GuessInput'
@@ -13,7 +14,7 @@ export default function GuessingGameHeader({ guesses, setGuess }) {
       <Stack sx={{ mt: 2 }}>
         <Countdown />
         <Box display='flex' justifyContent='center'>
-          <Button onClick={() => resultsDialogOpen(true)} sx={{ width: '100px' }} variant='contained'>Results</Button>
+          <StyledButton onClick={() => resultsDialogOpen(true)} sx={{ width: '100px' }} variant='contained'>Results</StyledButton>
         </Box>
       </Stack> :
       <GuessInput setGuess={setGuess} guesses={guesses} />
