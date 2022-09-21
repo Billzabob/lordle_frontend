@@ -2,6 +2,7 @@ import { Fade, Card, CardMedia, CardContent, Typography } from '@mui/material'
 import { useReactiveVar } from '@apollo/client'
 import { darkMode } from '../reactive-vars'
 import React from 'react'
+import { Box } from '@mui/system'
 
 const getColor = (palette, correct, isDark) => {
   if (isDark && correct === 'partial') return palette.warning.dark
@@ -39,9 +40,11 @@ export default function GuessBox({ correct, text, position, image }) {
     >
       <Card variant='outlined'>
         <CardContent
-          sx={{ bgcolor: ({ palette }) => palette.background.paper, textAlign: 'center' }}
+          sx={{ p: 0, bgcolor: ({ palette }) => palette.background.paper, textAlign: 'center' }}
         >
-          <Typography variant='h8' noWrap sx={{ display: 'block' }}>{text}</Typography>
+          <Box sx={{p: 1, height: 55}} display='flex' justifyContent='center' alignItems='center'>
+            <Typography variant='body2'>{text}</Typography>
+          </Box>
         </CardContent>
         <Image image={image} correct={correct} />
       </Card>
