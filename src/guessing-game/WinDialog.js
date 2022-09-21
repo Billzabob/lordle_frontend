@@ -10,7 +10,7 @@ export default function WinDialog({ open, onClose, correctCard, otherCards }) {
       <DialogTitle textAlign='center' variant='h3'>
         Victory!
       </DialogTitle>
-      <DialogContent dividers={false}>
+      <DialogContent sx={{p: 0}} dividers={false}>
         <Stack alignItems='center'>
           <CardTooltip image={correctCard.image} name={correctCard.name}>
             <img src={correctCard.image} alt={correctCard.name} style={{ height: '312px', width: '204px' }} />
