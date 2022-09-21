@@ -1,28 +1,35 @@
-import GuessRow from './GuessRow'
-import GuessHeader from './GuessHeader'
-import React, { useState } from 'react'
 import { Container, Grid } from '@mui/material'
 import FlipMove from 'react-flip-move'
+import GuessHeader from './GuessHeader'
+import GuessingGameHeader from './GuessingGameHeader'
+import GuessRow from './GuessRow'
+import React from 'react'
+import useGuesses from '../use-guesses'
 
-export default function GuessingGame({ guesses }) {
-  const [animatedAlready] = useState(guesses)
+export default function GuessingGame() {
+  const [guesses, setGuess] = useGuesses()
 
-  const guessRows = guesses.map(guess =>
+  const guessCodes = guesses.map(g => g.cardCode)
+
+  const guessRows = guessCodes.map(guess =>
     <div key={guess}>
-      <GuessRow code={guess} isAnimated={!animatedAlready.includes(guess)} />
+      <GuessRow code={guess} />
     </div>
   )
 
   return (
-    <Container maxWidth='md' sx={{ overflow: 'auto' }}>
-      {guesses.length > 0 &&
-        (<Grid container columns={12} spacing={2} minWidth={'868px'}>
-          <GuessHeader />
-        </Grid>)
-      }
-      <FlipMove enterAnimation="fade">
-        {guessRows}
-      </FlipMove>
-    </Container>
+    <>
+      <GuessingGameHeader guesses={guessCodes} setGuess={setGuess} />
+      <Container maxWidth='md' sx={{ overflow: 'auto' }}>
+        {guessCodes.length > 0 &&
+          (<Grid container columns={12} spacing={2} minWidth={'868px'}>
+            <GuessHeader />
+          </Grid>)
+        }
+        <FlipMove enterAnimation="fade">
+          {guessRows}
+        </FlipMove>
+      </Container>
+    </>
   )
 }

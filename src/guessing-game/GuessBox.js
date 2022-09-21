@@ -29,10 +29,9 @@ const Image = React.memo(
   }
 )
 
-export default function GuessBox({ correct, text, position, image, isAnimated }) {
+export default function GuessBox({ correct, text, position, image }) {
   return (
     <Fade
-      appear={isAnimated}
       direction='up'
       in
       timeout={750}
