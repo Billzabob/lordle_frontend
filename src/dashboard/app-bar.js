@@ -32,7 +32,7 @@ const largeLayout = (
           key={name}
           sx={{ mx: 1, color: 'white', display: 'block' }}
         >
-          <Typography variant='h6'>
+          <Typography textTransform='capitalize' variant='h6'>
             {name}
           </Typography>
         </Button>
