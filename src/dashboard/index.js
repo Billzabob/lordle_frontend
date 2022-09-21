@@ -4,7 +4,7 @@ import { GUESSES } from '../gql/queries'
 import { SettingsDialog } from '../dialogs/settings'
 import CacheResetter from './cache-resetter'
 import CssBaseline from '@mui/material/CssBaseline'
-import GuessCounter from './guess-counter'
+import GuessCounter from '../guessing-game/GuessCounter'
 import GuessingGame from '../guessing-game/GuessingGame'
 import GuessingGameHeader from '../guessing-game/GuessingGameHeader'
 import MainGameTitle from './main-game-title'
@@ -12,7 +12,7 @@ import MyAppBar from './app-bar'
 import MyDrawer from './drawer'
 import React from 'react'
 import Themer from './themer'
-import YesterdaysCard from './yesterdays-card'
+import YesterdaysCard from '../guessing-game/YesterdaysCard'
 
 export default function Dashboard() {
   const client = useApolloClient()
