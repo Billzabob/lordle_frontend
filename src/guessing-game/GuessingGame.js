@@ -4,15 +4,19 @@ import FlipMove from 'react-flip-move'
 import GuessHeader from './GuessHeader'
 import GuessingGameHeader from './GuessingGameHeader'
 import GuessRow from './GuessRow'
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 
 export default function GuessingGame() {
-  const [guessCodes, setGuessCodes] = useLocalStorage('guesses', [])
+  const [storedCodes, setStoredCodes] = useLocalStorage('guesses', [])
+  const [guessCodes, setGuessCodes] = useState(storedCodes)
+
   const setGuessCode = (guess) => setGuessCodes([guess, ...guessCodes])
+
+  useEffect(() => setStoredCodes(guessCodes))
 
   const guessRows = guessCodes.map(guess =>
     <div key={guess}>
-      <GuessRow code={guess} />
+      <GuessRow code={guess} animate={!storedCodes.includes(guess)} />
     </div>
   )
 
