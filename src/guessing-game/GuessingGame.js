@@ -1,15 +1,14 @@
 import { Container, Grid } from '@mui/material'
+import { useLocalStorage } from '../util'
 import FlipMove from 'react-flip-move'
 import GuessHeader from './GuessHeader'
 import GuessingGameHeader from './GuessingGameHeader'
 import GuessRow from './GuessRow'
 import React from 'react'
-import useGuesses from '../use-guesses'
 
 export default function GuessingGame() {
-  const [guesses, setGuess] = useGuesses()
-
-  const guessCodes = guesses.map(g => g.cardCode)
+  const [guessCodes, setGuessCodes] = useLocalStorage('guesses', [])
+  const setGuessCode = (guess) => setGuessCodes([guess, ...guessCodes])
 
   const guessRows = guessCodes.map(guess =>
     <div key={guess}>
@@ -19,7 +18,7 @@ export default function GuessingGame() {
 
   return (
     <>
-      <GuessingGameHeader guesses={guessCodes} setGuess={setGuess} />
+      <GuessingGameHeader guesses={guessCodes} setGuess={setGuessCode} />
       <Container maxWidth='md' sx={{ overflow: 'auto' }}>
         {guessCodes.length > 0 &&
           (<Grid container columns={12} spacing={2} minWidth={'868px'}>

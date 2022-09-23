@@ -1,6 +1,5 @@
 import { Box, Container } from '@mui/material'
 import { SettingsDialog } from '../dialogs/settings'
-import CacheResetter from './cache-resetter'
 import CssBaseline from '@mui/material/CssBaseline'
 import GuessCounter from '../guessing-game/GuessCounter'
 import GuessingGame from '../guessing-game/GuessingGame'
@@ -16,7 +15,6 @@ export default function Dashboard() {
 
   return (
     <Themer>
-      <CacheResetter />
       <CssBaseline />
       <SettingsDialog />
       {/* <StatsChartDialog /> */}
