@@ -1,4 +1,4 @@
-import { CHECK_GUESS } from '../gql/queries'
+import { CHECK_GUESS, CURRENT_DAY } from '../gql/queries'
 import { correctAnswer, resultsDialogOpen } from '../reactive-vars'
 import { Fade, Grid } from '@mui/material'
 import { useQuery, useReactiveVar } from '@apollo/client'
@@ -8,7 +8,9 @@ import React, { useEffect, useState } from 'react'
 import WinDialog from './WinDialog'
 
 export default React.memo(function GuessRow({ code }) {
-  const { loading, data } = useQuery(CHECK_GUESS, { variables: { code } })
+  const dayQuery = useQuery(CURRENT_DAY, { fetchPolicy: 'cache-and-network' })
+  const currentDay = dayQuery.data?.currentDay?.day || 0
+  const { loading, data } = useQuery(CHECK_GUESS, { variables: { code, day: currentDay } })
   const [winDialogState, setWinDialogState] = useState('incorrect')
   const resultsOpen = useReactiveVar(resultsDialogOpen)
 
