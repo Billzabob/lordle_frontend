@@ -18,6 +18,9 @@ export default function ApolloClientInitiator({ children }) {
           Guesses: {
             keyFields: ['cardCode']
           },
+          Day: {
+            keyFields: ['day']
+          }
         }
       })
 
