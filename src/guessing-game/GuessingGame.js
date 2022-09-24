@@ -5,21 +5,20 @@ import FlipMove from 'react-flip-move'
 import GuessHeader from './GuessHeader'
 import GuessingGameHeader from './GuessingGameHeader'
 import GuessRow from './GuessRow'
-import React, { useEffect, useReducer, useState } from 'react'
+import React, { useReducer, useState } from 'react'
 import WinDialog from './WinDialog'
 
 export default function GuessingGame() {
+  const [results, dispatch] = useReducer(reducer, [])
+  const latestResult = results[results.length - 1]
+
   const { data } = useQuery(CURRENT_DAY, { fetchPolicy: 'cache-and-network' })
   const currentDay = data?.currentDay?.day
-  const [guessCodes, setGuessCodes] = useState(() => getStoredCodes(currentDay))
-  const [results, dispatch] = useReducer(reducer, [])
-  useEffect(() => setStoredCodes(currentDay, guessCodes), [currentDay, guessCodes])
+
+  const [guess, setGuess] = useState()
   const storedCodes = getStoredCodes(currentDay) || []
 
-  if (!guessCodes && currentDay) setGuessCodes(storedCodes)
-
-  const codes = guessCodes || []
-  const latestResult = results[results.length - 1]
+  const codes = (guess && !storedCodes.includes(guess)) ? [...storedCodes, guess] : storedCodes
 
   const guessRows = codes.map((guess, i) =>
     <div key={guess}>
@@ -32,12 +31,14 @@ export default function GuessingGame() {
     </div>
   )
 
+  setStoredCodes(currentDay, codes)
+
   return (
     <>
       <GuessingGameHeader
         correct={latestResult?.correct}
         guesses={codes}
-        setGuess={(guess) => setGuessCodes([...guessCodes, guess])}
+        setGuess={setGuess}
       />
       <WinDialog results={results}/>
       <Container maxWidth='md' sx={{ overflow: 'auto' }}>
@@ -68,6 +69,6 @@ function getStoredCodes(currentDay) {
 }
 
 function setStoredCodes(currentDay, codes) {
-  if (currentDay && codes)
+  if (currentDay)
     window.localStorage.setItem('guesses' + currentDay, JSON.stringify(codes))
 }
