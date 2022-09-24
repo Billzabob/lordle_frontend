@@ -4,7 +4,7 @@ import { Fade, Grid } from '@mui/material'
 import { useQuery, useReactiveVar } from '@apollo/client'
 import CardTooltip from '../CardTooltip'
 import GuessBox from './GuessBox'
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import WinDialog from './WinDialog'
 
 export default React.memo(function GuessRow({ code, animate }) {
@@ -14,22 +14,21 @@ export default React.memo(function GuessRow({ code, animate }) {
   const [winDialogState, setWinDialogState] = useState('incorrect')
   const resultsOpen = useReactiveVar(resultsDialogOpen)
 
-  useEffect(() => {
-    if (!loading && winDialogState === 'incorrect' && data.guess.correct) {
-      if (animate) {
-        setTimeout(() => {
-          correctAnswer(true)
-          setWinDialogState('open')
-        }, 2450)
-      } else {
+  if (!loading && winDialogState === 'incorrect' && data.guess.correct) {
+    if (animate) {
+      setTimeout(() => {
         correctAnswer(true)
-        setWinDialogState('closed')
-      }
+        setWinDialogState('open')
+      }, 2450)
+    } else {
+      correctAnswer(true)
+      setWinDialogState('closed')
     }
-  })
+  }
 
   if (loading || !currentDay) return <div style={{ height: '200px' }}></div>
 
+  // Can move WinDialog out once we move state up
   return (
     <Grid container columns={12} spacing={2} minWidth={'868px'}>
       <WinDialog
@@ -101,7 +100,7 @@ export default React.memo(function GuessRow({ code, animate }) {
       </Grid>
     </Grid>
   )
-}, (a, b) => a.code === b.code)
+})
 
 function cleanName(name) {
   switch (name) {

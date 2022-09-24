@@ -1,5 +1,6 @@
 import { Container, Grid } from '@mui/material'
-import { useLocalStorage } from '../util'
+import { CURRENT_DAY } from '../gql/queries'
+import { useQuery } from '@apollo/client'
 import FlipMove from 'react-flip-move'
 import GuessHeader from './GuessHeader'
 import GuessingGameHeader from './GuessingGameHeader'
@@ -7,24 +8,29 @@ import GuessRow from './GuessRow'
 import React, { useEffect, useState } from 'react'
 
 export default function GuessingGame() {
-  const [storedCodes, setStoredCodes] = useLocalStorage('guesses', [])
-  const [guessCodes, setGuessCodes] = useState(storedCodes)
+  const { data } = useQuery(CURRENT_DAY, { fetchPolicy: 'cache-and-network' })
+  const currentDay = data?.currentDay?.day
+  const [guessCodes, setGuessCodes] = useState(() => getStoredCodes(currentDay))
+  useEffect(() => setStoredCodes(currentDay, guessCodes))
 
-  const setGuessCode = (guess) => setGuessCodes([guess, ...guessCodes])
+  if (!guessCodes && currentDay) setGuessCodes(getStoredCodes(currentDay) || [])
 
-  useEffect(() => setStoredCodes(guessCodes))
+  const codes = guessCodes || []
 
-  const guessRows = guessCodes.map(guess =>
+  const guessRows = codes.map(guess =>
     <div key={guess}>
-      <GuessRow code={guess} animate={!storedCodes.includes(guess)} />
+      <GuessRow code={guess} animate={!getStoredCodes(currentDay).includes(guess)} />
     </div>
   )
 
   return (
     <>
-      <GuessingGameHeader guesses={guessCodes} setGuess={setGuessCode} />
+      <GuessingGameHeader
+        guesses={codes}
+        setGuess={(guess) => setGuessCodes([guess, ...guessCodes])}
+      />
       <Container maxWidth='md' sx={{ overflow: 'auto' }}>
-        {guessCodes.length > 0 &&
+        {guessRows.length > 0 &&
           (<Grid container columns={12} spacing={2} minWidth={'868px'}>
             <GuessHeader />
           </Grid>)
@@ -35,4 +41,14 @@ export default function GuessingGame() {
       </Container>
     </>
   )
+}
+
+function getStoredCodes(currentDay) {
+  const item = window.localStorage.getItem('guesses' + currentDay)
+  return item ? JSON.parse(item) : item
+}
+
+function setStoredCodes(currentDay, codes) {
+  if (currentDay && codes)
+    window.localStorage.setItem('guesses' + currentDay, JSON.stringify(codes))
 }
