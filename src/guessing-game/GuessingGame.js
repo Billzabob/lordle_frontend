@@ -10,7 +10,6 @@ import WinDialog from './WinDialog'
 
 export default function GuessingGame() {
   const [results, dispatch] = useReducer(reducer, [])
-  const latestResult = results[results.length - 1]
 
   const { data } = useQuery(CURRENT_DAY, { fetchPolicy: 'cache-and-network' })
   const currentDay = data?.currentDay?.day
@@ -36,7 +35,6 @@ export default function GuessingGame() {
   return (
     <>
       <GuessingGameHeader
-        correct={latestResult?.correct}
         guesses={codes}
         setGuess={setGuess}
       />

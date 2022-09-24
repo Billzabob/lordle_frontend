@@ -13,12 +13,14 @@ export default React.memo(function GuessRow({ code, animate, index, setResult })
   const guess = data?.guess
   useEffect(() => guess && setResult({ index, result: guess }), [guess, setResult, index])
 
-  if (!loading && resultsDialogState() === 'incorrect' && guess.correct) {
-    if (animate)
-      setTimeout(() => resultsDialogState('open'), 2450)
-    else
-      resultsDialogState('closed')
-  }
+  useEffect(() => {
+    if (!loading && resultsDialogState() === 'incorrect' && guess.correct) {
+      if (animate)
+        setTimeout(() => resultsDialogState('open'), 2450)
+      else
+        resultsDialogState('closed')
+    }
+  })
 
   if (loading || !currentDay) return <div style={{ height: '200px' }}></div>
 
@@ -84,7 +86,7 @@ export default React.memo(function GuessRow({ code, animate, index, setResult })
       </Grid>
     </Grid>
   )
-})
+}, (a, b) => a.code === b.code)
 
 function cleanName(name) {
   switch (name) {
