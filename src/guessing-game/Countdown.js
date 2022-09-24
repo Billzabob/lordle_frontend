@@ -8,7 +8,7 @@ export default function Countdown() {
   const { data, loading } = useQuery(COUNTDOWN_QUERY, { fetchPolicy: 'no-cache' })
   const [timeLeft, setTimeLeft] = useState(null)
 
-  timeLeft === null && data && setTimeLeft(data.nextCardTimeSeconds)
+  timeLeft === null && data && setTimeLeft(3)
 
   useEffect(() => {
     const timer = timeLeft > 0 && setTimeout(() => setTimeLeft(t => t - 1), 1000)

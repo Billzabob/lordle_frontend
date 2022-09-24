@@ -14,8 +14,9 @@ export default function GuessingGame() {
   const [guessCodes, setGuessCodes] = useState(() => getStoredCodes(currentDay))
   const [results, dispatch] = useReducer(reducer, [])
   useEffect(() => setStoredCodes(currentDay, guessCodes), [currentDay, guessCodes])
+  const storedCodes = getStoredCodes(currentDay) || []
 
-  if (!guessCodes && currentDay) setGuessCodes(getStoredCodes(currentDay) || [])
+  if (!guessCodes && currentDay) setGuessCodes(storedCodes)
 
   const codes = guessCodes || []
   const latestResult = results[results.length - 1]
@@ -26,7 +27,7 @@ export default function GuessingGame() {
         code={guess}
         setResult={dispatch}
         index={i}
-        animate={!getStoredCodes(currentDay).includes(guess)}
+        animate={!storedCodes.includes(guess)}
       />
     </div>
   )
