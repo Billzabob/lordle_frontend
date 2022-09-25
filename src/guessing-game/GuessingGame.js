@@ -37,6 +37,7 @@ export default function GuessingGame() {
       <GuessingGameHeader
         guesses={codes}
         setGuess={setGuess}
+        correct={results.some(r => r.correct)}
       />
       <WinDialog results={results}/>
       <Container maxWidth='md' sx={{ overflow: 'auto' }}>

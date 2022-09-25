@@ -11,14 +11,18 @@ export default React.memo(function GuessRow({ code, animate, index, setResult })
   const currentDay = dayQuery.data?.currentDay?.day
   const { loading, data } = useQuery(CHECK_GUESS, { variables: { code, day: currentDay } })
   const guess = data?.guess
-  useEffect(() => guess && setResult({ index, result: guess }), [guess, setResult, index])
 
   useEffect(() => {
-    if (!loading && resultsDialogState() === 'incorrect' && guess.correct) {
-      if (animate)
-        setTimeout(() => resultsDialogState('open'), 2450)
-      else
-        resultsDialogState('closed')
+    if (!loading) {
+      if (animate) {
+        setTimeout(() => {
+          setResult({ index, result: guess })
+          if (resultsDialogState() === 'incorrect' && guess.correct) resultsDialogState('open')
+        }, 2450)
+      } else {
+        setResult({ index, result: guess })
+        if (resultsDialogState() === 'incorrect' && guess.correct) resultsDialogState('closed')
+      }
     }
   })
 

@@ -1,16 +1,13 @@
 import { Box, Stack } from '@mui/material'
 import { resultsDialogState } from '../reactive-vars'
 import { StyledButton } from '../dashboard/styled-components'
-import { useReactiveVar } from '@apollo/client'
 import Countdown from './Countdown'
 import GuessInput from '../guessing-game/GuessInput'
 import React from 'react'
 
-export default function GuessingGameHeader({ guesses, setGuess }) {
-  const resultsState = useReactiveVar(resultsDialogState)
-
+export default function GuessingGameHeader({ guesses, setGuess, correct }) {
   return (
-    resultsState !== 'incorrect' ?
+    correct ?
       <Stack sx={{ mt: 2 }}>
         <Countdown />
         <Box display='flex' justifyContent='center'>
