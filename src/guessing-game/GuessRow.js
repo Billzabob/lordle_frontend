@@ -27,6 +27,18 @@ export default React.memo(function GuessRow({ code, animate, index, setResult })
     }
   })
 
+  if (loading || !currentDay) return (
+    <Grid container columns={12} spacing={2} minWidth={'868px'}>
+      {
+        [0, 1, 2, 3, 4, 5].map(i =>
+          <Grid item xs={2}>
+            <img src='https://lor-card-images.s3.us-west-1.amazonaws.com/cardback.webp' alt='cardback' style={{ width: '128px', height: '193px' }} />
+          </Grid>
+        )
+      }
+    </Grid>
+  )
+
   return (
     <Grid container columns={12} spacing={2} minWidth={'868px'}>
       <Grid item xs={2}>
