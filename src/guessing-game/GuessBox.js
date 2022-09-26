@@ -32,9 +32,9 @@ const Image = React.memo(
   }
 )
 
-export default function GuessBox({ correct, text, position, image, padding, animate, run, onLoad }) {
+export default function GuessBox({ correct, text, position, image, padding, animate, run, onLoad, onDone }) {
   return (
-    <CardFlip delay={position * 350} animate={animate} run={run}>
+    <CardFlip delay={position * 350} animate={animate} run={run} onEntered={onDone}>
       <Card variant='outlined'>
         <CardContent
           sx={{ p: 0, bgcolor: ({ palette }) => palette.background.paper, textAlign: 'center' }}

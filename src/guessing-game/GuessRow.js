@@ -12,17 +12,16 @@ export default React.memo(function GuessRow({ code, animate, index, setResult })
   const currentDay = dayQuery.data?.currentDay?.day
   const { loading, data } = useQuery(CHECK_GUESS, { variables: { code, day: currentDay } })
   const [imagesCount, setImagesCount] = useState(0)
+  const [doneAnimating, setDoneAnimating] = useState(false)
   const imagesLoaded = imagesCount === 6
   const guess = data?.guess
 
   useEffect(() => {
     if (!loading) {
-      if (animate) {
-        setTimeout(() => {
-          setResult({ index, result: guess })
-          if (resultsDialogState() === 'incorrect' && guess.correct) resultsDialogState('open')
-        }, 2450)
-      } else {
+      if (animate && doneAnimating) {
+        setResult({ index, result: guess })
+        if (resultsDialogState() === 'incorrect' && guess.correct) resultsDialogState('open')
+      } else if (!animate) {
         setResult({ index, result: guess })
         if (resultsDialogState() === 'incorrect' && guess.correct) resultsDialogState('closed')
       }
@@ -33,7 +32,7 @@ export default React.memo(function GuessRow({ code, animate, index, setResult })
     <Grid container columns={12} spacing={2} minWidth={'868px'}>
       {
         [0, 1, 2, 3, 4, 5].map(i =>
-          <Grid item xs={2}>
+          <Grid key={i} item xs={2}>
             <img src='https://lor-card-images.s3.us-west-1.amazonaws.com/cardback.webp' alt='cardback' style={{ width: '128px', height: '193px' }} />
           </Grid>
         )
@@ -104,6 +103,7 @@ export default React.memo(function GuessRow({ code, animate, index, setResult })
         <GuessBox
           animate={animate}
           run={imagesLoaded}
+          onDone={() => setDoneAnimating(true)}
           onLoad={() => setImagesCount(i => i + 1)}
           position={6}
           correct={guess?.setResult.result === 'CORRECT'}

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { CSSTransition } from 'react-transition-group'
 
-export default function CardFlip({ children, delay, animate, run }) {
+export default function CardFlip({ children, delay, animate, run, onEntered }) {
   const [flipped, setFlipped] = useState(false)
   useEffect(() => {
     if (run) setTimeout(() => setFlipped(true), delay)
@@ -24,6 +24,7 @@ export default function CardFlip({ children, delay, animate, run }) {
           in={flipped}
           timeout={1000}
           classNames="back-face-transition"
+          onEntered={() => onEntered && onEntered()}
         >
           <div
             className="card-back">
