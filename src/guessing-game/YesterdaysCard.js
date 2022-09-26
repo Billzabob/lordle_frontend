@@ -5,7 +5,7 @@ import { GET_CARDS_FOR_DAY } from '../gql/queries'
 import { Box, Skeleton } from '@mui/material'
 
 export default React.forwardRef((_, ref) => {
-  const { data, loading } = useQuery(GET_CARDS_FOR_DAY, { variables: { 'daysBack': 1 } })
+  const { data, loading } = useQuery(GET_CARDS_FOR_DAY, { variables: { 'daysBack': 1 }, fetchPolicy: 'no-cache' })
 
   return (
     <Box ref={ref} display='flex' justifyContent='center'>

@@ -28,6 +28,10 @@ code {
   position: absolute;
 }
 
+.card-back {
+  transform: rotateY(180deg);
+}
+
 .front-face-transition-enter {
   transform: rotateY(180deg);
 }
