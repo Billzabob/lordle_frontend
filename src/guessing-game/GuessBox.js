@@ -1,8 +1,9 @@
-import { Fade, Card, CardMedia, CardContent, Typography } from '@mui/material'
-import { useReactiveVar } from '@apollo/client'
-import { darkMode } from '../reactive-vars'
-import React from 'react'
 import { Box } from '@mui/system'
+import { Card, CardMedia, CardContent, Typography } from '@mui/material'
+import { darkMode } from '../reactive-vars'
+import { useReactiveVar } from '@apollo/client'
+import CardFlip from './CardFlip'
+import React from 'react'
 
 const getColor = (palette, correct, isDark) => {
   if (isDark && correct === 'partial') return palette.warning.dark
@@ -32,13 +33,7 @@ const Image = React.memo(
 
 export default function GuessBox({ correct, text, position, image, padding, animate }) {
   return (
-    <Fade
-      appear={animate}
-      direction='up'
-      in
-      timeout={750}
-      style={{ transitionDelay: `${position * 350}ms` }}
-    >
+    <CardFlip delay={position * 350} animate={animate}>
       <Card variant='outlined'>
         <CardContent
           sx={{ p: 0, bgcolor: ({ palette }) => palette.background.paper, textAlign: 'center' }}
@@ -49,6 +44,6 @@ export default function GuessBox({ correct, text, position, image, padding, anim
         </CardContent>
         <Image image={image} correct={correct} padding={padding} />
       </Card>
-    </Fade>
+    </CardFlip>
   )
 }

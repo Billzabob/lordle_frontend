@@ -1,10 +1,11 @@
 import { CHECK_GUESS, CURRENT_DAY } from '../gql/queries'
-import { Fade, Grid } from '@mui/material'
+import { Grid } from '@mui/material'
+import { resultsDialogState } from '../reactive-vars'
 import { useQuery } from '@apollo/client'
+import CardFlip from './CardFlip'
 import CardTooltip from '../CardTooltip'
 import GuessBox from './GuessBox'
 import React, { useEffect } from 'react'
-import { resultsDialogState } from '../reactive-vars'
 
 export default React.memo(function GuessRow({ code, animate, index, setResult }) {
   const dayQuery = useQuery(CURRENT_DAY, { fetchPolicy: 'cache-and-network' })
@@ -26,66 +27,59 @@ export default React.memo(function GuessRow({ code, animate, index, setResult })
     }
   })
 
-  if (loading || !currentDay) return <div style={{ height: '200px' }}></div>
-
   return (
     <Grid container columns={12} spacing={2} minWidth={'868px'}>
       <Grid item xs={2}>
-        <CardTooltip image={guess.image} name={guess.name}>
-          <Fade
-            appear={animate}
-            in
-            timeout={750}
-            style={{ transitionDelay: '350ms' }}
-          >
-            <img src={guess.image} alt={guess.name} style={{ width: '128px', height: '193px' }} />
-          </Fade>
-        </CardTooltip>
+        <CardFlip delay={350} animate={animate}>
+          <CardTooltip image={guess?.image} name={guess?.name}>
+            <img src={guess?.image} alt={guess?.name || ''} style={{ width: '128px', height: '193px' }} />
+          </CardTooltip>
+        </CardFlip>
       </Grid>
       <Grid item xs={2}>
         <GuessBox
           animate={animate}
           position={2}
-          correct={guess.regionResult.result === 'PARTIAL' ? 'partial' : guess.regionResult.result === 'CORRECT'}
-          text={guess.regionResult.regions.map(cleanName).join(', ')}
-          image={getMedia(guess.regionResult.regions.slice().sort().join(''))}
-          padding={guess.regionResult.regions.length > 1 ? 1 : null}
+          correct={guess?.regionResult.result === 'PARTIAL' ? 'partial' : guess?.regionResult.result === 'CORRECT'}
+          text={guess?.regionResult.regions.map(cleanName).join(', ')}
+          image={getMedia(guess?.regionResult.regions.slice().sort().join(''))}
+          padding={guess?.regionResult.regions.length > 1 ? 1 : null}
         />
       </Grid>
       <Grid item xs={2}>
         <GuessBox
           animate={animate}
           position={3}
-          correct={guess.rarityResult.result === 'CORRECT'}
-          text={cleanName(guess.rarityResult.rarity)}
-          image={getMedia(guess.rarityResult.rarity)}
+          correct={guess?.rarityResult.result === 'CORRECT'}
+          text={cleanName(guess?.rarityResult.rarity)}
+          image={getMedia(guess?.rarityResult.rarity)}
         />
       </Grid>
       <Grid item xs={2}>
         <GuessBox
           animate={animate}
           position={4}
-          correct={guess.manaCostResult.result === 'CORRECT'}
-          text={cleanName(guess.manaCostResult.manaCost)}
-          image={getMedia(guess.manaCostResult.result === 'CORRECT' ? guess.manaCostResult.manaCost : guess.manaCostResult.result)}
+          correct={guess?.manaCostResult.result === 'CORRECT'}
+          text={cleanName(guess?.manaCostResult.manaCost)}
+          image={getMedia(guess?.manaCostResult.result === 'CORRECT' ? guess?.manaCostResult.manaCost : guess?.manaCostResult.result)}
         />
       </Grid>
       <Grid item xs={2}>
         <GuessBox
           animate={animate}
           position={5}
-          correct={guess.typeResult.result === 'CORRECT'}
-          text={cleanName(guess.typeResult.type)}
-          image={getMedia(guess.typeResult.type)}
+          correct={guess?.typeResult.result === 'CORRECT'}
+          text={cleanName(guess?.typeResult.type)}
+          image={getMedia(guess?.typeResult.type)}
         />
       </Grid>
       <Grid item xs={2}>
         <GuessBox
           animate={animate}
           position={6}
-          correct={guess.setResult.result === 'CORRECT'}
-          text={cleanName(guess.setResult.set)}
-          image={getMedia(guess.setResult.set)}
+          correct={guess?.setResult.result === 'CORRECT'}
+          text={cleanName(guess?.setResult.set)}
+          image={getMedia(guess?.setResult.set)}
         />
       </Grid>
     </Grid>
@@ -127,5 +121,5 @@ function cleanName(name) {
 }
 
 function getMedia(name) {
-  return 'https://lor-card-images.s3.us-west-1.amazonaws.com/' + name + '.webp'
+  return name && 'https://lor-card-images.s3.us-west-1.amazonaws.com/' + name + '.webp'
 }

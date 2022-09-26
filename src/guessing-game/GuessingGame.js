@@ -40,13 +40,13 @@ export default function GuessingGame() {
         correct={results.some(r => r.correct)}
       />
       <WinDialog results={results}/>
-      <Container maxWidth='md' sx={{ overflow: 'auto' }}>
+      <Container maxWidth='md' sx={{ overflow: 'auto', p: 2 }}>
         {guessRows.length > 0 &&
           (<Grid container columns={12} spacing={2} minWidth={'868px'}>
             <GuessHeader />
           </Grid>)
         }
-        <FlipMove enterAnimation="fade">
+        <FlipMove enterAnimation="accordionVertical">
           {guessRows.reverse()}
         </FlipMove>
       </Container>
