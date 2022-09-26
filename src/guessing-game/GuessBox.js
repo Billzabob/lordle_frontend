@@ -15,7 +15,7 @@ const getColor = (palette, correct, isDark) => {
 }
 
 const Image = React.memo(
-  function Image({ image, correct, padding }) {
+  function Image({ image, correct, padding, onLoad }) {
     const isDark = useReactiveVar(darkMode)
     return (
       <CardMedia
@@ -23,26 +23,27 @@ const Image = React.memo(
           bgcolor: ({ palette }) => getColor(palette, correct, isDark),
           p: padding || 3
         }}
-        style={{width: '127px', height: '127px'}}
+        style={{ width: '127px', height: '127px' }}
         component='img'
         image={image}
+        onLoad={onLoad}
       />
     )
   }
 )
 
-export default function GuessBox({ correct, text, position, image, padding, animate }) {
+export default function GuessBox({ correct, text, position, image, padding, animate, run, onLoad }) {
   return (
-    <CardFlip delay={position * 350} animate={animate}>
+    <CardFlip delay={position * 350} animate={animate} run={run}>
       <Card variant='outlined'>
         <CardContent
           sx={{ p: 0, bgcolor: ({ palette }) => palette.background.paper, textAlign: 'center' }}
         >
-          <Box sx={{p: 1, height: 55}} display='flex' justifyContent='center' alignItems='center'>
+          <Box sx={{ p: 1, height: 55 }} display='flex' justifyContent='center' alignItems='center'>
             <Typography variant='body2'>{text}</Typography>
           </Box>
         </CardContent>
-        <Image image={image} correct={correct} padding={padding} />
+        <Image image={image} correct={correct} padding={padding} onLoad={onLoad} />
       </Card>
     </CardFlip>
   )

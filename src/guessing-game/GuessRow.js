@@ -5,12 +5,14 @@ import { useQuery } from '@apollo/client'
 import CardFlip from './CardFlip'
 import CardTooltip from '../CardTooltip'
 import GuessBox from './GuessBox'
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 
 export default React.memo(function GuessRow({ code, animate, index, setResult }) {
   const dayQuery = useQuery(CURRENT_DAY, { fetchPolicy: 'cache-and-network' })
   const currentDay = dayQuery.data?.currentDay?.day
   const { loading, data } = useQuery(CHECK_GUESS, { variables: { code, day: currentDay } })
+  const [imagesCount, setImagesCount] = useState(0)
+  const imagesLoaded = imagesCount === 6
   const guess = data?.guess
 
   useEffect(() => {
@@ -42,15 +44,22 @@ export default React.memo(function GuessRow({ code, animate, index, setResult })
   return (
     <Grid container columns={12} spacing={2} minWidth={'868px'}>
       <Grid item xs={2}>
-        <CardFlip delay={350} animate={animate}>
+        <CardFlip delay={350} animate={animate} run={imagesLoaded}>
           <CardTooltip image={guess?.image} name={guess?.name}>
-            <img src={guess?.image} alt={guess?.name || ''} style={{ width: '128px', height: '193px' }} />
+            <img
+              src={guess?.image}
+              alt={guess?.name || ''}
+              style={{ width: '128px', height: '193px' }}
+              onLoad={() => setImagesCount(i => i + 1)}
+            />
           </CardTooltip>
         </CardFlip>
       </Grid>
       <Grid item xs={2}>
         <GuessBox
           animate={animate}
+          run={imagesLoaded}
+          onLoad={() => setImagesCount(i => i + 1)}
           position={2}
           correct={guess?.regionResult.result === 'PARTIAL' ? 'partial' : guess?.regionResult.result === 'CORRECT'}
           text={guess?.regionResult.regions.map(cleanName).join(', ')}
@@ -61,6 +70,8 @@ export default React.memo(function GuessRow({ code, animate, index, setResult })
       <Grid item xs={2}>
         <GuessBox
           animate={animate}
+          run={imagesLoaded}
+          onLoad={() => setImagesCount(i => i + 1)}
           position={3}
           correct={guess?.rarityResult.result === 'CORRECT'}
           text={cleanName(guess?.rarityResult.rarity)}
@@ -70,6 +81,8 @@ export default React.memo(function GuessRow({ code, animate, index, setResult })
       <Grid item xs={2}>
         <GuessBox
           animate={animate}
+          run={imagesLoaded}
+          onLoad={() => setImagesCount(i => i + 1)}
           position={4}
           correct={guess?.manaCostResult.result === 'CORRECT'}
           text={cleanName(guess?.manaCostResult.manaCost)}
@@ -79,6 +92,8 @@ export default React.memo(function GuessRow({ code, animate, index, setResult })
       <Grid item xs={2}>
         <GuessBox
           animate={animate}
+          run={imagesLoaded}
+          onLoad={() => setImagesCount(i => i + 1)}
           position={5}
           correct={guess?.typeResult.result === 'CORRECT'}
           text={cleanName(guess?.typeResult.type)}
@@ -88,6 +103,8 @@ export default React.memo(function GuessRow({ code, animate, index, setResult })
       <Grid item xs={2}>
         <GuessBox
           animate={animate}
+          run={imagesLoaded}
+          onLoad={() => setImagesCount(i => i + 1)}
           position={6}
           correct={guess?.setResult.result === 'CORRECT'}
           text={cleanName(guess?.setResult.set)}

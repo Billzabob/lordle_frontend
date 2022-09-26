@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react'
 import { CSSTransition } from 'react-transition-group'
 
-export default function CardFlip({ children, delay, animate }) {
+export default function CardFlip({ children, delay, animate, run }) {
   const [flipped, setFlipped] = useState(false)
   useEffect(() => {
-    setTimeout(() => setFlipped(true), delay)
+    if (run) setTimeout(() => setFlipped(true), delay)
   })
 
   return (
