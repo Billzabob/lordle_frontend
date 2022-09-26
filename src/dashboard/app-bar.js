@@ -28,12 +28,13 @@ const largeLayout = (
     <Logo sx={{ height: 25, display: { xs: 'none', md: 'flex' }, mx: 1 }} />
 
     <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' }}}>
-      {pages.map(({ name }) => (
+      {pages.map(({ name, link }) => (
         <StyledButton
           variant='text'
           key={name}
           color='secondary'
           sx={{ mx: 1 }}
+          href={link}
         >
           <Typography fontSize={14} fontWeight='bold'>
             {name}
