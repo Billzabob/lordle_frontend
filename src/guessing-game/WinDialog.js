@@ -16,22 +16,14 @@ export default function WinDialog({ results }) {
   return (
     <>
       {resultsState === 'open' &&
-        <>
-          <Confetti
-            confettiSource={{ x: (width / 2) - 200, y: height / 2, w: 0, h: 0 }}
-            initialVelocityX={{ min: -10, max: -10 }}
-            initialVelocityY={{ min: -30, max: 10 }}
-            recycle={false}
-            numberOfPieces={50}
-          />
-          <Confetti
-            confettiSource={{ x: (width / 2) + 200, y: height / 2, w: 0, h: 0 }}
-            initialVelocityX={{ min: 10, max: 10 }}
-            initialVelocityY={{ min: -30, max: 10 }}
-            recycle={false}
-            numberOfPieces={50}
-          />
-        </>
+        <Confetti
+          height={height * 3}
+          width={width}
+          style={{ zIndex: 1301 }}
+          recycle={false}
+          numberOfPieces={500}
+          gravity={0.8}
+        />
       }
       <Dialog open={resultsState === 'open'} onClose={() => resultsDialogState('closed')} maxWidth='xs' fullWidth hideBackdrop>
         <DialogTitle textAlign='center' variant='h3'>
