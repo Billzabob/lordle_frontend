@@ -29,6 +29,7 @@ export default function WinDialog({ results }) {
           recycle={false}
           numberOfPieces={500}
           gravity={0.8}
+          colors={['#0DAB5F', '#388AFE', '#EE5BFF', '#EA923F']}
         />
       }
       <Dialog open={resultsState === 'open'} onClose={() => resultsDialogState('closed')} maxWidth='xs' fullWidth hideBackdrop>
