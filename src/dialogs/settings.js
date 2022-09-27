@@ -53,8 +53,8 @@ export const SettingsDialog = () => {
           name='highContrastMode'
           on={highContrastModeOn}
           toggle={highContrastMode}
-          option1='High Contrast'
-          option2='Normal Contrast'
+          option1='Colorblind Mode'
+          option2='Colorblind Mode'
           icon1={<VisibilityOffIcon />}
           icon2={<VisibilityIcon />}
         />

@@ -36,7 +36,10 @@ export default function Themer({ children }) {
       error: {
         main: '#8FB3F6',
       },
-      tonalOffset: 0.08
+      warning: {
+        main: '#B2749C',
+      },
+      tonalOffset: 0
     }
   })
 
