@@ -4,7 +4,7 @@ import { useQuery } from '@apollo/client'
 import { GET_CARDS } from '../gql/queries'
 
 export default function GuessInput({ setGuess, guesses }) {
-  const { data } = useQuery(GET_CARDS)
+  const { data } = useQuery(GET_CARDS, { fetchPolicy: 'no-cache' })
   const [input, setInput] = useState('')
   const cards = data?.cards || []
   const sorted = cards.slice().sort((c1, c2) => c1.name > c2.name ? 1 : -1)
@@ -16,6 +16,7 @@ export default function GuessInput({ setGuess, guesses }) {
         clearOnBlur
         clearOnEscape
         filterOptions={filterOptions(guesses)}
+        noOptionsText='Loading...'
         id='guess-input'
         options={sorted}
         onChange={(_, c) => {
