@@ -54,7 +54,7 @@ export default function WinDialog({ results }) {
               (correctCard?.otherCards || []).length > 0 &&
               <>
                 <Typography variant='h4' sx={{ textAlign: 'center', mt: 0 }}>
-                  Other Possible Answers
+                  Other Answers
                 </Typography>
                 <ImageList cols={Math.min(3, correctCard?.otherCards?.length)} sx={{ m: 1 }}>
                   {correctCard?.otherCards.map((item) => (
