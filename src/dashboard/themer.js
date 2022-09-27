@@ -21,7 +21,7 @@ export default function Themer({ children }) {
 
   mdTheme = responsiveFontSizes(mdTheme)
 
-  const highContrastTheme = createTheme({
+  let highContrastTheme = createTheme({
     palette: {
       mode: isDarkMode ? 'dark' : 'light',
       primary: {
@@ -42,6 +42,8 @@ export default function Themer({ children }) {
       tonalOffset: 0
     }
   })
+
+  highContrastTheme = responsiveFontSizes(highContrastTheme)
 
   const theme = isHighContrastMode ? highContrastTheme : mdTheme
 
