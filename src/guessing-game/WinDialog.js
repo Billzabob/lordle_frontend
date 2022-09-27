@@ -2,7 +2,7 @@ import { Dialog, DialogContent, DialogTitle, ImageList, ImageListItem, Stack, To
 import { resultsDialogState } from '../reactive-vars'
 import { StyledButton } from '../dashboard/styled-components'
 import { useReactiveVar } from '@apollo/client'
-import { useWindowSize } from '@react-hook/window-size'
+import { useWindowWidth } from '@react-hook/window-size'
 import CardTooltip from '../CardTooltip'
 import Confetti from 'react-confetti'
 import React, { useState } from 'react'
@@ -11,14 +11,20 @@ export default function WinDialog({ results }) {
   const [tooltip, setTooltip] = useState(false)
   const resultsState = useReactiveVar(resultsDialogState)
   const correctCard = results.find(r => r?.correct)
-  const [width, height] = useWindowSize()
+  const width = useWindowWidth()
+
+  let scrollHeight = Math.max(
+    document.body.scrollHeight, document.documentElement.scrollHeight,
+    document.body.offsetHeight, document.documentElement.offsetHeight,
+    document.body.clientHeight, document.documentElement.clientHeight
+  );
 
   return (
     <>
       {resultsState === 'open' &&
         <Confetti
-          height={height * 3}
           width={width}
+          height={scrollHeight}
           style={{ zIndex: 1301 }}
           recycle={false}
           numberOfPieces={500}
