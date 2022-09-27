@@ -2,54 +2,77 @@ import { Dialog, DialogContent, DialogTitle, ImageList, ImageListItem, Stack, To
 import { resultsDialogState } from '../reactive-vars'
 import { StyledButton } from '../dashboard/styled-components'
 import { useReactiveVar } from '@apollo/client'
+import { useWindowSize } from '@react-hook/window-size'
 import CardTooltip from '../CardTooltip'
+import Confetti from 'react-confetti'
 import React, { useState } from 'react'
 
 export default function WinDialog({ results }) {
   const [tooltip, setTooltip] = useState(false)
   const resultsState = useReactiveVar(resultsDialogState)
   const correctCard = results.find(r => r?.correct)
+  const [width, height] = useWindowSize()
 
   return (
-    <Dialog open={resultsState === 'open'} onClose={() => resultsDialogState('closed')} maxWidth='xs' fullWidth>
-      <DialogTitle textAlign='center' variant='h3'>
-        Victory!
-      </DialogTitle>
-      <DialogContent sx={{ p: 0 }} dividers={false}>
-        <Stack alignItems='center'>
-          <CardTooltip image={correctCard?.image} name={correctCard?.name}>
-            <img
-              src={correctCard?.image}
-              alt={correctCard?.name || ''}
-              style={{ margin: '16px', height: '312px', width: '204px' }}
-            />
-          </CardTooltip>
-          <Tooltip open={tooltip} onClose={() => setTooltip(false)} title='Copied to clipboard!'>
-            <StyledButton onClick={() => {
-              setTooltip(true)
-              navigator.clipboard.writeText(shareText(results))
-            }} sx={{ width: '100px', mt: 2, mb: 4 }} variant='contained'>Share</StyledButton>
-          </Tooltip>
-          {
-            (correctCard?.otherCards || []).length > 0 &&
-            <>
-              <Typography variant='h4' sx={{ textAlign: 'center', mt: 0 }}>
-                Other Possible Answers
-              </Typography>
-              <ImageList cols={Math.min(3, correctCard?.otherCards?.length)} sx={{ m: 1 }}>
-                {correctCard?.otherCards.map((item) => (
-                  <CardTooltip key={item.name} image={item.image} name={item.name}>
-                    <ImageListItem sx={{ maxWidth: '140px' }}>
-                      <img src={item.image} alt={item.name} />
-                    </ImageListItem>
-                  </CardTooltip>
-                ))}
-              </ImageList>
-            </>
-          }
-        </Stack>
-      </DialogContent>
-    </Dialog>
+    <>
+      {resultsState === 'open' &&
+        <>
+          <Confetti
+            confettiSource={{ x: (width / 2) - 200, y: height / 2, w: 0, h: 0 }}
+            initialVelocityX={{ min: -10, max: -10 }}
+            initialVelocityY={{ min: -30, max: 10 }}
+            recycle={false}
+            numberOfPieces={50}
+          />
+          <Confetti
+            confettiSource={{ x: (width / 2) + 200, y: height / 2, w: 0, h: 0 }}
+            initialVelocityX={{ min: 10, max: 10 }}
+            initialVelocityY={{ min: -30, max: 10 }}
+            recycle={false}
+            numberOfPieces={50}
+          />
+        </>
+      }
+      <Dialog open={resultsState === 'open'} onClose={() => resultsDialogState('closed')} maxWidth='xs' fullWidth hideBackdrop>
+        <DialogTitle textAlign='center' variant='h3'>
+          Victory!
+        </DialogTitle>
+        <DialogContent sx={{ p: 0 }} dividers={false}>
+          <Stack alignItems='center'>
+            <CardTooltip image={correctCard?.image} name={correctCard?.name}>
+              <img
+                src={correctCard?.image}
+                alt={correctCard?.name || ''}
+                style={{ margin: '16px', height: '312px', width: '204px' }}
+              />
+            </CardTooltip>
+            <Tooltip open={tooltip} onClose={() => setTooltip(false)} title='Copied to clipboard!'>
+              <StyledButton onClick={() => {
+                setTooltip(true)
+                navigator.clipboard.writeText(shareText(results))
+              }} sx={{ width: '100px', mt: 2, mb: 4 }} variant='contained'>Share</StyledButton>
+            </Tooltip>
+            {
+              (correctCard?.otherCards || []).length > 0 &&
+              <>
+                <Typography variant='h4' sx={{ textAlign: 'center', mt: 0 }}>
+                  Other Possible Answers
+                </Typography>
+                <ImageList cols={Math.min(3, correctCard?.otherCards?.length)} sx={{ m: 1 }}>
+                  {correctCard?.otherCards.map((item) => (
+                    <CardTooltip key={item.name} image={item.image} name={item.name}>
+                      <ImageListItem sx={{ maxWidth: '140px' }}>
+                        <img src={item.image} alt={item.name} />
+                      </ImageListItem>
+                    </CardTooltip>
+                  ))}
+                </ImageList>
+              </>
+            }
+          </Stack>
+        </DialogContent>
+      </Dialog>
+    </>
   )
 }
 
