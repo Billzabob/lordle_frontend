@@ -94,5 +94,4 @@ function updateStats(currentDay, numGuesses) {
     localStorage.maxStreak = localStorage.currentStreak
 
   localStorage.currentDay = currentDay
-  console.log('Updating stats for day')
 }

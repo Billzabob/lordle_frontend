@@ -9,19 +9,19 @@ export default function MyDrawer() {
 
   const list = (
     <Box
-      sx={{ width: 180 }}
+      sx={{ width: 260 }}
       role='presentation'
       onClick={() => drawerOpen(false)}
       onKeyDown={() => drawerOpen(false)}
     >
       <List>
-        {pages.map(({name, icon, link}) => (
+        {pages.map(({name, icon, link, disabled}) => (
           <ListItem key={name} disablePadding>
-            <ListItemButton href={link}>
+            <ListItemButton href={link} disabled={disabled}>
               <ListItemIcon>
                 {icon}
               </ListItemIcon>
-              <ListItemText primary={name} />
+              <ListItemText primary={name + (disabled ? ' (coming soon)' : '')} />
             </ListItemButton>
           </ListItem>
         ))}

@@ -1,4 +1,4 @@
-import { AppBar, Box, Toolbar, IconButton, Typography } from '@mui/material'
+import { AppBar, Box, Toolbar, IconButton, Typography, Tooltip } from '@mui/material'
 import { drawerOpen, settingsDialogOpen, statsDialogOpen } from '../reactive-vars'
 import { StyledButton } from '../dashboard/styled-components'
 import BarChartIcon from '@mui/icons-material/BarChart'
@@ -10,7 +10,7 @@ import SettingsIcon from '@mui/icons-material/Settings'
 
 const smallLayout = (
   <>
-    <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
+    <Box sx={{ mr: 4, flexGrow: 0, display: { xs: 'flex', md: 'none' } }}>
       <IconButton
         size='large'
         onClick={() => drawerOpen(true)}
@@ -20,7 +20,7 @@ const smallLayout = (
       </IconButton>
     </Box>
 
-    <Logo sx={{ display: { xs: 'flex', md: 'none', flexGrow: 1 } }} />
+    <Logo sx={{ justifyContent: 'center', display: { xs: 'flex', md: 'none', flexGrow: 1 } }} />
   </>
 )
 
@@ -28,20 +28,23 @@ const largeLayout = (
   <>
     <Logo sx={{ height: 25, display: { xs: 'none', md: 'flex' }, mx: 1 }} />
 
-    <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' }}}>
-      {pages.map(({ name, link }) => (
-        <StyledButton
+    <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
+      {pages.map(({ name, link, disabled }) => {
+        const button = <StyledButton
           variant='text'
           key={name}
           color='secondary'
           sx={{ mx: 1 }}
           href={link}
+          disabled={disabled}
         >
           <Typography fontSize={14} fontWeight='bold'>
             {name}
           </Typography>
         </StyledButton>
-      ))}
+
+        return disabled ? <Tooltip key={name} title='Coming Soon!'><div>{button}</div></Tooltip> : button
+      })}
     </Box>
   </>
 )
