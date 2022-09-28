@@ -13,7 +13,7 @@ export default function StatsChartDialog({currentDay}) {
 
   return (
     <Dialog maxWidth='xs' fullWidth onClose={() => statsDialogOpen(false)} open={open}>
-      <DialogTitle variant='h3' textAlign='center'>Stats</DialogTitle>
+      <DialogTitle variant='h4' textAlign='center'>Stats</DialogTitle>
       <DialogContent>
         <Typography variant='h5' sx={{ textAlign: 'center' }}>
           {'Games Won: ' + gamesWon}

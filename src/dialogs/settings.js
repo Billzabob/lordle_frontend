@@ -22,7 +22,7 @@ const ToggleOption = ({ on, toggle, name, option1, option2, icon1, icon2 }) => {
   return (
     <ListItem>
       <ListItemText primary={on ? option1 : option2} />
-      <IconButton sx={{ ml: 1 }} onClick={() => handleToggle(!on)} color='inherit'>
+      <IconButton onClick={() => handleToggle(!on)} color='inherit'>
         {on ? icon1 : icon2}
       </IconButton>
     </ListItem>
@@ -38,8 +38,8 @@ export default function SettingsDialog() {
 
   return (
     <Dialog maxWidth='xs' fullWidth onClose={handleClose} open={open}>
-      <DialogTitle textAlign='center'>Settings</DialogTitle>
-      <List sx={{ pt: 0, ml: 4, mr: 4 }}>
+      <DialogTitle variant='h4' textAlign='center'>Settings</DialogTitle>
+      <List sx={{ pt: 0, mx: 4 }}>
         <ToggleOption
           name='darkMode'
           on={darkModeOn}
