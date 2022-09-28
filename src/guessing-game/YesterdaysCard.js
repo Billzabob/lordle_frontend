@@ -7,12 +7,15 @@ import { Box, Skeleton } from '@mui/material'
 export default React.forwardRef((_, ref) => {
   const { data, loading } = useQuery(GET_CARDS_FOR_DAY, { variables: { 'daysBack': 1 }, fetchPolicy: 'no-cache' })
 
+  console.log(data)
+
   return (
-    <Box ref={ref} display='flex' justifyContent='center'>
-      <Typography variant='h6' sx={{ my: 2, textAlign: 'center' }}>
-        {loading ? <Skeleton width={400} /> : content(data)}
-      </Typography>
-    </Box>
+    !loading && data.cardsForDay.length === 0 ? null :
+      <Box ref={ref} display='flex' justifyContent='center'>
+        <Typography variant='h6' sx={{ my: 2, textAlign: 'center' }}>
+          {loading ? <Skeleton width={400} /> : content(data)}
+        </Typography>
+      </Box>
   )
 })
 

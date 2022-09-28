@@ -1,6 +1,5 @@
 import { Container, Grid } from '@mui/material'
 import { CURRENT_DAY } from '../gql/queries'
-import { resultsDialogState } from '../reactive-vars'
 import { useQuery } from '@apollo/client'
 import FlipMove from 'react-flip-move'
 import GuessHeader from './GuessHeader'
@@ -12,29 +11,18 @@ import WinDialog from './WinDialog'
 
 export default function GuessingGame() {
   const [results, dispatch] = useReducer(reducer, [])
-  const correct = results.some(r => r?.correct)
+  const correct = results.some(r => r.correct)
   const numGuesses = results.length
 
-  const { data } = useQuery(CURRENT_DAY, { fetchPolicy: 'cache-and-network' })
+  const { data } = useQuery(CURRENT_DAY, { fetchPolicy: 'network-only' })
   const currentDay = data?.currentDay?.day
 
   useEffect(() => {
-    console.log('---------------')
-    console.log(correct)
-    console.log(Number(localStorage.currentDay))
-    console.log(currentDay)
     if (correct && Number(localStorage.currentDay) !== currentDay) updateStats(currentDay, numGuesses)
   }, [correct, currentDay, numGuesses])
 
   const [guess, setGuess] = useState()
   const storedCodes = getStoredCodes(currentDay) || []
-
-  useEffect(() => {
-    if (storedCodes.length === 0 && results.length !== 0) {
-      dispatch({result: 'reset'})
-      resultsDialogState('incorrect')
-    }
-  })
 
   const codes = (guess && !storedCodes.includes(guess)) ? [...storedCodes, guess] : storedCodes
 
@@ -53,13 +41,13 @@ export default function GuessingGame() {
 
   return (
     <>
-      <StatsChartDialog currentDay={currentDay}/>
+      <StatsChartDialog currentDay={currentDay} />
       <GuessingGameHeader
         guesses={codes}
         setGuess={setGuess}
         correct={correct}
       />
-      <WinDialog results={results}/>
+      <WinDialog results={results} />
       <Container maxWidth='md' sx={{ overflow: 'auto', p: 2 }}>
         {guessRows.length > 0 &&
           (<Grid container columns={12} spacing={2} minWidth={'868px'}>
@@ -99,7 +87,9 @@ function updateStats(currentDay, numGuesses) {
 
   if (localStorage.currentDay === undefined || Number(localStorage.currentDay) === currentDay - 1)
     localStorage.currentStreak = Number(localStorage.currentStreak || 0) + 1
-  
+  else
+    localStorage.currentStreak = 1
+
   if (Number(localStorage.currentStreak) > Number(localStorage.maxStreak || 0))
     localStorage.maxStreak = localStorage.currentStreak
 
