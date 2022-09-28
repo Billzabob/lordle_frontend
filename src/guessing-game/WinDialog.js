@@ -80,7 +80,7 @@ function shareText(results) {
   const trimmed = results.reverse().slice(0, maxResults)
   const result = trimmed.map(toEmojiRow).join('\n')
   const more = results.length > maxResults ? `➕${numberToEmoji(results.length - maxResults)} more` : ''
-  return `I found the LoRdle card in classic mode in ${results.length} attempts!
+  return `I found the LoRdle card in classic mode in ${results.length} ${results.length === 1 ? 'attempt' : 'attempts'}!
 ${result}
 ${more}
 https://lordle.gg`
