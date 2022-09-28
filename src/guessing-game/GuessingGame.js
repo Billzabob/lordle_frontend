@@ -17,6 +17,8 @@ export default function GuessingGame() {
   const [guess, setGuess] = useState()
   const storedCodes = getStoredCodes(currentDay) || []
 
+  if (storedCodes.length === 0 && results.length !== 0) dispatch({result: 'reset'})
+
   const codes = (guess && !storedCodes.includes(guess)) ? [...storedCodes, guess] : storedCodes
 
   const guessRows = codes.map((guess, i) =>
@@ -37,7 +39,7 @@ export default function GuessingGame() {
       <GuessingGameHeader
         guesses={codes}
         setGuess={setGuess}
-        correct={results.some(r => r.correct)}
+        correct={results.some(r => r?.correct)}
       />
       <WinDialog results={results}/>
       <Container maxWidth='md' sx={{ overflow: 'auto', p: 2 }}>
@@ -55,6 +57,7 @@ export default function GuessingGame() {
 }
 
 function reducer(results, { index, result }) {
+  if (result === 'reset') return []
   const newLength = Math.max(index + 1, results.length)
   const newResults = Array(newLength).fill(null)
   results.forEach((v, i) => newResults[i] = v)

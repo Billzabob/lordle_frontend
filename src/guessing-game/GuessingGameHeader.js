@@ -7,7 +7,7 @@ import React from 'react'
 
 export default function GuessingGameHeader({ guesses, setGuess, correct }) {
   return (
-    correct ?
+    false ?
       <Stack sx={{ mt: 2 }}>
         <Countdown />
         <Box display='flex' justifyContent='center'>
