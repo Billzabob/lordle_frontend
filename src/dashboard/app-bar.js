@@ -29,13 +29,14 @@ const largeLayout = (
     <Logo sx={{ height: 25, display: { xs: 'none', md: 'flex' }, mx: 1 }} />
 
     <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
-      {pages.map(({ name, link, disabled }) => {
+      {pages.map(({ name, link, disabled, onClick }) => {
         const button = <StyledButton
           variant='text'
           key={name}
           color='secondary'
           sx={{ mx: 1 }}
           href={link}
+          onClick={onClick}
           disabled={disabled}
         >
           <Typography fontSize={14} fontWeight='bold'>

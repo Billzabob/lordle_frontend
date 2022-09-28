@@ -15,9 +15,9 @@ export default function MyDrawer() {
       onKeyDown={() => drawerOpen(false)}
     >
       <List>
-        {pages.map(({name, icon, link, disabled}) => (
+        {pages.map(({name, icon, link, disabled, onClick}) => (
           <ListItem key={name} disablePadding>
-            <ListItemButton href={link} disabled={disabled}>
+            <ListItemButton href={link} onClick={onClick} disabled={disabled}>
               <ListItemIcon>
                 {icon}
               </ListItemIcon>
