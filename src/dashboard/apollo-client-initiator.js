@@ -30,7 +30,7 @@ export default function ApolloClientInitiator({ children }) {
       })
 
       setClient(new ApolloClient({
-        uri: 'https://app.lordle.gg/graphql',
+        uri: 'http://localhost:3000/dev/graphql',
         cache,
       }))
     }

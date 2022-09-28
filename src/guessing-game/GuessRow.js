@@ -28,7 +28,7 @@ export default React.memo(function GuessRow({ code, animate, index, setResult })
     }
   })
 
-  if (loading || !currentDay) return (
+  if (loading || currentDay === undefined) return (
     <Grid container columns={12} spacing={2} minWidth={'868px'}>
       {
         [0, 1, 2, 3, 4, 5].map(i =>

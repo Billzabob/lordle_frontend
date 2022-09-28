@@ -57,7 +57,7 @@ export default function WinDialog({ results }) {
                 <Typography variant='h4' sx={{ textAlign: 'center', mt: 0 }}>
                   Other Answers
                 </Typography>
-                <ImageList cols={Math.min(3, correctCard?.otherCards?.length)} sx={{ m: 1 }}>
+                <ImageList cols={Math.min(3, correctCard?.otherCards?.length)} sx={{ m: 1, mb: 3 }}>
                   {correctCard?.otherCards.map((item) => (
                     <CardTooltip key={item.name} image={item.image} name={item.name}>
                       <ImageListItem sx={{ maxWidth: '140px' }}>

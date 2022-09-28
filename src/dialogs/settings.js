@@ -29,7 +29,7 @@ const ToggleOption = ({ on, toggle, name, option1, option2, icon1, icon2 }) => {
   )
 }
 
-export const SettingsDialog = () => {
+export default function SettingsDialog() {
   const open = useReactiveVar(settingsDialogOpen)
   const darkModeOn = useReactiveVar(darkMode)
   const highContrastModeOn = useReactiveVar(highContrastMode)

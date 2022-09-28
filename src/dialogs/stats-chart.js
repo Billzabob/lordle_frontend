@@ -1,81 +1,40 @@
-import React from 'react'
-import { useReactiveVar } from '@apollo/client'
-import { LineChart, Line, XAxis, YAxis, Label, ResponsiveContainer } from 'recharts'
+import { Dialog, DialogContent, DialogTitle, Typography } from '@mui/material'
 import { statsDialogOpen } from '../reactive-vars'
-import DialogTitle from '@mui/material/DialogTitle'
-import Dialog from '@mui/material/Dialog'
-import { DialogContent, useTheme } from '@mui/material'
+import { useReactiveVar } from '@apollo/client'
+import React from 'react'
 
-export const StatsChartDialog = () => {
-  const theme = useTheme()
+export default function StatsChartDialog({currentDay}) {
   const open = useReactiveVar(statsDialogOpen)
-
-  // Generate Sales Data
-  function createData(time, amount) {
-    return { time, amount }
-  }
-
-  const data = [
-    createData('00:00', 0),
-    createData('03:00', 300),
-    createData('06:00', 600),
-    createData('09:00', 800),
-    createData('12:00', 1500),
-    createData('15:00', 2000),
-    createData('18:00', 2400),
-    createData('21:00', 2400),
-    createData('24:00', undefined),
-  ]
-
-  const handleClose = () => {
-    statsDialogOpen(false)
-  }
+  const gamesWon = Number(localStorage.gamesWon || 0)
+  const guessCount = Number(localStorage.guessCount || 0)
+  const averageGuesses = gamesWon === 0 ? 0 : (guessCount / gamesWon).toFixed(1)
+  const streak = currentStreak(currentDay)
+  const maxStreak = Number(localStorage.maxStreak || 0)
 
   return (
-    <Dialog maxWidth='md' fullWidth onClose={handleClose} open={open} PaperProps={{ sx: { height: '50%' } }}>
-      <DialogTitle textAlign='center'>Stats</DialogTitle>
+    <Dialog maxWidth='xs' fullWidth onClose={() => statsDialogOpen(false)} open={open}>
+      <DialogTitle variant='h3' textAlign='center'>Stats</DialogTitle>
       <DialogContent>
-        <ResponsiveContainer>
-          <LineChart
-            data={data}
-            margin={{
-              top: 16,
-              right: 16,
-              bottom: 0,
-              left: 24,
-            }}
-          >
-            <XAxis
-              dataKey='time'
-              stroke={theme?.palette?.text?.secondary}
-              style={theme?.typography?.body2}
-            />
-            <YAxis
-              stroke={theme?.palette?.text?.secondary}
-              style={theme?.typography?.body2}
-            >
-              <Label
-                angle={270}
-                position='left'
-                style={{
-                  textAnchor: 'middle',
-                  fill: theme?.palette?.text?.primary,
-                  ...theme?.typography?.body1,
-                }}
-              >
-                Sales ($)
-              </Label>
-            </YAxis>
-            <Line
-              isAnimationActive={false}
-              type='monotone'
-              dataKey='amount'
-              stroke={theme?.palette?.primary?.main}
-              dot={false}
-            />
-          </LineChart>
-        </ResponsiveContainer>
+        <Typography variant='h5' sx={{ textAlign: 'center' }}>
+          {'Games Won: ' + gamesWon}
+        </Typography>
+        <Typography variant='h5' sx={{ textAlign: 'center' }}>
+          {'Average Guesses: ' + averageGuesses}
+        </Typography>
+        <Typography variant='h5' sx={{ textAlign: 'center' }}>
+          {'Current Streak: ' + streak}
+        </Typography>
+        <Typography variant='h5' sx={{ textAlign: 'center' }}>
+          {'Max Streak: ' + maxStreak}
+        </Typography>
       </DialogContent>
     </Dialog>
   )
+}
+
+function currentStreak(currentDay) {
+  if (currentDay === Number(localStorage.currentDay) || currentDay - 1 === Number(localStorage.currentDay))
+    return localStorage.currentStreak || 0
+  else
+    return 0
 }

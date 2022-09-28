@@ -1,6 +1,7 @@
 import { AppBar, Box, Toolbar, IconButton, Typography } from '@mui/material'
-import { drawerOpen, settingsDialogOpen } from '../reactive-vars'
+import { drawerOpen, settingsDialogOpen, statsDialogOpen } from '../reactive-vars'
 import { StyledButton } from '../dashboard/styled-components'
+import BarChartIcon from '@mui/icons-material/BarChart'
 import Logo from '../Logo'
 import MenuIcon from '@mui/icons-material/Menu'
 import pages from './pages'
@@ -53,6 +54,9 @@ export default function MyAppBar() {
           {smallLayout}
           {largeLayout}
           <Box sx={{ flexGrow: 0 }}>
+            <IconButton color='inherit' onClick={() => statsDialogOpen(true)}>
+              <BarChartIcon />
+            </IconButton>
             <IconButton color='inherit' onClick={() => settingsDialogOpen(true)}>
               <SettingsIcon />
             </IconButton>
