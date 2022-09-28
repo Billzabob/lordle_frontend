@@ -17,7 +17,7 @@ export default function WinDialog({ results }) {
     document.body.scrollHeight, document.documentElement.scrollHeight,
     document.body.offsetHeight, document.documentElement.offsetHeight,
     document.body.clientHeight, document.documentElement.clientHeight
-  );
+  )
 
   return (
     <>

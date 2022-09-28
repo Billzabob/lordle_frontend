@@ -1,6 +1,6 @@
-import { aboutDialogOpen } from "../reactive-vars";
-import { Dialog, DialogContent, DialogTitle, Typography } from "@mui/material";
-import { useReactiveVar } from "@apollo/client";
+import { aboutDialogOpen } from '../reactive-vars'
+import { Dialog, DialogContent, DialogTitle, Typography } from '@mui/material'
+import { useReactiveVar } from '@apollo/client'
 import React from 'react'
 
 export default function AboutDialog() {
@@ -21,8 +21,8 @@ export default function AboutDialog() {
           Twitter: @Billzabob_
         </Typography>
         <div style={{display: 'flex', justifyContent: 'center'}}>
-          <a href="https://www.buymeacoffee.com/billzabob">
-            <img src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" alt="Buy Me A Coffee" style={{ height: '60px', width: '217px' }} />
+          <a href='https://www.buymeacoffee.com/billzabob' target='_blank' rel='noreferrer noopener'>
+            <img src='https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png' alt='Buy Me A Coffee' style={{ height: '60px', width: '217px' }} />
           </a>
         </div>
       </DialogContent>

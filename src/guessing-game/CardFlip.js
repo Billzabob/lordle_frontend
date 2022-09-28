@@ -9,25 +9,25 @@ export default function CardFlip({ children, delay, animate, run, onEntered }) {
 
   return (
     animate ?
-      <div className="card-container" onClick={() => setFlipped(!flipped)}>
+      <div className='card-container' onClick={() => setFlipped(!flipped)}>
         <CSSTransition
           in={!flipped}
           timeout={1000}
-          classNames="front-face-transition"
+          classNames='front-face-transition'
         >
           <div
-            className="card-front">
+            className='card-front'>
             <img src='https://lor-card-images.s3.us-west-1.amazonaws.com/cardback.webp' alt='cardback' style={{ width: '128px', height: '193px' }} />
           </div>
         </CSSTransition>
         <CSSTransition
           in={flipped}
           timeout={1000}
-          classNames="back-face-transition"
+          classNames='back-face-transition'
           onEntered={() => onEntered && onEntered()}
         >
           <div
-            className="card-back">
+            className='card-back'>
             {children}
           </div>
         </CSSTransition>

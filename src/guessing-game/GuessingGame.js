@@ -54,7 +54,7 @@ export default function GuessingGame() {
             <GuessHeader />
           </Grid>)
         }
-        <FlipMove enterAnimation="accordionVertical">
+        <FlipMove enterAnimation='accordionVertical'>
           {guessRows.reverse()}
         </FlipMove>
       </Container>

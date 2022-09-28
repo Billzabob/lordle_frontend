@@ -1,5 +1,5 @@
-import { aboutDialogOpen } from '../reactive-vars';
-import InfoIcon from '@mui/icons-material/Info';
+import { aboutDialogOpen } from '../reactive-vars'
+import InfoIcon from '@mui/icons-material/Info'
 import PhotoIcon from '@mui/icons-material/Photo'
 import React from 'react'
 import VideogameAssetIcon from '@mui/icons-material/VideogameAsset'
