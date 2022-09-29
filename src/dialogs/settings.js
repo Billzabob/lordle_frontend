@@ -1,18 +1,14 @@
-import { IconButton } from '@mui/material'
+import { Switch } from '@mui/material'
 import { settingsDialogOpen, darkMode, highContrastMode } from '../reactive-vars'
 import { useReactiveVar } from '@apollo/client'
-import Brightness4Icon from '@mui/icons-material/Brightness4'
-import Brightness7Icon from '@mui/icons-material/Brightness7'
 import Dialog from '@mui/material/Dialog'
 import DialogTitle from '@mui/material/DialogTitle'
 import List from '@mui/material/List'
 import ListItem from '@mui/material/ListItem'
 import ListItemText from '@mui/material/ListItemText'
 import React from 'react'
-import VisibilityIcon from '@mui/icons-material/Visibility'
-import VisibilityOffIcon from '@mui/icons-material/VisibilityOff'
 
-const ToggleOption = ({ on, toggle, name, option1, option2, icon1, icon2 }) => {
+const ToggleOption = ({ on, toggle, name, title }) => {
 
   const handleToggle = (toggleStatus) => {
     localStorage.setItem(name, toggleStatus)
@@ -21,10 +17,8 @@ const ToggleOption = ({ on, toggle, name, option1, option2, icon1, icon2 }) => {
 
   return (
     <ListItem>
-      <ListItemText primary={on ? option1 : option2} />
-      <IconButton onClick={() => handleToggle(!on)} color='inherit'>
-        {on ? icon1 : icon2}
-      </IconButton>
+      <ListItemText primary={title} />
+      <Switch checked={on} onChange={() => handleToggle(!on)} color='secondary' />
     </ListItem>
   )
 }
@@ -44,19 +38,13 @@ export default function SettingsDialog() {
           name='darkMode'
           on={darkModeOn}
           toggle={darkMode}
-          option1='Dark Mode'
-          option2='Light Mode'
-          icon1={<Brightness7Icon />}
-          icon2={<Brightness4Icon />}
+          title='Dark Mode'
         />
         <ToggleOption
           name='highContrastMode'
           on={highContrastModeOn}
           toggle={highContrastMode}
-          option1='Colorblind Mode'
-          option2='Colorblind Mode'
-          icon1={<VisibilityOffIcon />}
-          icon2={<VisibilityIcon />}
+          title='Colorblind Mode'
         />
       </List>
     </Dialog>
