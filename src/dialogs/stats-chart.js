@@ -3,7 +3,7 @@ import { statsDialogOpen } from '../reactive-vars'
 import { useReactiveVar } from '@apollo/client'
 import React from 'react'
 
-export default function StatsChartDialog({currentDay}) {
+export default function StatsChartDialog({ currentDay }) {
   const open = useReactiveVar(statsDialogOpen)
   const gamesWon = Number(localStorage.gamesWon || 0)
   const guessCount = Number(localStorage.guessCount || 0)
@@ -27,8 +27,11 @@ export default function StatsChartDialog({currentDay}) {
         <Typography variant='h5' sx={{ textAlign: 'center' }}>
           {'Max Streak: ' + maxStreak}
         </Typography>
-      </DialogContent>
-    </Dialog>
+        <Typography variant='body2' sx={{ mt: 2, textAlign: 'center' }}>
+          Note: Stats don't sync across devices
+      </Typography>
+    </DialogContent>
+    </Dialog >
   )
 }
 
