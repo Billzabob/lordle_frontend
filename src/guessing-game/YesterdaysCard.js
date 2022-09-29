@@ -7,7 +7,7 @@ import { Box, Skeleton } from '@mui/material'
 export default React.forwardRef((_, ref) => {
   const dayQuery = useQuery(CURRENT_DAY)
   const currentDay = dayQuery.data?.currentDay.day || 0
-  const { data, loading } = useQuery(GET_CARDS_FOR_DAY, { variables: { 'daysBack': 1, 'currentDay': currentDay } })
+  const { data, loading } = useQuery(GET_CARDS_FOR_DAY, { variables: { 'day': currentDay - 1 } })
 
   return (
     !loading && data.cardsForDay.length === 0 ? null :

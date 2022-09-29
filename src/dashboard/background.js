@@ -7,7 +7,7 @@ export default function Background() {
   const theme = useTheme()
   const dayQuery = useQuery(CURRENT_DAY)
   const currentDay = dayQuery.data?.currentDay.day || 0
-  const { data, loading } = useQuery(GET_CARDS_FOR_DAY, { variables: { 'daysBack': 1, 'currentDay': currentDay } })
+  const { data, loading } = useQuery(GET_CARDS_FOR_DAY, { variables: { 'day': currentDay - 1 } })
   const backgroundCount = Number(localStorage.backgroundCount || 0)
   const card = data?.cardsForDay[backgroundCount % data?.cardsForDay.length]
   localStorage.backgroundCount = backgroundCount + 1
