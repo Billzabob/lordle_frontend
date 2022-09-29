@@ -17,11 +17,11 @@ export default function AboutDialog() {
         <Typography sx={{ mb: 1 }}>
           Please feel free to reach out to me with feedback or bug reports.
         </Typography>
-        <Typography sx={{ mb: 3 }}>
-          Twitter: @Billzabob_
+        <Typography sx={{ mb: 1 }}>
+          Email: nick@lordle.gg
         </Typography>
         <Typography sx={{ mb: 3 }}>
-          Email: nick@lordle.gg
+          Twitter: @Billzabob_
         </Typography>
         <div style={{display: 'flex', justifyContent: 'center'}}>
           <a href='https://www.buymeacoffee.com/billzabob' target='_blank' rel='noreferrer noopener'>
