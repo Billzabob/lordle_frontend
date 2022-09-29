@@ -35,7 +35,7 @@ const Image = React.memo(
 export default function GuessBox({ correct, text, position, image, padding, animate, run, onLoad, onDone }) {
   return (
     <CardFlip delay={position * 350} animate={animate} run={run} onEntered={onDone}>
-      <Card variant='outlined' style={{ filter: 'drop-shadow(7px 7px 5px black)' }}>
+      <Card variant='outlined' style={{ filter: 'drop-shadow(5px 5px 5px black)' }}>
         <CardContent
           sx={{ p: 0, bgcolor: ({ palette }) => palette.background.paper, textAlign: 'center' }}
         >
