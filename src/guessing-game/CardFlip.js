@@ -9,7 +9,7 @@ export default function CardFlip({ children, delay, animate, run, onEntered }) {
 
   return (
     animate ?
-      <div className='card-container' onClick={() => setFlipped(!flipped)}>
+      <div className='card-container'>
         <CSSTransition
           in={!flipped}
           timeout={1000}

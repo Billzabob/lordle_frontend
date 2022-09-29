@@ -3,7 +3,6 @@ import { resultsDialogState } from '../reactive-vars'
 import { StyledButton } from '../dashboard/styled-components'
 import { useReactiveVar } from '@apollo/client'
 import { useWindowWidth } from '@react-hook/window-size'
-import CardTooltip from '../CardTooltip'
 import Confetti from 'react-confetti'
 import React, { useState } from 'react'
 
@@ -38,13 +37,11 @@ export default function WinDialog({ results }) {
         </DialogTitle>
         <DialogContent sx={{ p: 0 }} dividers={false}>
           <Stack alignItems='center'>
-            <CardTooltip image={correctCard?.image} name={correctCard?.name}>
-              <img
-                src={correctCard?.image}
-                alt={correctCard?.name || ''}
-                style={{ margin: '16px', height: '312px', width: '204px' }}
-              />
-            </CardTooltip>
+            <img
+              src={correctCard?.image}
+              alt={correctCard?.name || ''}
+              style={{ margin: '16px', height: '312px', width: '204px' }}
+            />
             <Tooltip open={tooltip} onClose={() => setTooltip(false)} title='Copied to clipboard!'>
               <StyledButton onClick={() => {
                 setTooltip(true)
@@ -59,11 +56,9 @@ export default function WinDialog({ results }) {
                 </Typography>
                 <ImageList cols={Math.min(3, correctCard?.otherCards?.length)} sx={{ m: 1, mb: 3 }}>
                   {correctCard?.otherCards.map((item) => (
-                    <CardTooltip key={item.name} image={item.image} name={item.name}>
-                      <ImageListItem sx={{ maxWidth: '140px' }}>
-                        <img src={item.image} alt={item.name} />
-                      </ImageListItem>
-                    </CardTooltip>
+                    <ImageListItem sx={{ maxWidth: '140px' }}>
+                      <img src={item.image} alt={item.name} />
+                    </ImageListItem>
                   ))}
                 </ImageList>
               </>
