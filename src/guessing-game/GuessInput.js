@@ -34,7 +34,7 @@ export default function GuessInput({ setGuess, guesses }) {
 
 function filterOptions(guesses) {
   return (cards, state) => {
-    const filter = createFilterOptions({ limit: 10 })
+    const filter = createFilterOptions({})
     const removePreviousGuesses = cards.filter(c => !guesses.includes(c.cardCode))
     return filter(removePreviousGuesses, state)
   }
