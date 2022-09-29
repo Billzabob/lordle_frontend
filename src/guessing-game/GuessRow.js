@@ -48,7 +48,7 @@ export default React.memo(function GuessRow({ code, animate, index, setResult })
             <img
               src={guess.image}
               alt={guess.name || ''}
-              style={{ width: '128px', height: '193px' }}
+              style={{ width: '128px', height: '193px', filter: 'drop-shadow(7px 7px 5px black)' }}
               onLoad={() => setImagesCount(i => i + 1)}
             />
           </CardTooltip>
