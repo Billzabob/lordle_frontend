@@ -14,6 +14,7 @@ export default function Background() {
 
   return <div style={{
     zIndex: -100,
+    position: 'fixed',
     backgroundImage: loading ? '' : `url("${card.backgroundImage}")`,
     width: '100vw',
     height: '100vh',
@@ -21,6 +22,5 @@ export default function Background() {
     opacity: theme.palette.mode === 'dark' ? 0.08 : 0.3,
     backgroundSize: 'cover',
     backgroundPosition: 'center',
-    position: 'absolute'
   }} />
 }
