@@ -20,6 +20,9 @@ export default function AboutDialog() {
         <Typography sx={{ mb: 3 }}>
           Twitter: @Billzabob_
         </Typography>
+        <Typography sx={{ mb: 3 }}>
+          Email: nick@lordle.gg
+        </Typography>
         <div style={{display: 'flex', justifyContent: 'center'}}>
           <a href='https://www.buymeacoffee.com/billzabob' target='_blank' rel='noreferrer noopener'>
             <img src='https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png' alt='Buy Me A Coffee' style={{ height: '60px', width: '217px' }} />
