@@ -1,5 +1,6 @@
 import { Box, Container } from '@mui/material'
 import AboutDialog from '../dialogs/about'
+import Background from './background'
 import CssBaseline from '@mui/material/CssBaseline'
 import GuessCounter from '../guessing-game/GuessCounter'
 import GuessingGame from '../guessing-game/GuessingGame'
@@ -20,6 +21,7 @@ export default function Dashboard() {
       <AboutDialog />
       <MyDrawer />
       <Box sx={{ display: 'flex', mb: 4 }}>
+        <Background />
         <MyAppBar />
         <Container sx={{ mt: 11 }}>
           <MainGameTitle />

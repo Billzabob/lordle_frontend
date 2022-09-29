@@ -1,11 +1,13 @@
 import React from 'react'
 import { useQuery } from '@apollo/client'
 import Typography from '@mui/material/Typography'
-import { GET_CARDS_FOR_DAY } from '../gql/queries'
+import { CURRENT_DAY, GET_CARDS_FOR_DAY } from '../gql/queries'
 import { Box, Skeleton } from '@mui/material'
 
 export default React.forwardRef((_, ref) => {
-  const { data, loading } = useQuery(GET_CARDS_FOR_DAY, { variables: { 'daysBack': 1 }, fetchPolicy: 'no-cache' })
+  const dayQuery = useQuery(CURRENT_DAY)
+  const currentDay = dayQuery.data?.currentDay.day || 0
+  const { data, loading } = useQuery(GET_CARDS_FOR_DAY, { variables: { 'daysBack': 1, 'currentDay': currentDay } })
 
   return (
     !loading && data.cardsForDay.length === 0 ? null :
