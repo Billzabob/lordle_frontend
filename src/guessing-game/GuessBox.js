@@ -35,16 +35,19 @@ const Image = React.memo(
 export default function GuessBox({ correct, text, position, image, padding, animate, run, onLoad, onDone }) {
   return (
     <CardFlip delay={position * 350} animate={animate} run={run} onEntered={onDone}>
-      <Card variant='outlined' style={{ filter: 'drop-shadow(5px 5px 5px black)' }}>
-        <CardContent
-          sx={{ p: 0, bgcolor: ({ palette }) => palette.background.paper, textAlign: 'center' }}
+      <div style={{ filter: 'drop-shadow(5px 5px 5px black)' }}>
+        <Card variant='outlined'
         >
-          <Box sx={{ p: 1, height: 55 }} display='flex' justifyContent='center' alignItems='center'>
-            <Typography variant='body2'>{text}</Typography>
-          </Box>
-        </CardContent>
-        <Image image={image} correct={correct} padding={padding} onLoad={onLoad} />
-      </Card>
+          <CardContent
+            sx={{ p: 0, bgcolor: ({ palette }) => palette.background.paper, textAlign: 'center' }}
+          >
+            <Box sx={{ p: 1, height: 55 }} display='flex' justifyContent='center' alignItems='center'>
+              <Typography variant='body2'>{text}</Typography>
+            </Box>
+          </CardContent>
+          <Image image={image} correct={correct} padding={padding} onLoad={onLoad} />
+        </Card>
+      </div>
     </CardFlip>
   )
 }

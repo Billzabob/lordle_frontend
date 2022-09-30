@@ -23,7 +23,7 @@ export default function Dashboard() {
       <Box sx={{ display: 'flex', mb: 4 }}>
         <Background />
         <MyAppBar />
-        <Container sx={{ mt: 11 }}>
+        <Container sx={{ mt: 11 }} disableGutters>
           <MainGameTitle />
           <GuessingGame />
           <GuessCounter />

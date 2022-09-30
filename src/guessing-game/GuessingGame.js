@@ -50,7 +50,7 @@ export default function GuessingGame() {
       <WinDialog results={results} />
       <Container maxWidth='md' sx={{ overflow: 'auto', p: 2 }}>
         {guessRows.length > 0 &&
-          (<Grid container columns={12} spacing={2} minWidth={'868px'}>
+          (<Grid container columns={12} spacing={2} minWidth={'868px'} >
             <GuessHeader />
           </Grid>)
         }

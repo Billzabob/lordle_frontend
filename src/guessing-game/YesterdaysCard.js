@@ -11,7 +11,7 @@ export default React.forwardRef((_, ref) => {
 
   return (
     !loading && data.cardsForDay.length === 0 ? null :
-      <Box ref={ref} display='flex' justifyContent='center'>
+      <Box ref={ref} display='flex' justifyContent='center' sx={{ mx: 2 }}>
         <Typography variant='h6' sx={{ my: 2, textAlign: 'center' }}>
           {loading ? <Skeleton width={400} /> : content(data)}
         </Typography>

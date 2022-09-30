@@ -27,7 +27,7 @@ export default React.memo(function GuessRow({ code, animate, index, setResult })
   })
 
   if (loading) return (
-    <Grid container columns={12} spacing={2} minWidth={'868px'}>
+    <Grid container columns={12} spacing={2} minWidth={'868px'} >
       {
         [0, 1, 2, 3, 4, 5].map(i =>
           <Grid key={i} item xs={2}>
@@ -41,7 +41,7 @@ export default React.memo(function GuessRow({ code, animate, index, setResult })
   const guess = data.guess
 
   return (
-    <Grid container columns={12} spacing={2} minWidth={'868px'}>
+    <Grid container columns={12} spacing={2} minWidth={'868px'} >
       <Grid item xs={2}>
         <CardFlip delay={350} animate={animate} run={imagesLoaded}>
           <CardTooltip image={guess.image} name={guess.name}>

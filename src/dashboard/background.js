@@ -19,7 +19,7 @@ export default function Background() {
     width: '100vw',
     height: '100vh',
     backgroundRepeat: 'no-repeat',
-    opacity: theme.palette.mode === 'dark' ? 0.08 : 0.3,
+    opacity: theme.palette.mode === 'dark' ? 0.3 : 0.3,
     backgroundSize: 'cover',
     backgroundPosition: 'center',
   }} />
