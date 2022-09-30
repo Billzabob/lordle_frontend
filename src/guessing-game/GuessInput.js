@@ -1,10 +1,12 @@
-import React, { useState } from 'react'
 import { Autocomplete, createFilterOptions, Stack, TextField, useTheme } from '@mui/material'
-import { useQuery } from '@apollo/client'
 import { GET_CARDS } from '../gql/queries'
+import { languageSetting } from '../reactive-vars'
+import { useQuery, useReactiveVar } from '@apollo/client'
+import React, { useState } from 'react'
 
 export default function GuessInput({ setGuess, guesses }) {
-  const { data, loading } = useQuery(GET_CARDS, { fetchPolicy: 'no-cache' })
+  const language = useReactiveVar(languageSetting)
+  const { data, loading } = useQuery(GET_CARDS, { variables: { language }, fetchPolicy: 'no-cache' })
   const [input, setInput] = useState('')
   const cards = data?.cards || []
   const sorted = cards.slice().sort((c1, c2) => c1.name > c2.name ? 1 : -1)

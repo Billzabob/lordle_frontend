@@ -7,10 +7,10 @@ import CardTooltip from '../CardTooltip'
 import GuessBox from './GuessBox'
 import React, { useEffect, useState } from 'react'
 
-export default React.memo(function GuessRow({ code, animate, index, setResult }) {
+export default React.memo(function GuessRow({ code, animate, index, setResult, language }) {
   const dayQuery = useQuery(CURRENT_DAY)
   const currentDay = dayQuery.data.currentDay.day
-  const { loading, data } = useQuery(CHECK_GUESS, { variables: { code, day: currentDay } })
+  const { loading, data } = useQuery(CHECK_GUESS, { variables: { code, language, day: currentDay } })
   const [imagesCount, setImagesCount] = useState(0)
   const [doneAnimating, setDoneAnimating] = useState(false)
   const imagesLoaded = imagesCount === 6
@@ -113,7 +113,7 @@ export default React.memo(function GuessRow({ code, animate, index, setResult })
       </Grid>
     </Grid>
   )
-}, (a, b) => a.code === b.code)
+}, (a, b) => a.code === b.code && a.language === b.language)
 
 function cleanName(name) {
   switch (name) {

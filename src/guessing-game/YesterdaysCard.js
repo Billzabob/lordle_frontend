@@ -1,13 +1,15 @@
-import React from 'react'
-import { useQuery } from '@apollo/client'
-import Typography from '@mui/material/Typography'
-import { CURRENT_DAY, GET_CARDS_FOR_DAY } from '../gql/queries'
 import { Box, Skeleton } from '@mui/material'
+import { CURRENT_DAY, GET_CARDS_FOR_DAY } from '../gql/queries'
+import { languageSetting } from '../reactive-vars'
+import { useQuery, useReactiveVar } from '@apollo/client'
+import React from 'react'
+import Typography from '@mui/material/Typography'
 
 export default React.forwardRef((_, ref) => {
+  const language = useReactiveVar(languageSetting)
   const dayQuery = useQuery(CURRENT_DAY)
   const currentDay = dayQuery.data?.currentDay.day || 0
-  const { data, loading } = useQuery(GET_CARDS_FOR_DAY, { variables: { 'day': currentDay - 1 } })
+  const { data, loading } = useQuery(GET_CARDS_FOR_DAY, { variables: { day: currentDay - 1, language } })
 
   return (
     !loading && data.cardsForDay.length === 0 ? null :

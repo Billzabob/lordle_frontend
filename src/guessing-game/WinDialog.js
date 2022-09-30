@@ -9,7 +9,7 @@ import React, { useState } from 'react'
 export default function WinDialog({ results }) {
   const [tooltip, setTooltip] = useState(false)
   const resultsState = useReactiveVar(resultsDialogState)
-  const correctCard = results.find(r => r.correct)
+  const correctCard = results.find(r => r?.correct)
   const width = useWindowWidth()
 
   let scrollHeight = Math.max(

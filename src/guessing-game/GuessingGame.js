@@ -1,6 +1,6 @@
 import { Container, Grid } from '@mui/material'
 import { CURRENT_DAY } from '../gql/queries'
-import { useQuery } from '@apollo/client'
+import { useQuery, useReactiveVar } from '@apollo/client'
 import FlipMove from 'react-flip-move'
 import GuessHeader from './GuessHeader'
 import GuessingGameHeader from './GuessingGameHeader'
@@ -8,11 +8,13 @@ import GuessRow from './GuessRow'
 import React, { useEffect, useReducer, useState } from 'react'
 import StatsChartDialog from '../dialogs/stats-chart'
 import WinDialog from './WinDialog'
+import { languageSetting } from '../reactive-vars'
 
 export default function GuessingGame() {
   const [results, dispatch] = useReducer(reducer, [])
-  const correct = results.some(r => r.correct)
+  const correct = results.some(r => r?.correct)
   const numGuesses = results.length
+  const language = useReactiveVar(languageSetting)
 
   const { data } = useQuery(CURRENT_DAY, { fetchPolicy: 'network-only' })
   const currentDay = data?.currentDay?.day
@@ -31,6 +33,7 @@ export default function GuessingGame() {
   const guessRows = codes.map((guess, i) =>
     <div key={guess}>
       <GuessRow
+        language={language}
         code={guess}
         setResult={dispatch}
         index={i}
@@ -63,7 +66,6 @@ export default function GuessingGame() {
 }
 
 function reducer(results, { index, result }) {
-  if (result === 'reset') return []
   const newLength = Math.max(index + 1, results.length)
   const newResults = Array(newLength).fill(null)
   results.forEach((v, i) => newResults[i] = v)

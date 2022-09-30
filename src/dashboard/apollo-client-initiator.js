@@ -10,13 +10,13 @@ export default function ApolloClientInitiator({ children }) {
       const cache = new InMemoryCache({
         typePolicies: {
           Card: {
-            keyFields: ['cardCode']
+            keyFields: ['cardCode', 'language']
           },
           Guess: {
-            keyFields: ['cardCode']
+            keyFields: ['cardCode', 'language']
           },
           Guesses: {
-            keyFields: ['cardCode']
+            keyFields: ['cardCode', 'language']
           },
           Day: {
             keyFields: ['day']
