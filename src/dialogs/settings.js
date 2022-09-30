@@ -18,7 +18,7 @@ const ToggleOption = ({ on, toggle, name, title }) => {
   return (
     <ListItem>
       <ListItemText primary={title} />
-      <Switch checked={on} onChange={() => handleToggle(!on)} color='secondary' />
+      <Switch checked={on} onChange={() => handleToggle(!on)} />
     </ListItem>
   )
 }
@@ -50,9 +50,8 @@ export default function SettingsDialog() {
         <ListItem>
           <ListItemText primary='Language' />
           <FormControl sx={{ minWidth: 120 }}>
-            <InputLabel color='secondary' id='language-selector'>Language</InputLabel>
+            <InputLabel id='language-selector'>Language</InputLabel>
             <Select
-              color='secondary'
               labelId='language-selector'
               label='Language'
               value={chosenLanguage}

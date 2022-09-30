@@ -33,7 +33,6 @@ const largeLayout = (
         const button = <StyledButton
           variant='text'
           key={name}
-          color='secondary'
           sx={{ mx: 1 }}
           href={link}
           onClick={onClick}
@@ -52,7 +51,7 @@ const largeLayout = (
 
 export default function MyAppBar() {
   return (
-    <AppBar component='nav'>
+    <AppBar component='nav' color='secondary'>
       <Box mx={3} my={1}>
         <Toolbar disableGutters>
           {smallLayout}
