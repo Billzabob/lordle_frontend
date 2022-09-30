@@ -81,7 +81,7 @@ ${more}
 https://lordle.gg`
 }
 
-const numberToEmoji = (number) => number.toString().split('').map(digitToEmoji)
+const numberToEmoji = (number) => number.toString().split('').map(digitToEmoji).join('')
 
 function digitToEmoji(digit) {
   switch (digit) {
