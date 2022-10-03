@@ -3,6 +3,7 @@ import { CSSTransition } from 'react-transition-group'
 
 export default function CardFlip({ children, delay, animate, run, onEntered }) {
   const [flipped, setFlipped] = useState(false)
+
   useEffect(() => {
     if (run) setTimeout(() => setFlipped(true), delay)
   })
@@ -17,7 +18,10 @@ export default function CardFlip({ children, delay, animate, run, onEntered }) {
         >
           <div
             className='card-front'>
-            <img src='https://lor-card-images.s3.us-west-1.amazonaws.com/cardback.webp' alt='cardback' style={{ width: '128px', height: '193px' }} />
+            <img
+              src='https://lor-card-images.s3.us-west-1.amazonaws.com/cardback.webp'
+              alt='cardback'
+              style={{ width: '100%', aspectRatio: 0.664, filter: 'drop-shadow(5px 5px 5px black)' }} />
           </div>
         </CSSTransition>
         <CSSTransition

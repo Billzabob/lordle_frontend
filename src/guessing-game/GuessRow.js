@@ -1,6 +1,6 @@
+import { Box, Grid } from '@mui/material'
 import { CHECK_GUESS, CURRENT_DAY } from '../gql/queries'
-import { getImagePath } from '../util'
-import { Grid } from '@mui/material'
+import { getImagePath, useCompactMode } from '../util'
 import { resultsDialogState } from '../reactive-vars'
 import { useQuery } from '@apollo/client'
 import CardFlip from './CardFlip'
@@ -14,7 +14,9 @@ export default React.memo(function GuessRow({ code, animate, index, setResult, l
   const { loading, data } = useQuery(CHECK_GUESS, { variables: { code, language, day: currentDay } })
   const [imagesCount, setImagesCount] = useState(0)
   const [doneAnimating, setDoneAnimating] = useState(false)
+  const small = useCompactMode()
   const imagesLoaded = imagesCount === 6
+
   useEffect(() => {
     if (!loading) {
       if (animate && doneAnimating) {
@@ -28,92 +30,99 @@ export default React.memo(function GuessRow({ code, animate, index, setResult, l
   })
 
   if (loading) return (
-    <Grid container columns={12} spacing={2} minWidth={'868px'} >
-      {
-        [0, 1, 2, 3, 4, 5].map(i =>
-          <Grid key={i} item xs={2}>
-            <img src='https://lor-card-images.s3.us-west-1.amazonaws.com/cardback.webp' alt='cardback' style={{ width: '128px', height: '193px' }} />
-          </Grid>
-        )
-      }
-    </Grid>
+    <Box display='flex' justifyContent='center' width={small ? '100%' : '852px'}>
+      <Grid container spacing={small ? 1 : 2}  >
+        {
+          [0, 1, 2, 3, 4, 5].map(i =>
+            <Grid key={i} item xs={2}>
+              <img
+                src='https://lor-card-images.s3.us-west-1.amazonaws.com/cardback.webp'
+                alt='cardback'
+                style={{ width: '100%', aspectRatio: 0.664, filter: 'drop-shadow(5px 5px 5px black)' }} />
+            </Grid>
+          )
+        }
+      </Grid>
+    </Box>
   )
 
   const guess = data.guess
   const image = getImagePath(code, 150)
 
   return (
-    <Grid container columns={12} spacing={2} minWidth={'868px'} >
-      <Grid item xs={2}>
-        <CardFlip delay={350} animate={animate} run={imagesLoaded}>
-          <CardTooltip language={language} code={code} image={guess.image} name={guess.name}>
-            <img
-              src={language === 'en_us' ? image : guess.image}
-              alt={guess.name || ''}
-              style={{ width: '128px', height: '193px', filter: 'drop-shadow(5px 5px 5px black)' }}
-              onLoad={() => setImagesCount(i => i + 1)}
-            />
-          </CardTooltip>
-        </CardFlip>
+    <Box display='flex' justifyContent='center' width={small ? '100%' : '852px'}>
+      <Grid container spacing={small ? 1 : 2}  >
+        <Grid item xs={2}>
+          <CardFlip delay={350} animate={animate} run={imagesLoaded}>
+            <CardTooltip language={language} code={code} image={guess.image} name={guess.name}>
+              <img
+                src={language === 'en_us' ? image : guess.image}
+                alt={guess.name || ''}
+                style={{ width: '100%', aspectRatio: 0.664, filter: 'drop-shadow(5px 5px 5px black)' }}
+                onLoad={() => setImagesCount(i => i + 1)}
+              />
+            </CardTooltip>
+          </CardFlip>
+        </Grid>
+        <Grid item xs={2}>
+          <GuessBox
+            animate={animate}
+            run={imagesLoaded}
+            onLoad={() => setImagesCount(i => i + 1)}
+            position={2}
+            correct={guess.regionResult.result === 'PARTIAL' ? 'partial' : guess.regionResult.result === 'CORRECT'}
+            text={guess.regionResult.regions.map(cleanName).join(', ')}
+            image={getMedia(guess.regionResult.regions.slice().sort().join(''))}
+            padding={guess.regionResult.regions.length > 1}
+          />
+        </Grid>
+        <Grid item xs={2}>
+          <GuessBox
+            animate={animate}
+            run={imagesLoaded}
+            onLoad={() => setImagesCount(i => i + 1)}
+            position={3}
+            correct={guess.rarityResult.result === 'CORRECT'}
+            text={cleanName(guess.rarityResult.rarity)}
+            image={getMedia(guess.rarityResult.rarity)}
+          />
+        </Grid>
+        <Grid item xs={2}>
+          <GuessBox
+            animate={animate}
+            run={imagesLoaded}
+            onLoad={() => setImagesCount(i => i + 1)}
+            position={4}
+            correct={guess.manaCostResult.result === 'CORRECT'}
+            text={cleanName(guess.manaCostResult.manaCost)}
+            image={getMedia(guess.manaCostResult.result === 'CORRECT' ? guess.manaCostResult.manaCost : guess.manaCostResult.result)}
+          />
+        </Grid>
+        <Grid item xs={2}>
+          <GuessBox
+            animate={animate}
+            run={imagesLoaded}
+            onLoad={() => setImagesCount(i => i + 1)}
+            position={5}
+            correct={guess.typeResult.result === 'CORRECT'}
+            text={cleanName(guess.typeResult.type)}
+            image={getMedia(guess.typeResult.type)}
+          />
+        </Grid>
+        <Grid item xs={2}>
+          <GuessBox
+            animate={animate}
+            run={imagesLoaded}
+            onDone={() => setDoneAnimating(true)}
+            onLoad={() => setImagesCount(i => i + 1)}
+            position={6}
+            correct={guess.setResult.result === 'CORRECT'}
+            text={cleanName(guess.setResult.set)}
+            image={getMedia(guess.setResult.set)}
+          />
+        </Grid>
       </Grid>
-      <Grid item xs={2}>
-        <GuessBox
-          animate={animate}
-          run={imagesLoaded}
-          onLoad={() => setImagesCount(i => i + 1)}
-          position={2}
-          correct={guess.regionResult.result === 'PARTIAL' ? 'partial' : guess.regionResult.result === 'CORRECT'}
-          text={guess.regionResult.regions.map(cleanName).join(', ')}
-          image={getMedia(guess.regionResult.regions.slice().sort().join(''))}
-          padding={guess.regionResult.regions.length > 1 ? 1 : null}
-        />
-      </Grid>
-      <Grid item xs={2}>
-        <GuessBox
-          animate={animate}
-          run={imagesLoaded}
-          onLoad={() => setImagesCount(i => i + 1)}
-          position={3}
-          correct={guess.rarityResult.result === 'CORRECT'}
-          text={cleanName(guess.rarityResult.rarity)}
-          image={getMedia(guess.rarityResult.rarity)}
-        />
-      </Grid>
-      <Grid item xs={2}>
-        <GuessBox
-          animate={animate}
-          run={imagesLoaded}
-          onLoad={() => setImagesCount(i => i + 1)}
-          position={4}
-          correct={guess.manaCostResult.result === 'CORRECT'}
-          text={cleanName(guess.manaCostResult.manaCost)}
-          image={getMedia(guess.manaCostResult.result === 'CORRECT' ? guess.manaCostResult.manaCost : guess.manaCostResult.result)}
-        />
-      </Grid>
-      <Grid item xs={2}>
-        <GuessBox
-          animate={animate}
-          run={imagesLoaded}
-          onLoad={() => setImagesCount(i => i + 1)}
-          position={5}
-          correct={guess.typeResult.result === 'CORRECT'}
-          text={cleanName(guess.typeResult.type)}
-          image={getMedia(guess.typeResult.type)}
-        />
-      </Grid>
-      <Grid item xs={2}>
-        <GuessBox
-          animate={animate}
-          run={imagesLoaded}
-          onDone={() => setDoneAnimating(true)}
-          onLoad={() => setImagesCount(i => i + 1)}
-          position={6}
-          correct={guess.setResult.result === 'CORRECT'}
-          text={cleanName(guess.setResult.set)}
-          image={getMedia(guess.setResult.set)}
-        />
-      </Grid>
-    </Grid>
+    </Box>
   )
 }, (a, b) => a.code === b.code && a.language === b.language)
 

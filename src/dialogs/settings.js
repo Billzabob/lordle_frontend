@@ -1,5 +1,5 @@
-import { FormControl, InputLabel, MenuItem, Select, Switch } from '@mui/material'
-import { settingsDialogOpen, darkMode, highContrastMode, languageSetting } from '../reactive-vars'
+import { FormControl, InputLabel, MenuItem, Select, Switch, useMediaQuery, useTheme } from '@mui/material'
+import { settingsDialogOpen, darkMode, highContrastMode, languageSetting, compactMode } from '../reactive-vars'
 import { useReactiveVar } from '@apollo/client'
 import Dialog from '@mui/material/Dialog'
 import DialogTitle from '@mui/material/DialogTitle'
@@ -27,7 +27,11 @@ export default function SettingsDialog() {
   const open = useReactiveVar(settingsDialogOpen)
   const darkModeOn = useReactiveVar(darkMode)
   const highContrastModeOn = useReactiveVar(highContrastMode)
+  const compactModeOn = useReactiveVar(compactMode)
   const chosenLanguage = useReactiveVar(languageSetting)
+
+  const theme = useTheme()
+  const small = useMediaQuery(theme.breakpoints.down('md'))
 
   const handleClose = () => settingsDialogOpen(false)
 
@@ -47,6 +51,13 @@ export default function SettingsDialog() {
           toggle={highContrastMode}
           title='Colorblind Mode'
         />
+        {small && <ToggleOption
+          name='compactMode'
+          on={compactModeOn}
+          toggle={compactMode}
+          title='Compact Mode'
+        />
+        }
         <ListItem>
           <ListItemText primary='Language' />
           <FormControl sx={{ minWidth: 120 }}>
