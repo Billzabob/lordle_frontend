@@ -1,4 +1,5 @@
 import { CHECK_GUESS, CURRENT_DAY } from '../gql/queries'
+import { getImagePath } from '../util'
 import { Grid } from '@mui/material'
 import { resultsDialogState } from '../reactive-vars'
 import { useQuery } from '@apollo/client'
@@ -39,14 +40,16 @@ export default React.memo(function GuessRow({ code, animate, index, setResult, l
   )
 
   const guess = data.guess
+  const image = getImagePath(code, 150)
 
   return (
     <Grid container columns={12} spacing={2} minWidth={'868px'} >
       <Grid item xs={2}>
         <CardFlip delay={350} animate={animate} run={imagesLoaded}>
-          <CardTooltip image={guess.image} name={guess.name}>
+          <CardTooltip code={code} name={guess.name}>
             <img
-              src={guess.image}
+              src={image}
+              referrerPolicy='no-referrer'
               alt={guess.name || ''}
               style={{ width: '128px', height: '193px', filter: 'drop-shadow(5px 5px 5px black)' }}
               onLoad={() => setImagesCount(i => i + 1)}

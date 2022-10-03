@@ -26,10 +26,10 @@ export default function Themer({ children }) {
     palette: {
       mode: isDarkMode ? 'dark' : 'light',
       primary: {
-        main: '#413331',
+        main: '#C2A052',
       },
       secondary: {
-        main: '#C2A052',
+        main: '#413331',
       },
       success: {
         main: '#D7733A',
