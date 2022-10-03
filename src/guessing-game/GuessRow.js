@@ -49,7 +49,7 @@ export default React.memo(function GuessRow({ code, animate, index, setResult, l
           <CardTooltip code={code} name={guess.name}>
             <img
               src={image}
-              referrerPolicy='no-referrer'
+              referrerPolicy='same-origin'
               alt={guess.name || ''}
               style={{ width: '128px', height: '193px', filter: 'drop-shadow(5px 5px 5px black)' }}
               onLoad={() => setImagesCount(i => i + 1)}
