@@ -1,5 +1,7 @@
-import { Container, Grid } from '@mui/material'
+import { Box, Container, Grid } from '@mui/material'
 import { CURRENT_DAY } from '../gql/queries'
+import { languageSetting } from '../reactive-vars'
+import { useCompactMode } from '../util'
 import { useQuery, useReactiveVar } from '@apollo/client'
 import FlipMove from 'react-flip-move'
 import GuessHeader from './GuessHeader'
@@ -8,13 +10,13 @@ import GuessRow from './GuessRow'
 import React, { useEffect, useReducer, useState } from 'react'
 import StatsChartDialog from '../dialogs/stats-chart'
 import WinDialog from './WinDialog'
-import { languageSetting } from '../reactive-vars'
 
 export default function GuessingGame() {
   const [results, dispatch] = useReducer(reducer, [])
   const correct = results.some(r => r?.correct)
   const numGuesses = results.length
   const language = useReactiveVar(languageSetting)
+  const small = useCompactMode()
 
   const { data } = useQuery(CURRENT_DAY, { fetchPolicy: 'network-only' })
   const currentDay = data?.currentDay?.day
@@ -53,9 +55,13 @@ export default function GuessingGame() {
       <WinDialog results={results} />
       <Container maxWidth='md' sx={{ overflow: 'auto', p: 2 }}>
         {guessRows.length > 0 &&
-          (<Grid container columns={12} spacing={2} minWidth={'868px'} >
-            <GuessHeader />
-          </Grid>)
+          (
+            <Box display='flex' justifyContent='center' width={small ? '100%' : '852px'}>
+              <Grid container spacing={small ? 1 : 2} >
+                <GuessHeader />
+              </Grid>
+            </Box>
+          )
         }
         <FlipMove enterAnimation='accordionVertical'>
           {guessRows.reverse()}
