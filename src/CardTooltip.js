@@ -12,7 +12,7 @@ export default function CardTooltip({ code, name, children }) {
       followCursor
       title={
         <img
-          referrerPolicy='no-referrer'
+          referrerPolicy='same-origin'
           src={image}
           alt={name}
           style={{ width: '250px', height: '376px' }}
