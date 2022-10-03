@@ -46,9 +46,9 @@ export default React.memo(function GuessRow({ code, animate, index, setResult, l
     <Grid container columns={12} spacing={2} minWidth={'868px'} >
       <Grid item xs={2}>
         <CardFlip delay={350} animate={animate} run={imagesLoaded}>
-          <CardTooltip code={code} name={guess.name}>
+          <CardTooltip language={language} code={code} image={guess.image} name={guess.name}>
             <img
-              src={image}
+              src={language === 'en_us' ? image : guess.image}
               alt={guess.name || ''}
               style={{ width: '128px', height: '193px', filter: 'drop-shadow(5px 5px 5px black)' }}
               onLoad={() => setImagesCount(i => i + 1)}
