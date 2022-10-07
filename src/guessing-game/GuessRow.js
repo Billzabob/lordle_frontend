@@ -1,7 +1,7 @@
 import { Box, Grid } from '@mui/material'
 import { CHECK_GUESS, CURRENT_DAY } from '../gql/queries'
 import { getImagePath, useCompactMode } from '../util'
-// import { resultsDialogState } from '../reactive-vars'
+import { resultsDialogState } from '../reactive-vars'
 import { useQuery } from '@apollo/client'
 import CardFlip from './CardFlip'
 import CardTooltip from '../CardTooltip'
@@ -20,25 +20,27 @@ export default React.memo(function GuessRow({ code, animate, index, setResult, l
   useEffect(() => {
     if (!loading) {
       if (animate && doneAnimating) {
-        // setResult({ index, result: guess })
-        // if (resultsDialogState() === 'incorrect' && guess.correct) resultsDialogState('open')
+        setResult({ index, result: guess })
+        if (resultsDialogState() === 'incorrect' && guess.correct) resultsDialogState('open')
       } else if (!animate) {
-        // setResult({ index, result: guess })
-        // if (resultsDialogState() === 'incorrect' && guess.correct) resultsDialogState('closed')
+        setResult({ index, result: guess })
+        if (resultsDialogState() === 'incorrect' && guess.correct) resultsDialogState('closed')
       }
     }
   })
 
-  if (true) return (
+  if (loading) return (
     <Box display='flex' justifyContent='center' width={small ? '100%' : '852px'}>
       <Grid container spacing={small ? 1 : 2}  >
         {
           [0, 1, 2, 3, 4, 5].map(i =>
             <Grid key={i} item xs={2}>
-              <img
-                src='https://lor-card-images.s3.us-west-1.amazonaws.com/cardback.webp'
-                alt='cardback'
-                style={{ width: '100%', aspectRatio: 0.664, filter: 'drop-shadow(5px 5px 5px black)' }} />
+              <div>
+                <img
+                  src='https://lor-card-images.s3.us-west-1.amazonaws.com/cardback.webp'
+                  alt='cardback'
+                  style={{ width: '100%', aspectRatio: 0.664, filter: 'drop-shadow(5px 5px 5px black)' }} />
+              </div>
             </Grid>
           )
         }
