@@ -21,8 +21,6 @@ code {
 .card-front,
 .card-back {
   backface-visibility: hidden;
-  height: 100%;
-  width: 100%;
 }
 
 .card-front {
