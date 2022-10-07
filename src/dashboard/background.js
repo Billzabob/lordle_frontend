@@ -1,10 +1,8 @@
 import { CURRENT_DAY, GET_CARDS_FOR_DAY } from '../gql/queries'
 import { useQuery } from '@apollo/client'
-import { useTheme } from '@emotion/react'
 import React from 'react'
 
 export default function Background() {
-  const theme = useTheme()
   const dayQuery = useQuery(CURRENT_DAY)
   const currentDay = dayQuery.data?.currentDay.day || 0
   const { data, loading } = useQuery(GET_CARDS_FOR_DAY, { variables: { day: currentDay - 1 } })
@@ -13,13 +11,14 @@ export default function Background() {
   localStorage.backgroundCount = backgroundCount + 1
 
   return <div style={{
+    margin: '70px 0 0 0',
     zIndex: -100,
     position: 'fixed',
     backgroundImage: loading ? '' : `url("${card.backgroundImage}")`,
     width: '100vw',
-    height: '100vh',
+    height: 'calc(100vh - 70px)',
     backgroundRepeat: 'no-repeat',
-    opacity: theme.palette.mode === 'dark' ? 0.3 : 0.3,
+    opacity: 0.3,
     backgroundSize: 'cover',
     backgroundPosition: 'center',
   }} />
