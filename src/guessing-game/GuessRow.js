@@ -1,7 +1,7 @@
 import { Box, Grid } from '@mui/material'
 import { CHECK_GUESS, CURRENT_DAY } from '../gql/queries'
 import { getImagePath, useCompactMode } from '../util'
-// import { resultsDialogState } from '../reactive-vars'
+import { resultsDialogState } from '../reactive-vars'
 import { useQuery } from '@apollo/client'
 import CardFlip from './CardFlip'
 import CardTooltip from '../CardTooltip'
@@ -20,16 +20,16 @@ export default React.memo(function GuessRow({ code, animate, index, setResult, l
   useEffect(() => {
     if (!loading) {
       if (animate && doneAnimating) {
-        // setResult({ index, result: guess })
-        // if (resultsDialogState() === 'incorrect' && guess.correct) resultsDialogState('open')
+        setResult({ index, result: guess })
+        if (resultsDialogState() === 'incorrect' && guess.correct) resultsDialogState('open')
       } else if (!animate) {
-        // setResult({ index, result: guess })
-        // if (resultsDialogState() === 'incorrect' && guess.correct) resultsDialogState('closed')
+        setResult({ index, result: guess })
+        if (resultsDialogState() === 'incorrect' && guess.correct) resultsDialogState('closed')
       }
     }
   })
 
-  if (true) return (
+  if (loading) return (
     <Box display='flex' justifyContent='center' width={small ? '100%' : '852px'}>
       <Grid container spacing={small ? 1 : 2}  >
         {
