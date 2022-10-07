@@ -6,12 +6,19 @@ import React, { useEffect, useState } from 'react'
 
 export default function Countdown() {
   const { data, loading } = useQuery(COUNTDOWN_QUERY, { fetchPolicy: 'no-cache' })
+  const [midnight, setMidnight] = useState(null)
   const [timeLeft, setTimeLeft] = useState(null)
 
-  timeLeft === null && data && setTimeLeft(data.nextCardTimeSeconds)
+  if (midnight === null && data) {
+    const date = new Date()
+    date.setSeconds(date.getSeconds() + data.nextCardTimeSeconds)
+    setMidnight(date)
+  }
 
   useEffect(() => {
-    const timer = timeLeft > 0 && setTimeout(() => setTimeLeft(t => t - 1), 1000)
+    const startDate = new Date()
+    const timeInSeconds = (midnight - startDate) / 1000
+    const timer = setTimeout(() => setTimeLeft(timeInSeconds), 1000)
     return () => clearTimeout(timer)
   })
 
@@ -21,10 +28,10 @@ export default function Countdown() {
   return (
     <Box display='flex' justifyContent='center'>
       {
-        (timeLeft && timeLeft <= 0)
-          ? <StyledButton href='/' sx={{ my: 1.25 }} variant='contained'>Refresh</StyledButton>
+        (timeLeft !== null && timeLeft <= 0)
+          ? <StyledButton href='/' sx={{ my: 1.21875 }} variant='contained'>Refresh</StyledButton>
           : <Typography variant='h6' sx={{ my: 1.5 }}>
-            {loading ? <Skeleton width={400} /> : 'Next challenge in: ' + timeString}
+            {loading || timeLeft == null ? <Skeleton width={400} /> : 'Next challenge in: ' + timeString}
           </Typography>
       }
     </Box>
