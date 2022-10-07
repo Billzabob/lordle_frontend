@@ -15,14 +15,11 @@ code {
   background: transparent;
   transform-style: preserve-3d;
   perspective: 500px;
-  height: 100%;
 }
 
 .card-front,
 .card-back {
   backface-visibility: hidden;
-  height: 100%;
-  width: 100%;
 }
 
 .card-front {

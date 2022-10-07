@@ -29,24 +29,7 @@ export default React.memo(function GuessRow({ code, animate, index, setResult, l
     }
   })
 
-  if (loading) return (
-    <Box display='flex' justifyContent='center' width={small ? '100%' : '852px'}>
-      <Grid container spacing={small ? 1 : 2}  >
-        {
-          [0, 1, 2, 3, 4, 5].map(i =>
-            <Grid key={i} item xs={2}>
-              <img
-                src='https://lor-card-images.s3.us-west-1.amazonaws.com/cardback.webp'
-                alt='cardback'
-                style={{ width: '100%', aspectRatio: 0.664, filter: 'drop-shadow(5px 5px 5px black)' }} />
-            </Grid>
-          )
-        }
-      </Grid>
-    </Box>
-  )
-
-  const guess = data.guess
+  const guess = data?.guess
   const image = getImagePath(code, 150)
 
   return (
@@ -54,10 +37,10 @@ export default React.memo(function GuessRow({ code, animate, index, setResult, l
       <Grid container spacing={small ? 1 : 2}  >
         <Grid item xs={2}>
           <CardFlip delay={350} animate={animate} run={imagesLoaded}>
-            <CardTooltip language={language} code={code} image={guess.image} name={guess.name}>
+            <CardTooltip language={language} code={code} image={guess?.image} name={guess?.name}>
               <img
-                src={language === 'en_us' ? image : guess.image}
-                alt={guess.name || ''}
+                src={language === 'en_us' ? image : guess?.image}
+                alt={guess?.name || ''}
                 style={{ width: '100%', aspectRatio: 0.664, filter: 'drop-shadow(5px 5px 5px black)' }}
                 onLoad={() => setImagesCount(i => i + 1)}
               />
@@ -70,10 +53,10 @@ export default React.memo(function GuessRow({ code, animate, index, setResult, l
             run={imagesLoaded}
             onLoad={() => setImagesCount(i => i + 1)}
             position={2}
-            correct={guess.regionResult.result === 'PARTIAL' ? 'partial' : guess.regionResult.result === 'CORRECT'}
-            text={guess.regionResult.regions.map(cleanName).join(', ')}
-            image={getMedia(guess.regionResult.regions.slice().sort().join(''))}
-            padding={guess.regionResult.regions.length > 1}
+            correct={guess?.regionResult.result === 'PARTIAL' ? 'partial' : guess?.regionResult.result === 'CORRECT'}
+            text={guess?.regionResult.regions.map(cleanName).join(', ')}
+            image={getMedia(guess?.regionResult.regions.slice().sort().join(''))}
+            padding={guess?.regionResult.regions.length > 1}
           />
         </Grid>
         <Grid item xs={2}>
@@ -82,9 +65,9 @@ export default React.memo(function GuessRow({ code, animate, index, setResult, l
             run={imagesLoaded}
             onLoad={() => setImagesCount(i => i + 1)}
             position={3}
-            correct={guess.rarityResult.result === 'CORRECT'}
-            text={cleanName(guess.rarityResult.rarity)}
-            image={getMedia(guess.rarityResult.rarity)}
+            correct={guess?.rarityResult.result === 'CORRECT'}
+            text={cleanName(guess?.rarityResult.rarity)}
+            image={getMedia(guess?.rarityResult.rarity)}
           />
         </Grid>
         <Grid item xs={2}>
@@ -93,9 +76,9 @@ export default React.memo(function GuessRow({ code, animate, index, setResult, l
             run={imagesLoaded}
             onLoad={() => setImagesCount(i => i + 1)}
             position={4}
-            correct={guess.manaCostResult.result === 'CORRECT'}
-            text={cleanName(guess.manaCostResult.manaCost)}
-            image={getMedia(guess.manaCostResult.result === 'CORRECT' ? guess.manaCostResult.manaCost : guess.manaCostResult.result)}
+            correct={guess?.manaCostResult.result === 'CORRECT'}
+            text={cleanName(guess?.manaCostResult.manaCost)}
+            image={getMedia(guess?.manaCostResult.result === 'CORRECT' ? guess?.manaCostResult.manaCost : guess?.manaCostResult.result)}
           />
         </Grid>
         <Grid item xs={2}>
@@ -104,9 +87,9 @@ export default React.memo(function GuessRow({ code, animate, index, setResult, l
             run={imagesLoaded}
             onLoad={() => setImagesCount(i => i + 1)}
             position={5}
-            correct={guess.typeResult.result === 'CORRECT'}
-            text={cleanName(guess.typeResult.type)}
-            image={getMedia(guess.typeResult.type)}
+            correct={guess?.typeResult.result === 'CORRECT'}
+            text={cleanName(guess?.typeResult.type)}
+            image={getMedia(guess?.typeResult.type)}
           />
         </Grid>
         <Grid item xs={2}>
@@ -116,9 +99,9 @@ export default React.memo(function GuessRow({ code, animate, index, setResult, l
             onDone={() => setDoneAnimating(true)}
             onLoad={() => setImagesCount(i => i + 1)}
             position={6}
-            correct={guess.setResult.result === 'CORRECT'}
-            text={cleanName(guess.setResult.set)}
-            image={getMedia(guess.setResult.set)}
+            correct={guess?.setResult.result === 'CORRECT'}
+            text={cleanName(guess?.setResult.set)}
+            image={getMedia(guess?.setResult.set)}
           />
         </Grid>
       </Grid>
