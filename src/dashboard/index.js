@@ -1,4 +1,6 @@
 import { Box, Container } from '@mui/material'
+import { page } from '../reactive-vars'
+import { useReactiveVar } from '@apollo/client'
 import AboutDialog from '../dialogs/about'
 import Background from './background'
 import CssBaseline from '@mui/material/CssBaseline'
@@ -11,8 +13,19 @@ import React from 'react'
 import SettingsDialog from '../dialogs/settings'
 import Themer from './themer'
 import YesterdaysCard from '../guessing-game/YesterdaysCard'
+import VoiceGame from '../voice-game/VoiceGame'
 
 export default function Dashboard() {
+  const selectedPage = useReactiveVar(page)
+
+  const classic = <>
+    <MainGameTitle />
+    <GuessingGame />
+    <GuessCounter />
+    <YesterdaysCard />
+  </>
+
+  const quote = <VoiceGame/>
 
   return (
     <Themer>
@@ -24,10 +37,8 @@ export default function Dashboard() {
         <Background />
         <MyAppBar />
         <Container sx={{ mt: 11 }} disableGutters>
-          <MainGameTitle />
-          <GuessingGame />
-          <GuessCounter />
-          <YesterdaysCard />
+          {selectedPage === 'classic' && classic}
+          {selectedPage === 'quote' && quote}
         </Container>
       </Box>
     </Themer>
