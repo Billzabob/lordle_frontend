@@ -1,3 +1,3 @@
 import { makeVar } from '@apollo/client'
 
-export const page = makeVar('quote')
+export const page = makeVar('classic')

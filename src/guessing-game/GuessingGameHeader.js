@@ -1,19 +1,23 @@
 import { Box, Stack } from '@mui/material'
-import { resultsDialogState } from '../reactive-vars'
 import { StyledButton } from '../dashboard/styled-components'
 import Countdown from './Countdown'
 import GuessInput from '../guessing-game/GuessInput'
 import React from 'react'
 
-export default function GuessingGameHeader({ guesses, setGuess, correct }) {
+export default function GuessingGameHeader({ guesses, setGuess, correct, dialogState, sx }) {
+  console.log(sx)
   return (
-    correct ?
-      <Stack sx={{ mt: 2 }}>
-        <Countdown />
-        <Box display='flex' justifyContent='center'>
-          <StyledButton onClick={() => resultsDialogState('open')} sx={{ width: '100px' }} variant='contained'>Results</StyledButton>
-        </Box>
-      </Stack> :
-      <GuessInput setGuess={setGuess} guesses={guesses} />
+    <Box sx={sx}>
+      {
+        correct ?
+          <Stack>
+            <Countdown />
+            <Box display='flex' justifyContent='center'>
+              <StyledButton onClick={() => dialogState('open')} sx={{ width: '100px' }} variant='contained'>Results</StyledButton>
+            </Box>
+          </Stack> :
+          <GuessInput setGuess={setGuess} guesses={guesses} />
+      }
+    </Box>
   )
 }

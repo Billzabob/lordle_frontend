@@ -21,7 +21,7 @@ export default function SoundButton() {
     <Box display='flex' justifyContent='center'>
       {loading ? <Skeleton variant='rectangular' width={125} height={125} /> :
         <IconButton color='primary' onClick={playSound}>
-          <PlayCircleFilledTwoToneIcon style={{ fontSize: 150 }} />
+          <PlayCircleFilledTwoToneIcon style={{ fontSize: 120 }} />
         </IconButton>
       }
     </Box>
