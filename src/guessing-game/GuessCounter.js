@@ -1,12 +1,11 @@
 import React from 'react'
 import { useQuery } from '@apollo/client'
-import { CORRECT_ANSWERS } from '../gql/queries'
 import { Box, Skeleton, Typography } from '@mui/material'
 
-export default React.forwardRef((_, ref) => {
-  const { data, loading } = useQuery(CORRECT_ANSWERS, { fetchPolicy: 'no-cache' })
+export default function GuessCounter({ query }) {
+  const { data, loading } = useQuery(query, { fetchPolicy: 'no-cache' })
   return (
-    <Box ref={ref} display='flex' justifyContent='center'>
+    <Box display='flex' justifyContent='center'>
       <Typography variant='h6' sx={{ mt: 0 }}>
         {loading
           ? <Skeleton width={400} />
@@ -14,4 +13,4 @@ export default React.forwardRef((_, ref) => {
       </Typography>
     </Box>
   )
-})
+}

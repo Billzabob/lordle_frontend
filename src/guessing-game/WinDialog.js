@@ -1,14 +1,13 @@
 import { Dialog, DialogContent, DialogTitle, ImageList, ImageListItem, Stack, Tooltip, Typography } from '@mui/material'
-import { resultsDialogState } from '../reactive-vars'
 import { StyledButton } from '../dashboard/styled-components'
 import { useReactiveVar } from '@apollo/client'
 import { useWindowWidth } from '@react-hook/window-size'
 import Confetti from 'react-confetti'
 import React, { useState } from 'react'
 
-export default function WinDialog({ results }) {
+export default function WinDialog({ results, dialogState, shareText }) {
   const [tooltip, setTooltip] = useState(false)
-  const resultsState = useReactiveVar(resultsDialogState)
+  const resultsState = useReactiveVar(dialogState)
   const correctCard = results.find(r => r?.correct)
   const width = useWindowWidth()
 
@@ -31,7 +30,7 @@ export default function WinDialog({ results }) {
           colors={['#0DAB5F', '#388AFE', '#EE5BFF', '#EA923F']}
         />
       }
-      <Dialog open={resultsState === 'open'} onClose={() => resultsDialogState('closed')} maxWidth='xs' fullWidth hideBackdrop>
+      <Dialog open={resultsState === 'open'} onClose={() => dialogState('closed')} maxWidth='xs' fullWidth hideBackdrop>
         <DialogTitle textAlign='center' variant='h3'>
           Victory!
         </DialogTitle>
@@ -68,69 +67,4 @@ export default function WinDialog({ results }) {
       </Dialog>
     </>
   )
-}
-
-function shareText(results) {
-  const maxResults = 5
-  const trimmed = results.reverse().slice(0, maxResults)
-  const result = trimmed.map(toEmojiRow).join('\n')
-  const more = results.length > maxResults ? `➕${numberToEmoji(results.length - maxResults)} more` : ''
-  return `I found the LoRdle card in classic mode in ${results.length} ${results.length === 1 ? 'attempt' : 'attempts'}!
-${result}
-${more}
-https://lordle.gg`
-}
-
-const numberToEmoji = (number) => number.toString().split('').map(digitToEmoji).join('')
-
-function digitToEmoji(digit) {
-  switch (digit) {
-    case '0':
-      return '0️⃣'
-    case '1':
-      return '1️⃣'
-    case '2':
-      return '2️⃣'
-    case '3':
-      return '3️⃣'
-    case '4':
-      return '4️⃣'
-    case '5':
-      return '5️⃣'
-    case '6':
-      return '6️⃣'
-    case '7':
-      return '7️⃣'
-    case '8':
-      return '8️⃣'
-    case '9':
-      return '9️⃣'
-    default:
-      return ''
-  }
-}
-
-const toEmojiRow = (guess) => [
-  guess.regionResult,
-  guess.rarityResult,
-  guess.manaCostResult,
-  guess.typeResult,
-  guess.setResult,
-].map(resultToEmoji).join('')
-
-function resultToEmoji({ result }) {
-  switch (result) {
-    case 'CORRECT':
-      return '🟩'
-    case 'WRONG':
-      return '🟥'
-    case 'PARTIAL':
-      return '🟧'
-    case 'UP':
-      return '⬆️'
-    case 'DOWN':
-      return '⬇️'
-    default:
-      return ''
-  }
 }
