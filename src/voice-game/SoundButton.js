@@ -12,7 +12,7 @@ export default function SoundButton() {
   const [playCount, setPlayCount] = useState(0)
   const [playing, setPlaying] = useState(false)
   const [audio, setAudio] = useState(new Audio())
-  const voiceLines = data?.voiceLines
+  const voiceLines = data?.voiceLines || []
 
   useEffect(() => setAudio(new Audio(voiceLines[playCount % voiceLines.length])), [voiceLines, playCount])
 
@@ -34,18 +34,27 @@ export default function SoundButton() {
     setPlayCount(c => c + 1)
   }
 
+  const Button = ({ playing }) => {
+    if (playing) {
+      return (
+        <IconButton color='primary' onClick={pauseSound}>
+          <PauseCircleFilledTwoToneIcon style={{ fontSize: 120 }} />
+        </IconButton>
+      )
+    } else {
+      return (
+        <IconButton color='primary' onClick={playSound}>
+          <PlayCircleFilledTwoToneIcon style={{ fontSize: 120 }} />
+        </IconButton>
+      )
+    }
+  }
+
   return (
     <Box display='flex' justifyContent='center'>
-      {loading ? <Skeleton variant='rectangular' width={125} height={125} /> :
-        playing ?
-          <IconButton color='primary' onClick={pauseSound}>
-            <PauseCircleFilledTwoToneIcon style={{ fontSize: 120 }} />
-          </IconButton>
-          :
-          <IconButton color='primary' onClick={playSound}>
-            <PlayCircleFilledTwoToneIcon style={{ fontSize: 120 }} />
-          </IconButton>
-      }
+      {loading ?
+        <Skeleton variant='rectangular' width={125} height={125} /> :
+        <Button playing={playing} />}
     </Box>
   )
 }
