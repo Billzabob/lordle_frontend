@@ -14,7 +14,7 @@ export default function Background() {
     margin: '70px 0 0 0',
     zIndex: -100,
     position: 'fixed',
-    backgroundImage: loading ? '' : `url("${card.backgroundImage}")`,
+    backgroundImage: loading ? '' : `url("https://lor-splash-arts.s3.us-west-1.amazonaws.com/${card.cardCode}.webp")`,
     width: '100vw',
     height: 'calc(100vh - 70px)',
     backgroundRepeat: 'no-repeat',
