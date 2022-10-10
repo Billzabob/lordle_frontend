@@ -5,7 +5,6 @@ import GuessInput from '../guessing-game/GuessInput'
 import React from 'react'
 
 export default function GuessingGameHeader({ guesses, setGuess, correct, dialogState, sx }) {
-  console.log(sx)
   return (
     <Box sx={sx}>
       {

@@ -1,12 +1,13 @@
 import { Box, Container, Grid } from '@mui/material'
-import { CURRENT_DAY } from '../gql/queries'
-import { languageSetting, resultsDialogState } from '../reactive-vars'
 import { classicShareText, updateStats, useCompactMode } from '../util'
+import { CURRENT_DAY } from '../gql/queries'
+import { languageSetting, loadingBar, resultsDialogState } from '../reactive-vars'
 import { useQuery, useReactiveVar } from '@apollo/client'
 import FlipMove from 'react-flip-move'
 import GuessHeader from './GuessHeader'
 import GuessingGameHeader from './GuessingGameHeader'
 import GuessRow from './GuessRow'
+import LoadingBar from './LoadingBar'
 import React, { useEffect, useReducer, useState } from 'react'
 import StatsChartDialog from '../dialogs/stats-chart'
 import WinDialog from './WinDialog'
@@ -16,6 +17,7 @@ export default function GuessingGame() {
   const correct = results.some(r => r?.correct)
   const numGuesses = results.length
   const language = useReactiveVar(languageSetting)
+  const loading = useReactiveVar(loadingBar)
   const small = useCompactMode()
 
   const { data } = useQuery(CURRENT_DAY, { fetchPolicy: 'network-only' })
@@ -55,6 +57,7 @@ export default function GuessingGame() {
         sx={{ mt: 2 }}
       />
       <WinDialog results={results} dialogState={resultsDialogState} shareText={classicShareText} />
+      <LoadingBar loading={loading === 'loading'}/>
       <Container maxWidth='md' sx={{ overflow: 'auto', p: 2 }}>
         {guessRows.length > 0 &&
           (
