@@ -67,22 +67,24 @@ export default React.memo(function VoiceGuess({ code, language, animate, setResu
         </Grid>
         <Grid style={{ zIndex: 100 }} item xs={6}>
           <CardFlip onEntered={() => setDoneAnimating(true)} delay={350} animate={animate} run={!loading && loaded}>
-            <Card variant='outlined'>
-              <CardMedia
-                sx={{
-                  bgcolor: ({ palette }) => getColor(palette, data?.guessVoice.correct, isDark),
-                  width: '100%',
-                  aspectRatio: '0.664',
-                }}
-              >
-                <Box display='flex' flexDirection='column' justifyContent='center' alignItems='center' sx={{ height: '100%' }}>
-                  {data?.guessVoice.correct ?
-                    <CheckIcon htmlColor='white' style={{ fontSize: 100 }} /> :
-                    <ClearIcon htmlColor='black' style={{ fontSize: 100 }} />
-                  }
-                </Box>
-              </CardMedia>
-            </Card>
+            <div style={{ filter: 'drop-shadow(5px 5px 5px black)' }}>
+              <Card variant='outlined'>
+                <CardMedia
+                  sx={{
+                    bgcolor: ({ palette }) => getColor(palette, data?.guessVoice.correct, isDark),
+                    width: '100%',
+                    aspectRatio: '0.664',
+                  }}
+                >
+                  <Box display='flex' flexDirection='column' justifyContent='center' alignItems='center' sx={{ height: '100%' }}>
+                    {data?.guessVoice.correct ?
+                      <CheckIcon htmlColor='white' style={{ fontSize: 100 }} /> :
+                      <ClearIcon htmlColor='black' style={{ fontSize: 100 }} />
+                    }
+                  </Box>
+                </CardMedia>
+              </Card>
+            </div>
           </CardFlip>
         </Grid>
       </Grid>
