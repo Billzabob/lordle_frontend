@@ -4,7 +4,6 @@ import { useQuery } from "@apollo/client"
 import PauseCircleFilledTwoToneIcon from '@mui/icons-material/PauseCircleFilledTwoTone'
 import PlayCircleFilledTwoToneIcon from '@mui/icons-material/PlayCircleFilledTwoTone'
 import React, { useCallback, useEffect, useState } from 'react'
-import { useAudios } from "../util"
 
 export default function SoundButton() {
   const dayQuery = useQuery(CURRENT_DAY)
@@ -12,14 +11,19 @@ export default function SoundButton() {
   const { data, loading } = useQuery(GET_VOICE_LINES, { variables: { day: currentDay } })
   const [playCount, setPlayCount] = useState(0)
   const [playing, setPlaying] = useState(false)
+  const [audioLoading, setAudioLoading] = useState(false)
+  const [audio, setAudio] = useState(false)
   const voiceLines = data?.voiceLines || []
-  const audios = useAudios(voiceLines)
-
-  const audio = audios[playCount % audios.length]
+  const length = voiceLines.length
 
   const handleEnded = useCallback(() => {
     setPlaying(false)
     setPlayCount(c => c + 1)
+  }, [])
+
+  const handleLoaded = useCallback(() => {
+    setAudioLoading(false)
+    setPlaying(true)
   }, [])
 
   useEffect(() => {
@@ -29,9 +33,18 @@ export default function SoundButton() {
     }
   })
 
+  useEffect(() => {
+    if (audio) {
+      audio.addEventListener('canplaythrough', handleLoaded)
+      return () => audio.removeEventListener('canplaythrough', handleLoaded)
+    }
+  })
+
   const playSound = () => {
-    setPlaying(true)
-    audio.play()
+    const a = new Audio(voiceLines[playCount % length])
+    setAudio(a)
+    setAudioLoading(true)
+    a.play()
   }
 
   const pauseSound = () => {
@@ -66,7 +79,7 @@ export default function SoundButton() {
     <Box display='flex' justifyContent='center'>
       {loading ?
         <Skeleton sx={{my: 2.25}} variant='rectangular' width={100} height={100} /> :
-        <Button playing={playing} audioLoaded={audio} />}
+        <Button playing={playing} audioLoaded={!audioLoading} />}
     </Box>
   )
 }
