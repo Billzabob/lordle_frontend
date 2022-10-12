@@ -52,7 +52,6 @@ export default function VoiceGame() {
         guesses={codes}
         setGuess={setGuess}
         correct={correct}
-        sx={{mt: -3}}
       />
       <Box display='flex' alignItems='center' flexDirection='column' sx={{ mt: 4, mb: 1 }}>
         <FlipMove enterAnimation='accordionVertical'>

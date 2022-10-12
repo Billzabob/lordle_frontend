@@ -55,8 +55,8 @@ export default React.memo(function VoiceGuess({ code, language, animate, setResu
   return (
     <Box sx={{ width: small ? 250 : 350, mt: 1 }}>
       <Grid container spacing={2}>
-        <Grid item xs={6}>
-          <CardFlip delay={0} animate={animate} run={!loading && loaded}>
+        <Grid style={{ zIndex: 100 }} item xs={6}>
+          <CardFlip delay={1000} animate={animate} run={!loading && loaded}>
             <img
               src={language === 'en_us' ? image : guess?.image}
               alt={data?.guessVoice.name || ''}
@@ -65,8 +65,8 @@ export default React.memo(function VoiceGuess({ code, language, animate, setResu
             />
           </CardFlip>
         </Grid>
-        <Grid item xs={6}>
-          <CardFlip onEntered={() => setDoneAnimating(true)} delay={350} animate={animate} run={!loading && loaded}>
+        <Grid style={{ zIndex: 100 }} item xs={6}>
+          <CardFlip onEntered={() => setDoneAnimating(true)} delay={1350} animate={animate} run={!loading && loaded}>
             <Card variant='outlined'>
               <CardMedia
                 sx={{
