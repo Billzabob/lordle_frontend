@@ -54,7 +54,7 @@ export default function VoiceGame() {
         correct={correct}
         sx={{mt: -3}}
       />
-      <Box display='flex' alignItems='center' flexDirection='column' sx={{ mt: 4, mb: 1 }}>
+      <Box display='flex' alignItems='center' flexDirection='column' sx={{ mt: 4, mb: 1, zIndex: 1000 }}>
         <FlipMove enterAnimation='accordionVertical'>
           {guessRows.reverse()}
         </FlipMove>
