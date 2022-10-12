@@ -1,12 +1,13 @@
 import { Box, Container, Grid } from '@mui/material'
+import { classicShareText, updateStats, useCompactMode } from '../util'
 import { CURRENT_DAY } from '../gql/queries'
-import { languageSetting } from '../reactive-vars'
-import { useCompactMode } from '../util'
+import { languageSetting, loadingBar, resultsDialogState } from '../reactive-vars'
 import { useQuery, useReactiveVar } from '@apollo/client'
 import FlipMove from 'react-flip-move'
 import GuessHeader from './GuessHeader'
 import GuessingGameHeader from './GuessingGameHeader'
 import GuessRow from './GuessRow'
+import LoadingBar from './LoadingBar'
 import React, { useEffect, useReducer, useState } from 'react'
 import StatsChartDialog from '../dialogs/stats-chart'
 import WinDialog from './WinDialog'
@@ -16,13 +17,14 @@ export default function GuessingGame() {
   const correct = results.some(r => r?.correct)
   const numGuesses = results.length
   const language = useReactiveVar(languageSetting)
+  const loading = useReactiveVar(loadingBar)
   const small = useCompactMode()
 
   const { data } = useQuery(CURRENT_DAY, { fetchPolicy: 'network-only' })
   const currentDay = data?.currentDay?.day
 
   useEffect(() => {
-    if (correct && Number(localStorage.currentDay) !== currentDay) updateStats(currentDay, numGuesses)
+    if (correct && Number(localStorage.currentDay) !== currentDay) updateStats(currentDay, numGuesses, '')
   }, [correct, currentDay, numGuesses])
 
   const [guess, setGuess] = useState()
@@ -46,13 +48,16 @@ export default function GuessingGame() {
 
   return (
     <>
-      <StatsChartDialog currentDay={currentDay} />
+      <StatsChartDialog currentDay={currentDay} prefix='' title='Classic Stats' />
       <GuessingGameHeader
+        dialogState={resultsDialogState}
         guesses={codes}
         setGuess={setGuess}
         correct={correct}
+        sx={{ mt: 2 }}
       />
-      <WinDialog results={results} />
+      <WinDialog results={results} dialogState={resultsDialogState} shareText={classicShareText} />
+      <LoadingBar loading={loading === 'loading'}/>
       <Container maxWidth='md' sx={{ overflow: 'auto', p: 2 }}>
         {guessRows.length > 0 &&
           (
@@ -87,19 +92,4 @@ function getStoredCodes(currentDay) {
 function setStoredCodes(currentDay, codes) {
   if (currentDay !== undefined)
     window.localStorage.setItem('guesses' + currentDay, JSON.stringify(codes))
-}
-
-function updateStats(currentDay, numGuesses) {
-  localStorage.gamesWon = Number(localStorage.gamesWon || 0) + 1
-  localStorage.guessCount = Number(localStorage.guessCount || 0) + numGuesses
-
-  if (localStorage.currentDay === undefined || Number(localStorage.currentDay) === currentDay - 1)
-    localStorage.currentStreak = Number(localStorage.currentStreak || 0) + 1
-  else
-    localStorage.currentStreak = 1
-
-  if (Number(localStorage.currentStreak) > Number(localStorage.maxStreak || 0))
-    localStorage.maxStreak = localStorage.currentStreak
-
-  localStorage.currentDay = currentDay
 }

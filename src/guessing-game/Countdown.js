@@ -9,17 +9,21 @@ export default function Countdown() {
   const [midnight, setMidnight] = useState(null)
   const [timeLeft, setTimeLeft] = useState(null)
 
-  if (midnight === null && data) {
-    const date = new Date()
-    date.setSeconds(date.getSeconds() + data.nextCardTimeSeconds)
-    setMidnight(date)
-  }
+  useEffect(() => {
+    if (midnight === null && data) {
+      const date = new Date()
+      date.setSeconds(date.getSeconds() + data.nextCardTimeSeconds)
+      setMidnight(date)
+    }
+  }, [midnight, data])
 
   useEffect(() => {
-    const startDate = new Date()
-    const timeInSeconds = (midnight - startDate) / 1000
-    const timer = setTimeout(() => setTimeLeft(timeInSeconds), 1000)
-    return () => clearTimeout(timer)
+    if (midnight) {
+      const startDate = new Date()
+      const timeInSeconds = (midnight - startDate) / 1000
+      const timer = setTimeout(() => setTimeLeft(timeInSeconds), 1000)
+      return () => clearTimeout(timer)
+    }
   })
 
   // This could be much cleaner with a time library

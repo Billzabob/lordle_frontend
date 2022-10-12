@@ -1,7 +1,7 @@
 import { Box, Grid } from '@mui/material'
 import { CHECK_GUESS, CURRENT_DAY } from '../gql/queries'
 import { getImagePath, useCompactMode } from '../util'
-import { resultsDialogState } from '../reactive-vars'
+import { loadingBar, resultsDialogState } from '../reactive-vars'
 import { useQuery } from '@apollo/client'
 import CardFlip from './CardFlip'
 import CardTooltip from '../CardTooltip'
@@ -16,6 +16,17 @@ export default React.memo(function GuessRow({ code, animate, index, setResult, l
   const [doneAnimating, setDoneAnimating] = useState(false)
   const small = useCompactMode()
   const imagesLoaded = imagesCount === 6
+
+  useEffect(() => {
+    loadingBar('started')
+    setTimeout(() => {
+      if (loadingBar() === 'started') loadingBar('loading')
+    }, 1200)
+  }, [])
+
+  useEffect(() => {
+    imagesLoaded && loadingBar('loaded')
+  })
 
   useEffect(() => {
     if (!loading) {
