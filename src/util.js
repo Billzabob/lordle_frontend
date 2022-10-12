@@ -2,6 +2,7 @@ import { compactMode } from './reactive-vars'
 import { useMediaQuery, useTheme } from '@mui/material'
 import { useReactiveVar } from '@apollo/client'
 import md5 from 'md5'
+import { useCallback, useEffect, useState } from 'react'
 
 export function getImagePath(code, width) {
   const image = code + '.png'
@@ -104,4 +105,23 @@ function resultToEmoji({ result }) {
     default:
       return ''
   }
+}
+
+export function useAudios(audioNames) {
+  const [audios, setAudios] = useState([])
+  const [loadingIndex, setLoadingIndex] = useState(0)
+
+  const audio = new Audio(audioNames[loadingIndex])
+
+  const handleLoaded = useCallback(({ target }) => {
+    if (!audios[loadingIndex]) setAudios([...audios, target])
+    if (loadingIndex < audioNames.length - 1) setLoadingIndex(i => i + 1)
+  }, [loadingIndex, audioNames, audios])
+
+  useEffect(() => {
+    audio.addEventListener('canplaythrough', handleLoaded)
+    return () => audio.removeEventListener('canplaythrough', handleLoaded)
+  })
+
+  return audios
 }

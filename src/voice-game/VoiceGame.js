@@ -4,12 +4,13 @@ import React, { useEffect, useReducer, useState } from "react"
 import VoiceGuess from "./VoiceGuess"
 import { CURRENT_DAY } from "../gql/queries"
 import { useQuery, useReactiveVar } from "@apollo/client"
-import { languageSetting, voiceResultsDialogState } from "../reactive-vars"
+import { languageSetting, loadingBar, voiceResultsDialogState } from "../reactive-vars"
 import WinDialog from "../guessing-game/WinDialog"
 import GuessingGameHeader from "../guessing-game/GuessingGameHeader"
 import { updateStats, voiceShareText } from "../util"
 import SoundButton from "./SoundButton"
 import StatsChartDialog from "../dialogs/stats-chart"
+import LoadingBar from "../guessing-game/LoadingBar"
 
 export default function VoiceGame() {
   const [results, dispatch] = useReducer(reducer, [])
@@ -21,6 +22,7 @@ export default function VoiceGame() {
   const [guess, setGuess] = useState()
   const codes = (guess && !storedCodes.includes(guess)) ? [...storedCodes, guess] : storedCodes
   const language = useReactiveVar(languageSetting)
+  const loading = useReactiveVar(loadingBar)
   useEffect(() => setStoredCodes(currentDay, codes), [currentDay, codes])
 
   useEffect(() => {
@@ -42,6 +44,7 @@ export default function VoiceGame() {
   return (
     <Box>
       <WinDialog results={results} dialogState={voiceResultsDialogState} shareText={voiceShareText} />
+      <LoadingBar loading={loading === 'loading'}/>
       <SoundButton/>
       <StatsChartDialog currentDay={currentDay} prefix='voice' title='Voice Stats' />
       <GuessingGameHeader
@@ -49,7 +52,7 @@ export default function VoiceGame() {
         guesses={codes}
         setGuess={setGuess}
         correct={correct}
-        sx={{mt: -2}}
+        sx={{mt: -3}}
       />
       <Box display='flex' alignItems='center' flexDirection='column' sx={{ mt: 4, mb: 1 }}>
         <FlipMove enterAnimation='accordionVertical'>

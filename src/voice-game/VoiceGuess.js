@@ -6,7 +6,8 @@ import CardFlip from "../guessing-game/CardFlip"
 import React, { useEffect, useState } from "react"
 import CheckIcon from '@mui/icons-material/Check'
 import ClearIcon from '@mui/icons-material/Clear'
-import { darkMode, voiceResultsDialogState } from "../reactive-vars"
+import { darkMode, loadingBar, voiceResultsDialogState } from "../reactive-vars"
+import { getImagePath, useCompactMode } from "../util"
 
 const getColor = (palette, correct, isDark) => {
   if (isDark && correct) return palette.success.dark
@@ -23,6 +24,18 @@ export default React.memo(function VoiceGuess({ code, language, animate, setResu
   const [loaded, setLoaded] = useState(false)
   const [doneAnimating, setDoneAnimating] = useState(false)
   const guess = data?.guessVoice
+  const small = useCompactMode()
+
+  useEffect(() => {
+    loadingBar('started')
+    setTimeout(() => {
+      if (loadingBar() === 'started') loadingBar('loading')
+    }, 1200)
+  }, [])
+
+  useEffect(() => {
+    loaded && loadingBar('loaded')
+  })
 
   useEffect(() => {
     if (!loading) {
@@ -37,13 +50,15 @@ export default React.memo(function VoiceGuess({ code, language, animate, setResu
     }
   })
 
+  const image = getImagePath(code, 150)
+
   return (
-    <Box sx={{ width: 350, mt: 1 }}>
+    <Box sx={{ width: small ? 250 : 350, mt: 1 }}>
       <Grid container spacing={2}>
         <Grid item xs={6}>
           <CardFlip delay={0} animate={animate} run={!loading && loaded}>
             <img
-              src={data?.guessVoice.image}
+              src={language === 'en_us' ? image : guess?.image}
               alt={data?.guessVoice.name || ''}
               onLoad={() => setLoaded(true)}
               style={{ width: '100%', aspectRatio: 0.664, filter: 'drop-shadow(5px 5px 5px black)' }}
