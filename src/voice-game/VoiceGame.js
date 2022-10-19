@@ -46,7 +46,7 @@ export default function VoiceGame() {
       <WinDialog results={results} dialogState={voiceResultsDialogState} shareText={voiceShareText} />
       <LoadingBar loading={loading === 'loading'}/>
       <SoundButton/>
-      <StatsChartDialog currentDay={currentDay} prefix='voice' title='Voice Stats' />
+      <StatsChartDialog currentDay={currentDay} prefix='voice' title='Quote Stats' />
       <GuessingGameHeader
         dialogState={voiceResultsDialogState}
         guesses={codes}
