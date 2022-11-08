@@ -15,6 +15,7 @@ const smallLayout = (
         size='large'
         onClick={() => drawerOpen(true)}
         color='inherit'
+        aria-label='Menu'
       >
         <MenuIcon />
       </IconButton>
@@ -57,10 +58,10 @@ export default function MyAppBar() {
           {smallLayout}
           {largeLayout}
           <Box sx={{ flexGrow: 0 }}>
-            <IconButton color='inherit' onClick={() => statsDialogOpen(true)}>
+            <IconButton aria-label='Stats' color='inherit' onClick={() => statsDialogOpen(true)}>
               <BarChartIcon />
             </IconButton>
-            <IconButton color='inherit' onClick={() => settingsDialogOpen(true)}>
+            <IconButton aria-label='Settings' color='inherit' onClick={() => settingsDialogOpen(true)}>
               <SettingsIcon />
             </IconButton>
           </Box>
