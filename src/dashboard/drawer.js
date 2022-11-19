@@ -9,7 +9,7 @@ export default function MyDrawer() {
 
   const list = (
     <Box
-      sx={{ width: 280 }}
+      sx={{ width: 290 }}
       role='presentation'
       onClick={() => drawerOpen(false)}
       onKeyDown={() => drawerOpen(false)}
