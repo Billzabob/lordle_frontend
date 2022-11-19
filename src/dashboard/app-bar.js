@@ -44,7 +44,7 @@ const largeLayout = (
           </Typography>
         </StyledButton>
 
-        return disabled ? <Tooltip key={name} title='Coming Soon!'><div>{button}</div></Tooltip> : button
+        return disabled ? <Tooltip key={name} title='Coming Eventually!'><div>{button}</div></Tooltip> : button
       })}
     </Box>
   </>
