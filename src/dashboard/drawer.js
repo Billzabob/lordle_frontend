@@ -21,7 +21,7 @@ export default function MyDrawer() {
               <ListItemIcon>
                 {icon}
               </ListItemIcon>
-              <ListItemText primary={name + (disabled ? ' (coming soon)' : '')} />
+              <ListItemText primary={name + (disabled ? ' (coming eventually)' : '')} />
             </ListItemButton>
           </ListItem>
         ))}
