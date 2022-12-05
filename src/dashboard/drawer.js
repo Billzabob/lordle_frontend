@@ -9,7 +9,7 @@ export default function MyDrawer() {
 
   const list = (
     <Box
-      sx={{ width: 260 }}
+      sx={{ width: 290 }}
       role='presentation'
       onClick={() => drawerOpen(false)}
       onKeyDown={() => drawerOpen(false)}
@@ -21,7 +21,7 @@ export default function MyDrawer() {
               <ListItemIcon>
                 {icon}
               </ListItemIcon>
-              <ListItemText primary={name + (disabled ? ' (coming soon)' : '')} />
+              <ListItemText primary={name + (disabled ? ' (coming eventually)' : '')} />
             </ListItemButton>
           </ListItem>
         ))}
