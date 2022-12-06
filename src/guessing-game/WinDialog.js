@@ -2,6 +2,8 @@ import { Dialog, DialogContent, DialogTitle, ImageList, ImageListItem, Stack, To
 import { StyledButton } from '../dashboard/styled-components'
 import { useReactiveVar } from '@apollo/client'
 import { useWindowWidth } from '@react-hook/window-size'
+import Atropos from 'atropos/react/atropos-react.esm'
+import "atropos/atropos.css"
 import Confetti from 'react-confetti'
 import React, { useState } from 'react'
 
@@ -36,11 +38,18 @@ export default function WinDialog({ results, dialogState, shareText }) {
         </DialogTitle>
         <DialogContent sx={{ p: 0 }} dividers={false}>
           <Stack alignItems='center'>
-            <img
-              src={correctCard?.image}
-              alt={correctCard?.name || ''}
-              style={{ margin: '16px', height: '312px', width: '204px' }}
-            />
+            <Atropos
+              shadow={false}
+              highlight={false}
+              rotateXMax={30}
+              rotateYMax={30}
+            >
+              <img
+                src={correctCard?.image}
+                alt={correctCard?.name || ''}
+                style={{ margin: '16px', height: '312px', width: '204px' }}
+              />
+            </Atropos>
             <Tooltip open={tooltip} onClose={() => setTooltip(false)} title='Copied to clipboard!'>
               <StyledButton onClick={() => {
                 setTooltip(true)
