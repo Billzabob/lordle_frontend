@@ -21,6 +21,7 @@ export default function GuessInput({ setGuess, guesses }) {
         clearOnEscape
         filterOptions={filterOptions(guesses)}
         id='guess-input'
+        noOptionsText='No options (collectible cards only)'
         options={sorted}
         onChange={(_, c) => {
           if (c) setGuess(c.cardCode)
