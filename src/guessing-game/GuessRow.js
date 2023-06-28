@@ -136,6 +136,10 @@ function cleanName(name) {
       return 'Worldwalker'
     case 'Set6cde':
       return 'The Darkin Saga'
+    case 'Set7':
+      return 'Glory in Navori'
+    case 'Set7b':
+      return 'Glory in Navori'
     case 'RARE':
       return 'Rare'
     case 'EPIC':
