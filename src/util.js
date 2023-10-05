@@ -17,8 +17,9 @@ export function updateStats(currentDay, numGuesses, prefix) {
   localStorage.setItem(prefix + 'guessCount', Number(localStorage.getItem(prefix + 'guessCount') || 0) + numGuesses)
 
   const day = localStorage.getItem(prefix + 'currentDay')
+  const brokenDays = [362, 363, 364]
 
-  if (day === undefined || Number(day) === currentDay - 1)
+  if (day === undefined || Number(day) === currentDay - 1 || brokenDays.contains(Number(day)))
     localStorage.setItem(prefix + 'currentStreak', Number(localStorage.getItem(prefix + 'currentStreak') || 0) + 1)
   else
     localStorage.setItem(prefix + 'currentStreak', 1)
