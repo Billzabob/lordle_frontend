@@ -140,6 +140,8 @@ function cleanName(name) {
       return 'Glory in Navori'
     case 'Set7b':
       return 'Glory in Navori'
+    case 'Set8':
+      return 'Fate\'s Voyage'
     case 'RARE':
       return 'Rare'
     case 'EPIC':
